@@ -1,0 +1,24 @@
+<!doctype html>
+<html ng-app="feriTest">
+
+<!-- consume a REST service with Angular -->
+
+<head>
+	<title>Hello AngularJS</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+   	<script src="hello.js"></script>
+</head>
+
+<body>
+	<div ng-controller="Hello">
+		<p>The ID is {{person.id}}</p>
+		<p>The name is {{person.descr}}</p>
+	</div>
+
+	<!--<hr/>-->
+    <!--<p><input type="number" ng-model="$scope.numModel" name="numModel" value="1">-->
+        <!--<button ng-click="myResult = $scope.numModel">Press me!</button></p>-->
+    <!--<p>Result: {{$scope.myResult}}</p>-->
+
+</body>
+</html>
