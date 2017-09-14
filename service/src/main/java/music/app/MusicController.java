@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collection;
@@ -21,6 +22,8 @@ import java.util.concurrent.atomic.AtomicLong;
 public class MusicController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MusicController.class);
+
+    private static final String URL_BASE = "http://localhost:8080/music";
 
     @Autowired
     private BookDao bookDao;
@@ -35,41 +38,36 @@ public class MusicController {
 
 //    @RequestMapping("/music/books")
 //    public List<Book>(@RequestParam(value="title", defaultValue="World") String name) {
-//        LOGGER.info("## music() title={}", name);
 //
 //        return new Composer(counter.incrementAndGet(), "Beethoven", 1770); // TODO
 //    }
 
     @RequestMapping("/music")
     public String music() {
-        LOGGER.info("music");
-
-        return cmd("books") + cmd("composers") + cmd("publishers");
+        return cmd("book") + cmd("composer") + cmd("publisher");
     }
 
     private static String cmd(String lastWord) {
-        return String.format("<a href=\"http://localhost:8080/music/%s\">%s</a><br>",
-                lastWord, lastWord);
+        return String.format("<a href=\"%s/%s\">%s</a><br>", URL_BASE, lastWord, lastWord);
     }
 
-    @RequestMapping("/music/books")
+    @RequestMapping("/music/book")
     public Collection<Book> books() {
-        LOGGER.info("music/books");
-
         return bookDao.getBooks();
     }
 
-    @RequestMapping("/music/composers")
-    public Collection<Composer> composers() {
-        LOGGER.info("music/composers");
-
-        return composerDao.getComposers();
+    @RequestMapping("/music/composer")
+    public Collection<Composer> composers(@RequestParam(value="name", defaultValue="") String name) {
+        if (name.isEmpty()) {
+            return composerDao.getComposers();
+        }
+        else {
+            return composerDao.getComposersByName(name);
+        }
     }
 
-    @RequestMapping("/music/publishers")
-    public Collection<Publisher> publishers() {
-        LOGGER.info("music/publishers");
-
+    @RequestMapping("/music/publisher")
+    public Collection<Publisher> publishers(@RequestParam(value="name", defaultValue="") String name) {
         return publisherDao.getPublishers();
     }
 }

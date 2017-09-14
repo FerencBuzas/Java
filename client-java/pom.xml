@@ -10,7 +10,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>consumer-java</artifactId>
+    <artifactId>client-java</artifactId>
 
     <properties>
         <java.version>1.8</java.version>

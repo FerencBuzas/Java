@@ -3,14 +3,14 @@ package music.dao;
 import music.common.Composer;
 import org.springframework.stereotype.Repository;
 
-import java.util.Collection;
+import java.util.List;
 
 @Repository
 public interface ComposerDao {
 
-    Collection<Composer> getComposers();
+    List<Composer> getComposers();
+
+    List<Composer> getComposersByName(String name);
 
     Composer getComposerById(long id);
-
-    Composer getComposerByName(String name);
 }
