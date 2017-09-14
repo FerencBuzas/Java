@@ -1,18 +1,17 @@
 <!doctype html>
-<html ng-app="feriTest">
+<html ng-app="MusicModule">
 
-<!-- consume a REST service with Angular -->
+<!-- Show sheet music data with Angular -->
 
 <head>
-	<title>Hello AngularJS</title>
+	<title>JpsRestAngular</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
-   	<script src="hello.js"></script>
+   	<script src="music.js"></script>
 </head>
 
 <body>
-	<div ng-controller="Hello">
-		<p>The ID is {{person.id}}</p>
-		<p>The title is {{person.descr}}</p>
+	<div ng-controller="MusicCtrl">
+		<p>Composer: {{composer}}</p>
 	</div>
 
 	<!--<hr/>-->

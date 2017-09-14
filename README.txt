@@ -1,12 +1,18 @@
 JpaRestAngular
 
-Server side: REST service, persistence to Hibernate / H2.
-Client: Angular.
+Simple demo program which uses REST service and several clients.
+
+Author: Ferenc Buzas
+Starting date: 13 Sep 2017
+
+Server side: REST service
+Client:      Java app / or Angular / or just browse URLs.
 
 Usage:
   Run service/.../music/app/MusicServiceApp
   browser: http://localhost:8080/music - this gives help.
 
+------------------------------------------------------------------
 Modules
 
   common: classes, which are used in the backend and also in the Java client.
@@ -15,9 +21,14 @@ Modules
     Publisher:  id, title
     Book:       id, title, composer, publisher, pubDate
 
-  client-angularjs
+  client-angular
 
     TODO: The client runs in a browser, with Angular-js
+    git clone https://github.com/angular/quickstart.git angular-client
+    cd angular-client
+    npm install
+    npm start   # should start a browser tab with "Hello Angular!"
+    # deleted non-essential files (listed in .txt)
 
   client-java
 
