@@ -3,9 +3,9 @@ JpaRestAngular
 Server side: REST service, persistence to Hibernate / H2.
 Client: Angular.
 
-Composer:   id, name,  birth
-Publisher:  id, name
-Book:       title, composerId, publisherId, pubDate
+Composer:   id, title,  birth
+Publisher:  id, title
+Book:       id, title, composer, publisher, pubDate
 
 Menu
   Composers   (table, edit)

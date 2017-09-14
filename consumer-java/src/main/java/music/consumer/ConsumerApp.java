@@ -1,5 +1,6 @@
-package hello;
+package music.consumer;
 
+import music.common.Composer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.client.RestTemplate;
@@ -14,15 +15,15 @@ import org.springframework.web.client.RestTemplate;
 public class ConsumerApp {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ConsumerApp.class);
-    private static final String URL = "http://localhost:8080/greeting?name=TestFeri";
+    private static final String URL = "http://localhost:8080/music?title=TestFeri";
 
-    // Note: class Greeting is defined in module 'common'
+    // Note: class Composer is defined in module 'common'
     private static void consumeGreeting() {
 
         RestTemplate restTemplate = new RestTemplate();
-        Greeting greeting = restTemplate.getForObject(URL, Greeting.class);
+        Composer composer = restTemplate.getForObject(URL, Composer.class);
 
-        LOGGER.info("App, GREETING: {}", greeting.toString());
+        LOGGER.info("App, GREETING: {}", composer.toString());
     }
 
     public static void main(String args[]) {
