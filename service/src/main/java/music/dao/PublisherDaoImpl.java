@@ -16,7 +16,7 @@ public class PublisherDaoImpl implements PublisherDao {
         if (publishers == null) {
             publishers = new ArrayList<>();
 
-            List<Publisher> publishers = new ArrayList<>();
+            publishers = new ArrayList<>();
 
             publishers.add(new Publisher(1, "Breitkopf"));
             publishers.add(new Publisher(2, "Editio Musica Budapest"));
