@@ -1,20 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Composer } from './composer/composer';
+import { Composer }        from './composer/composer';
 import { ComposerService } from './composer/composer.service';
 
 @Component({
-  moduleId: module.id,
   selector: 'my-dashboard',
-  templateUrl: 'dashboard.component.html',
-  styleUrls: [ 'dashboard.component.css' ]
+  templateUrl: './dashboard.component.html',
+  styleUrls: [ './dashboard.component.css' ]
 })
 export class DashboardComponent implements OnInit {
-
   composers: Composer[] = [];
 
-  constructor(private composerService: ComposerService) {   // inject to private member
-  }
+  constructor(private composerService: ComposerService) { }
 
   ngOnInit(): void {
     this.composerService.getComposers()

@@ -1,0 +1,18 @@
+
+<h2>My Composers</h2>
+(composers.component.html)<br/>
+
+<ul class="composers">
+  <li *ngFor="let composer of composers"
+    [class.selected]="composer === selectedComposer"
+    (click)="onSelect(composer)">
+      <span class="badge">{{composer.id}}</span> {{composer.name}}
+  </li>
+</ul>
+
+<div *ngIf="selectedComposer">
+  <h2>
+    {{selectedComposer.name | uppercase}} is my composer
+  </h2>
+  <button (click)="gotoDetail()">View Details</button>
+</div>

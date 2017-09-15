@@ -5,12 +5,11 @@ import { DashboardComponent }   from './dashboard.component';
 import { ComposersComponent }      from './composer/composers.component';
 import { ComposerDetailComponent }  from './composer/composer-detail.component';
 
-
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   { path: 'dashboard',  component: DashboardComponent },
   { path: 'detail/:id', component: ComposerDetailComponent },
-  { path: 'composers',     component: ComposersComponent }
+  { path: 'composers',  component: ComposersComponent }
 ];
 
 @NgModule({

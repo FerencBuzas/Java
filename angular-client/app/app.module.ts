@@ -5,9 +5,9 @@ import { RouterModule }   from '@angular/router';
 
 import { AppComponent }        from './app.component';
 import { DashboardComponent }  from './dashboard.component';
-import { HeroDetailComponent } from './hero/hero-detail.component';
-import { HeroesComponent }     from './hero/heroes.component';
-import { HeroService }         from './hero/hero.service';
+import { ComposerDetailComponent } from './composer/composer-detail.component';
+import { ComposersComponent }     from './composer/composers.component';
+import { ComposerService }         from './composer/composer.service';
 
 import { AppRoutingModule }     from './app-routing.module';
 
@@ -20,10 +20,10 @@ import { AppRoutingModule }     from './app-routing.module';
   declarations: [
     AppComponent,
     DashboardComponent,
-    HeroDetailComponent,
-    HeroesComponent
+    ComposerDetailComponent,
+    ComposersComponent
   ],
-  providers: [ HeroService ],
+  providers: [ ComposerService ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { 
