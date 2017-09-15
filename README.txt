@@ -24,11 +24,13 @@ Modules
   client-angular
 
     TODO: The client runs in a browser, with Angular-js
+
     git clone https://github.com/angular/quickstart.git angular-client
     cd angular-client
     npm install
     npm start   # should start a browser tab with "Hello Angular!"
     # deleted non-essential files (listed in .txt)
+    Then used as a guide: https://angular.io/tutorial/toh-pt1
 
   client-java
 

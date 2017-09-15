@@ -1,4 +1,4 @@
-.idea/
+**/.idea/
 *.iml
 target/
 .classpath
@@ -6,29 +6,10 @@ target/
 .settings
 bin
 build
-dependency-reduced-pom.xml
 /scratch
-
-# compiled output
 **/dist
 **/tmp
-
-# dependencies
-**/node_modules/**
-
-# misc
-/.sass-cache
-/connect.lock
-/coverage/*
-/libpeerconnection.log
-npm-debug.log
-testem.log
-/typings
-
-# e2e
-/e2e/*.js
-/e2e/*.map
-
-#System Files
-.DS_Store
-Thumbs.db
+**/node_modules
+**/*.log
+**/*.js
+**/*.map
