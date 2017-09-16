@@ -15,11 +15,16 @@
 
     <script src="systemjs.config.js"></script>
     <script>
-      System.import('main.js').catch(function(err){ console.error(err); });
+        debugger;
+        console.info("import main.js ##");
+        System.import('main.js').catch(function(err) {
+            console.error(err);
+        });
+        console.info("after import main.js ##");
     </script>
   </head>
 
   <body>
-    Loading...
+    <my-app>Loading...</my-app>   <!-- app.components and tests -->
   </body>
 </html>

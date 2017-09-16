@@ -1,7 +1,9 @@
 import { Component }          from '@angular/core';
 
 @Component({
-  selector: 'my-app',
+
+  selector: 'my-app',  // Must match index.html!
+
   template: `
     <h1>{{title}}</h1>
     <nav>
@@ -13,5 +15,5 @@ import { Component }          from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Tour of Composers';
+  title = 'Sheet Music';
 }

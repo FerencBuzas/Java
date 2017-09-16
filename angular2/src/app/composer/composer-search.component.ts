@@ -11,6 +11,7 @@ import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
+import 'rxjs/add/operator/switchMap';
 
 import { ComposerSearchService } from './composer-search.service';
 import { Composer } from './composer';
@@ -35,13 +36,13 @@ export class ComposerSearchComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log("ngOnInit() ##");
     this.composers = this.searchTerms
       .debounceTime(300)        // wait 300ms after each keystroke before considering the term
       .distinctUntilChanged()   // ignore if next search term is same as previous
-// TODO: TEMPORARY HACK by Feri
-//      .switchMap(term => term   // switch to new observable each time the term changes
-//        ? this.composerSearchService.search(term)    // return the http search observable
-//        : Observable.of<Composer[]>([]))             // or the obs. of empty composers
+      .switchMap(term => term   // switch to new observable each time the term changes
+        ? this.composerSearchService.search(term)    // return the http search observable
+        : Observable.of<Composer[]>([]))             // or the obs. of empty composers
       .catch(error => {
         console.log(error);              // TODO: add real error handling
         return Observable.of<Composer[]>([]);

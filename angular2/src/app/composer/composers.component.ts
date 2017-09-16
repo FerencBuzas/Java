@@ -17,7 +17,8 @@ export class ComposersComponent implements OnInit {
   selectedComposer: Composer;
 
   constructor(private composerService: ComposerService,
-              private router: Router ) { 
+              private router: Router ) {
+      console.log("ComposerComponent constructor ##");
   }
 
   getComposers(): void {   // a future is involved
@@ -25,6 +26,7 @@ export class ComposersComponent implements OnInit {
   }
 
   ngOnInit(): void {    // The constructor must be short and fast
+    console.debug("ComposerComponent.ngOnInit() ##");
     this.getComposers();
   }
 

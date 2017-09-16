@@ -1,8 +1,8 @@
 {
-  "name": "angular-io-example",
+  "name": "sheet-music-demo",
   "version": "1.0.0",
   "private": true,
-  "description": "Example project from an angular.io guide.",
+  "description": "Demo program, Angular with REST services.",
   "scripts": {
     "test:once": "karma start karma.conf.js --single-run",
     "build": "tsc -p src/",
@@ -23,7 +23,7 @@
     "lint": "tslint ./src/**/*.ts -t verbose"
   },
   "keywords": [],
-  "author": "",
+  "author": "Ferenc Buzas",
   "license": "MIT",
   "dependencies": {
     "@angular/animations": "~4.3.1",
