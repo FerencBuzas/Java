@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Hero } from './hero/hero';
-import { HeroService } from './hero/hero.service';
+import { Composer } from './composer/composer';
+import { ComposerService } from './composer/composer.service';
 
 @Component({
   moduleId: module.id,
@@ -11,13 +11,13 @@ import { HeroService } from './hero/hero.service';
 })
 export class DashboardComponent implements OnInit {
 
-  heroes: Hero[] = [];
+  composers: Composer[] = [];
 
-  constructor(private heroService: HeroService) {   // inject to private member
+  constructor(private composerService: ComposerService) {   // inject to private member
   }
 
   ngOnInit(): void {
-    this.heroService.getHeroes()
-      .then(heroes => this.heroes = heroes.slice(1, 5));
+    this.composerService.getComposers()
+      .then(composers => this.composers = composers.slice(1, 5));
   }
 }

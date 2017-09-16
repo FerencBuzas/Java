@@ -2,21 +2,21 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Params }   from '@angular/router';
 import { Location }                 from '@angular/common';
 
-import { Hero } from './hero';
-import { HeroService } from './hero.service';
+import { Composer } from './composer';
+import { ComposerService } from './composer.service';
 
 @Component({
   moduleId: module.id,
-  selector: 'my-hero-detail',
-  templateUrl: 'hero-detail.component.html',
-  styleUrls: [ 'hero-detail.component.css' ]
+  selector: 'my-composer-detail',
+  templateUrl: 'composer-detail.component.html',
+  styleUrls: [ 'composer-detail.component.css' ]
 })
 
-export class HeroDetailComponent implements OnInit{
+export class ComposerDetailComponent implements OnInit{
     //@Input()
-    hero: Hero;
+    composer: Composer;
   constructor(
-    private heroService: HeroService,
+    private composerService: ComposerService,
     private route: ActivatedRoute,
     private location: Location
   ) {}
@@ -24,8 +24,8 @@ export class HeroDetailComponent implements OnInit{
   ngOnInit(): void {
     this.route.params.forEach((params: Params) => {
       let id = +params['id'];       // '+' operator: converts string to number
-      this.heroService.getHero(id)
-        .then(hero => this.hero = hero);
+      this.composerService.getComposer(id)
+        .then(composer => this.composer = composer);
     });
   }
 

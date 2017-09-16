@@ -1,0 +1,10 @@
+<div *ngIf="composer">
+  <h2>{{composer.name}} details!</h2>
+  <div>
+    <label>id: </label>{{composer.id}}</div>
+  <div>
+    <label>name: </label>
+    <input [(ngModel)]="composer.name" placeholder="name" />
+  </div>
+  <button (click)="goBack()">Back</button>
+</div>
