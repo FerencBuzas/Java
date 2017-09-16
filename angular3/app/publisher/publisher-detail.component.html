@@ -1,0 +1,10 @@
+<div *ngIf="publisher">
+  <h2>{{publisher.name}} details!</h2>
+  <div>
+    <label>id: </label>{{publisher.id}}</div>
+  <div>
+    <label>name: </label>
+    <input [(ngModel)]="publisher.name" placeholder="name" />
+  </div>
+  <button (click)="goBack()">Back</button>
+</div>

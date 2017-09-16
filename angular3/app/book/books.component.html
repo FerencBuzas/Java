@@ -1,0 +1,18 @@
+
+<h2>My Books</h2>
+(books.component.html)<br/>
+
+<ul class="books">
+  <li *ngFor="let book of books"
+    [class.selected]="book === selectedBook"
+    (click)="onSelect(book)">
+      <span class="badge">{{book.id}}</span> {{book.name}}
+  </li>
+</ul>
+
+<div *ngIf="selectedBook">
+  <h2>
+    {{selectedBook.name | uppercase}} is my book
+  </h2>
+  <button (click)="gotoDetail()">View Details</button>
+</div>

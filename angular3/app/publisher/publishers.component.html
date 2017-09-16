@@ -1,0 +1,18 @@
+
+<h2>My Publishers</h2>
+(publishers.component.html)<br/>
+
+<ul class="publishers">
+  <li *ngFor="let publisher of publishers"
+    [class.selected]="publisher === selectedPublisher"
+    (click)="onSelect(publisher)">
+      <span class="badge">{{publisher.id}}</span> {{publisher.name}}
+  </li>
+</ul>
+
+<div *ngIf="selectedPublisher">
+  <h2>
+    {{selectedPublisher.name | uppercase}} is my publisher
+  </h2>
+  <button (click)="gotoDetail()">View Details</button>
+</div>
