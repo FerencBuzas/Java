@@ -1,10 +1,17 @@
 <div *ngIf="book">
-  <h2>{{book.name}} details!</h2>
+  <h2>{{book.title}} details!</h2>
   <div>
-    <label>id: </label>{{book.id}}</div>
+    <label>id: </label>{{book.id}}
+  </div>
   <div>
-    <label>name: </label>
-    <input [(ngModel)]="book.name" placeholder="name" />
+    <label>title: </label>
+    <input [(ngModel)]="book.title" placeholder="title" />
+  </div>
+  <div>
+    <label>composer: </label>{{book.composer.name}}
+  </div>
+  <div>
+    <label>publisher: </label>{{book.publisher.name}}
   </div>
   <button (click)="goBack()">Back</button>
 </div>

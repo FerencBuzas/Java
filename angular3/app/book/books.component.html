@@ -1,18 +1,18 @@
 
-<h2>List of Books</h2>
-(DEBUG: books.component.html)<br/>
+<h2>Books</h2>
+(DEBUG: books.component.html)
 
 <ul class="books">
   <li *ngFor="let book of books"
     [class.selected]="book === selectedBook"
     (click)="onSelect(book)">
-      <span class="badge">{{book.id}}</span> {{book.name}}
+      <span class="badge">{{book.id}}</span> {{book.title}}
   </li>
 </ul>
 
 <div *ngIf="selectedBook">
   <h2>
-    Selected book: {{selectedBook.name | uppercase}}
+    Selected book: {{selectedBook.title | uppercase}}
   </h2>
   <button (click)="gotoDetail()">View Details</button>
 </div>

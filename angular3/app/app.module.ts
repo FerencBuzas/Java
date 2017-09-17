@@ -4,7 +4,7 @@ import { FormsModule }   from '@angular/forms';
 import { RouterModule }   from '@angular/router';
 
 import { AppComponent }        from './app.component';
-import { DashboardComponent }  from './dashboard.component';
+import { DashboardComponent }  from './dashboard/dashboard.component';
 import { BookDetailComponent } from './book/book-detail.component';
 import { BooksComponent }     from './book/books.component';
 import { BookService }         from './book/book.service';

@@ -1,7 +1,7 @@
 import { NgModule }             from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { DashboardComponent }   from './dashboard.component';
+import { DashboardComponent }   from './dashboard/dashboard.component';
 import { BooksComponent }        from './book/books.component';
 import { BookDetailComponent }        from './book/book-detail.component';
 import { ComposersComponent }      from './composer/composers.component';
@@ -17,7 +17,7 @@ const routes: Routes = [
   { path: 'bookDetail/:id', component: BookDetailComponent },
   { path: 'composers',  component: ComposersComponent },
   { path: 'composerDetail/:id', component: ComposerDetailComponent },
-  { path: 'publishers', component: PublishersComponent }
+  { path: 'publishers', component: PublishersComponent },
   { path: 'publisherDetail/:id', component: PublisherDetailComponent },
 ];
 

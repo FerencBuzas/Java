@@ -1,4 +1,7 @@
+
 export class Book {
   id: number;
-  name: string;
+  title: string;
+  composer: Composer;
+  publisher: Publisher;
 }

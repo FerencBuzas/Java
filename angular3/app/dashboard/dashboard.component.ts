@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Composer } from './composer/composer';
-import { ComposerService } from './composer/composer.service';
+import { Composer } from '../composer/composer';
+import { ComposerService } from '../composer/composer.service';
 
 @Component({
   moduleId: module.id,
