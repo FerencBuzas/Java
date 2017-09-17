@@ -1,6 +1,6 @@
 
-<h2>My Books</h2>
-(books.component.html)<br/>
+<h2>List of Books</h2>
+(DEBUG: books.component.html)<br/>
 
 <ul class="books">
   <li *ngFor="let book of books"
@@ -12,7 +12,7 @@
 
 <div *ngIf="selectedBook">
   <h2>
-    {{selectedBook.name | uppercase}} is my book
+    Selected book: {{selectedBook.name | uppercase}}
   </h2>
   <button (click)="gotoDetail()">View Details</button>
 </div>
