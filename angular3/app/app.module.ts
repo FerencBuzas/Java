@@ -5,9 +5,15 @@ import { RouterModule }   from '@angular/router';
 
 import { AppComponent }        from './app.component';
 import { DashboardComponent }  from './dashboard.component';
+import { BookDetailComponent } from './book/book-detail.component';
+import { BooksComponent }     from './book/books.component';
+import { BookService }         from './book/book.service';
 import { ComposerDetailComponent } from './composer/composer-detail.component';
 import { ComposersComponent }     from './composer/composers.component';
 import { ComposerService }         from './composer/composer.service';
+import { PublisherDetailComponent } from './publisher/publisher-detail.component';
+import { PublishersComponent }     from './publisher/publishers.component';
+import { PublisherService }         from './publisher/publisher.service';
 
 import { AppRoutingModule }     from './app-routing.module';
 
@@ -20,10 +26,14 @@ import { AppRoutingModule }     from './app-routing.module';
   declarations: [
     AppComponent,
     DashboardComponent,
+    BookDetailComponent,
+    BooksComponent,
     ComposerDetailComponent,
-    ComposersComponent
+    ComposersComponent,
+    PublisherDetailComponent,
+    PublishersComponent
   ],
-  providers: [ ComposerService ],
+  providers: [ BookService, ComposerService, PublisherService ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { 

@@ -6,7 +6,9 @@ import { Component } from '@angular/core';
    <h1>{{title}}</h1>
    <nav>
      <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+     <a routerLink="/books" routerLinkActive="active">Books</a>
      <a routerLink="/composers" routerLinkActive="active">Composers</a>
+     <a routerLink="/publishers" routerLinkActive="active">Publishers</a>
    </nav>
    <router-outlet></router-outlet>
   `,
@@ -14,5 +16,5 @@ import { Component } from '@angular/core';
 })
 
 export class AppComponent {
-  title = 'Tour of Composers';
+  title = 'Sheet Music';
 }

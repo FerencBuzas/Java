@@ -1,6 +1,6 @@
 <h3>Top Composers</h3>
 <div class="grid grid-pad">
-  <a *ngFor="let composer of composers"  [routerLink]="['/detail', composer.id]"  class="col-1-4">
+  <a *ngFor="let composer of composers"  [routerLink]="['/composerDetail', composer.id]"  class="col-1-4">
     <div class="module composer">
       <h4>{{composer.name}}</h4>
     </div>

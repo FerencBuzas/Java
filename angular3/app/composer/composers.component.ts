@@ -33,6 +33,6 @@ export class ComposersComponent implements OnInit {
   }
 
   gotoDetail(): void {
-    this.router.navigate(['/detail', this.selectedComposer.id]);
+    this.router.navigate(['/composerDetail', this.selectedComposer.id]);
   }
 }

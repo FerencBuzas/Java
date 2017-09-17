@@ -11,4 +11,5 @@ Steps:
 -   checked the Heroes, committed
 - There was now Hero only in app/ and in hero/;
     now renamed all hero to composer,
-    renamed contents with the algorhytm above.
+    renamed contents with the algorythm above.
+- Added Book and Publisher to each place with Composer

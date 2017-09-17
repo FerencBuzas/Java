@@ -33,6 +33,6 @@ export class BooksComponent implements OnInit {
   }
 
   gotoDetail(): void {
-    this.router.navigate(['/detail', this.selectedBook.id]);
+    this.router.navigate(['/bookDetail', this.selectedBook.id]);
   }
 }

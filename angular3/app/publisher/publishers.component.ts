@@ -33,6 +33,6 @@ export class PublishersComponent implements OnInit {
   }
 
   gotoDetail(): void {
-    this.router.navigate(['/detail', this.selectedPublisher.id]);
+    this.router.navigate(['/publisherDetail', this.selectedPublisher.id]);
   }
 }
