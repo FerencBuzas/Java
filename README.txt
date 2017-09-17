@@ -21,9 +21,9 @@ Modules
     Publisher:  id, title
     Book:       id, title, composer, publisher, pubDate
 
-  client-angular
-
-    TODO: The client runs in a browser, with Angular-js
+  angular-client
+    The client runs in a browser, with Angular-js.
+    ** Actually, the working version is not here, but in angular3/. **
 
     git clone https://github.com/angular/quickstart.git angular-client
     cd angular-client
@@ -31,6 +31,13 @@ Modules
     npm start   # should start a browser tab with "Hello Angular!"
     # deleted non-essential files (listed in .txt)
     Then used as a guide: https://angular.io/tutorial/toh-pt1
+
+  angular2
+    A failure, to be deleted.
+
+  angular3
+    This is the actully working version.
+    Started with copying ~/develop/js/angular-tour-of-heroes.
 
   client-java
 
