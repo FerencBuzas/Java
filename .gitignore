@@ -6,6 +6,6 @@ target/
 **/node_modules
 *.log
 *.js
-*.map
+*.js.map
 *.swp
 .vscode

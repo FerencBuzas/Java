@@ -14,10 +14,10 @@ public class MusicServiceApp {
     private static final Logger LOGGER = LoggerFactory.getLogger(MusicServiceApp.class);
 
     public static void main(String[] args) {
-        LOGGER.info("## main()");
+        LOGGER.info("main()");
 
         SpringApplication.run(MusicServiceApp.class, args);   // No XML at all!
 
-        LOGGER.info("## end of main()");
+        LOGGER.info("end of main()");
     }
 }

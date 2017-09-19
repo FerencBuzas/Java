@@ -11,8 +11,6 @@
 </ul>
 
 <div *ngIf="selectedPublisher">
-  <h2>
-    {{selectedPublisher.name | uppercase}} is my publisher
-  </h2>
+  <h2>Selected publisher: {{selectedPublisher.name | uppercase}}</h2>
   <button (click)="gotoDetail()">View Details</button>
 </div>

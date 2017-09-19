@@ -3,10 +3,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule }   from '@angular/forms';
 import { HttpModule }    from '@angular/http';
 import { RouterModule }   from '@angular/router';
-//import { Observable } from 'rxjs';
 
 import { AppComponent }        from './app.component';
-import { Constants }        from './constants';
+import { MusicConfig }     from './util/music-config';
+import { MusicLogger }       from './util/music-logger';
 import { DashboardComponent }  from './dashboard/dashboard.component';
 import { BookDetailComponent } from './book/book-detail.component';
 import { BooksComponent }     from './book/books.component';
@@ -25,7 +25,6 @@ import { AppRoutingModule }     from './app-routing.module';
     BrowserModule,
     FormsModule,
     HttpModule,
-//    Observable,
     AppRoutingModule,
   ],
   declarations: [
@@ -38,8 +37,16 @@ import { AppRoutingModule }     from './app-routing.module';
     PublisherDetailComponent,
     PublishersComponent
   ],
-  providers: [ Constants, BookService, ComposerService, PublisherService ],
-  bootstrap: [ AppComponent ]
+  providers: [
+    MusicConfig,
+    MusicLogger,
+    BookService,
+    ComposerService,
+    PublisherService
+  ],
+  bootstrap: [
+    AppComponent
+  ]
 })
 export class AppModule { 
 }
