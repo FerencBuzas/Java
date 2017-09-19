@@ -8,10 +8,10 @@
     <input [(ngModel)]="book.title" placeholder="title" />
   </div>
   <div>
-    <label>composer: </label>{{book.composer.name}}
+    <label>composer: </label>{{book.composer.name}}  ({{book.composer.birthYear}})
   </div>
   <div>
-    <label>publisher: </label>{{book.publisher.name}}
+    <label>published: </label>{{book.publisher.name}}, {{book.pubYear}}
   </div>
   <button (click)="goBack()">Back</button>
 </div>

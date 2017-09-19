@@ -1,9 +1,12 @@
 import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule }   from '@angular/forms';
+import { HttpModule }    from '@angular/http';
 import { RouterModule }   from '@angular/router';
+//import { Observable } from 'rxjs';
 
 import { AppComponent }        from './app.component';
+import { Constants }        from './constants';
 import { DashboardComponent }  from './dashboard/dashboard.component';
 import { BookDetailComponent } from './book/book-detail.component';
 import { BooksComponent }     from './book/books.component';
@@ -21,7 +24,9 @@ import { AppRoutingModule }     from './app-routing.module';
   imports:      [
     BrowserModule,
     FormsModule,
-    AppRoutingModule
+    HttpModule,
+//    Observable,
+    AppRoutingModule,
   ],
   declarations: [
     AppComponent,
@@ -33,7 +38,7 @@ import { AppRoutingModule }     from './app-routing.module';
     PublisherDetailComponent,
     PublishersComponent
   ],
-  providers: [ BookService, ComposerService, PublisherService ],
+  providers: [ Constants, BookService, ComposerService, PublisherService ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { 

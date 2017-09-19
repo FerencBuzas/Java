@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,12 +19,13 @@ import java.util.Collection;
 import java.util.concurrent.atomic.AtomicLong;
 
 @RestController
+@CrossOrigin     // Adds Allow Cross Origin to header; TODO: restrict to address ...
 @ComponentScan(basePackages = "music.dao")
 public class MusicController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MusicController.class);
 
-    private static final String URL_BASE = "http://localhost:8080/music";
+    private static final String URL_BASE = "localhost:8080/music";
 
     @Autowired
     private BookDao bookDao;

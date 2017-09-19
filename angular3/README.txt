@@ -13,3 +13,8 @@ Steps:
     now renamed all hero to composer,
     renamed contents with the algorythm above.
 - Added Book and Publisher to each place with Composer
+
+The Web developer page is much better in Chrome than in FireFox.
+Cross... error in Chrome: an extension is available.
+Then: Not authorized
+--> The solution: add @C

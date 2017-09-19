@@ -11,7 +11,7 @@ import { PublisherDetailComponent } from './publisher/publisher-detail.component
 
 
 const routes: Routes = [
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+  { path: '', redirectTo: '/composers', pathMatch: 'full' },
   { path: 'dashboard',  component: DashboardComponent },
   { path: 'books',     component: BooksComponent },
   { path: 'bookDetail/:id', component: BookDetailComponent },
