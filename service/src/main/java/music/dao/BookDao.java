@@ -6,6 +6,9 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * Give one or more Book objects.
+ */
 @ComponentScan
 @Repository
 public interface BookDao {

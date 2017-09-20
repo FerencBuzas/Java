@@ -5,6 +5,7 @@ import music.common.Composer;
 import music.common.Publisher;
 import music.dao.BookDao;
 import music.dao.ComposerDao;
+import music.dao.DataCreator;
 import music.dao.PublisherDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,6 +37,9 @@ public class MusicController {
     @Autowired
     private PublisherDao publisherDao;
 
+    @Autowired
+    private DataCreator dataCreator;
+
     private final AtomicLong counter = new AtomicLong();
 
 //    @RequestMapping("/music/books")
@@ -51,6 +55,11 @@ public class MusicController {
 
     private static String cmd(String lastWord) {
         return String.format("<a href=\"%s/%s\">%s</a><br>", URL_BASE, lastWord, lastWord);
+    }
+
+    @RequestMapping("/music/create")
+    public String create() {
+        return dataCreator.createData(composerDao, publisherDao);
     }
 
     @RequestMapping("/music/book")

@@ -5,6 +5,9 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * Give one or more Composer objects.
+ */
 @Repository
 public interface ComposerDao {
 

@@ -1,38 +1,33 @@
 package music.dao;
 
 import music.common.Composer;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Implementation of ComposerDao, when data are served just from memory.
+ */
 @Repository
-public class ComposerDaoImpl implements ComposerDao {
+public class ComposerDaoMemory implements ComposerDao {
 
     private List<Composer> composers;
 
-    private void createComposers() {
-        if (composers != null) {
-            return;
-        }
-        composers = new ArrayList<>();
-        composers.add(new Composer(1, "Bach", 1685));
-        composers.add(new Composer(2, "Haydn", 1732));
-        composers.add(new Composer(3, "Mozart", 1756));
-        composers.add(new Composer(4, "Beethoven", 1770));
-        composers.add(new Composer(5, "Schubert", 1797));
+    @Autowired
+    ComposerDaoMemory(ComposerDataCreator composerDataCreator) {
+        composers = composerDataCreator.createComposerList();
     }
 
     @Override
     public List<Composer> getComposers() {
 
-        createComposers();
         return composers;
     }
 
     @Override
     public List<Composer> getComposersByName(String name) {
-        createComposers();
 
         List<Composer> result = new ArrayList<>();
         for (int i = 0; i < composers.size(); ++i) {
@@ -46,7 +41,6 @@ public class ComposerDaoImpl implements ComposerDao {
 
     @Override
     public Composer getComposerById(long id) {
-        createComposers();
 
         for (int i = 0; i < composers.size(); ++i) {
             if (composers.get(i).id == id) {

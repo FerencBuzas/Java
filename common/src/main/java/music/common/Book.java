@@ -3,15 +3,23 @@ package music.common;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 /**
  * Actually this is 'sheet music', but 'book' is simpler.
  *
  * Created by Ferenc_Buzas on 13 Sep 2017
  */
+@Entity
 public class Book {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Book.class);
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     long id;
     String title;
     Composer composer;

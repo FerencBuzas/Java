@@ -16,7 +16,7 @@ public class MusicServiceApp {
     public static void main(String[] args) {
         LOGGER.info("main()");
 
-        SpringApplication.run(MusicServiceApp.class, args);   // No XML at all!
+        SpringApplication.run(MusicServiceApp.class, args);
 
         LOGGER.info("end of main()");
     }

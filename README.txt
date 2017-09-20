@@ -21,22 +21,15 @@ Modules
     Publisher:  id, title
     Book:       id, title, composer, publisher, pubDate
 
-  angular-client
+
+  angular3
     The client runs in a browser, with Angular-js.
-    ** Actually, the working version is not here, but in angular3/. **
 
     git clone https://github.com/angular/quickstart.git angular-client
     cd angular-client
     npm install
     npm start   # should start a browser tab with "Hello Angular!"
-    # deleted non-essential files (listed in .txt)
     Then used as a guide: https://angular.io/tutorial/toh-pt1
-
-  angular2
-    A failure, to be deleted.
-
-  angular3
-    This is the actully working version.
     Started with copying ~/develop/js/angular-tour-of-heroes.
 
   client-java
@@ -52,3 +45,4 @@ Modules
       it had Authentication error.
     Then I added Cross Origin header to the service, following
       https://spring.io/guides/gs/rest-service-cors/.
+    Spring: if an I/F has 2 implementations, one can be annotated as @Primary.

@@ -1,39 +1,33 @@
 package music.dao;
 
 import music.common.Publisher;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Implementation of PublisherDao, when data are served just from memory.
+ */
 @Repository
-public class PublisherDaoImpl implements PublisherDao {
+public class PublisherDaoMemory implements PublisherDao {
 
     private List<Publisher> publishers;
 
-    private void createPublishers() {
-
-        if (publishers != null) {
-            return;
-        }
-
-        publishers = new ArrayList<>();
-        publishers.add(new Publisher(1, "Breitkopf"));
-        publishers.add(new Publisher(2, "Editio Musica Budapest"));
-        publishers.add(new Publisher(3, "Peters"));
+    @Autowired
+    PublisherDaoMemory(PublisherDataCreator publisherDataCreator) {
+        publishers = publisherDataCreator.createPublisherList();
     }
 
     @Override
     public List<Publisher> getPublishers() {
 
-        createPublishers();
         return publishers;
     }
 
     @Override
     public List<Publisher> getPublishersByName(String name) {
-
-        createPublishers();
 
         List<Publisher> result = new ArrayList<>();
         for (int i = 0; i < publishers.size(); ++i) {
@@ -46,8 +40,6 @@ public class PublisherDaoImpl implements PublisherDao {
 
     @Override
     public Publisher getPublisherById(long id) {
-
-        createPublishers();
 
         for (int i = 0; i < publishers.size(); ++i) {
             if (publishers.get(i).id == id) {
