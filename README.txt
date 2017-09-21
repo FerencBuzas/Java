@@ -22,7 +22,7 @@ Modules
     Publisher:  id, title
     Book:       id, title, composer, publisher, pubDate
 
-  angular3
+  angular
     The client runs in a browser, with Angular-js.
 
     git clone https://github.com/angular/quickstart.git angular-client

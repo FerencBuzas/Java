@@ -1,6 +1,6 @@
 Steps:
 
-- Copied develop/tour-of-heroes/ go JpaRestAngular/angular3
+- Copied develop/tour-of-heroes/ go JpaRestAngular/angular
 -   checked the Heroes, committed
 - created subdir hero, moved all heroes there
 -   checked the Heroes, committed
