@@ -30,24 +30,11 @@ public class PublisherDaoMemory implements PublisherDao {
     public List<Publisher> getPublishersByName(String name) {
 
         List<Publisher> result = new ArrayList<>();
-        for (int i = 0; i < publishers.size(); ++i) {
-            if (publishers.get(i).name.startsWith(name)) {
-                result.add(publishers.get(i));
+        for (Publisher publisher : publishers) {
+            if (publisher.getName().startsWith(name)) {
+                result.add(publisher);
             }
         }
         return result;
-    }
-
-    @Override
-    public Publisher getPublisherById(long id) {
-
-        for (int i = 0; i < publishers.size(); ++i) {
-            if (publishers.get(i).id == id) {
-                return publishers.get(i);
-            }
-        }
-
-        // TODO: error handling
-        return null;
     }
 }

@@ -18,6 +18,8 @@ public class MusicServiceApp {
 
         SpringApplication.run(MusicServiceApp.class, args);
 
+        // Setup here works only with embedded Tomcat, not from a War. Hence StartupHook.
+
         LOGGER.info("end of main()");
     }
 }

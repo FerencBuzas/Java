@@ -14,6 +14,4 @@ import java.util.List;
 public interface BookDao {
 
     List<Book> getBooks();
-
-    Book getBookById(long id);
 }

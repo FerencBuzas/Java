@@ -6,6 +6,7 @@ import music.common.Publisher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
@@ -16,6 +17,7 @@ import java.util.List;
  * This class is used only with JPA: creates and persists all the data.
  */
 @Service
+@ComponentScan(basePackages = "music.common, music.dao")
 public class DataCreator {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DataCreator.class);
@@ -32,7 +34,7 @@ public class DataCreator {
     @Autowired
     private BookDataCreator bookDataCreator;
 
-    public String createData(ComposerDao composerDao, PublisherDao publisherDao) {
+    public void createData() {
         LOGGER.info("DataCreator.createData ##");
 
         // Create lists in memory
@@ -50,14 +52,13 @@ public class DataCreator {
             entityManager.persist(publisher);
         }
 
-        List<Book> books = bookDataCreator.createBookList(composerDao, publisherDao);
+        // Create and store dependent Books after Composers and Publishers are stored.
+        List<Book> books = bookDataCreator.createBookList(composers, publishers);
         for (Book book: books) {
             entityManager.persist(book);
         }
 
         entityManager.getTransaction().commit();
         entityManager.close();
-
-        return "OK";
     }
 }

@@ -14,9 +14,9 @@
             Persistence unit for the JpaRestAngular project
         </description>
 
-        <class>Book</class>
-        <class>Composer</class>
-        <class>Publisher</class>
+        <class>music.common.Book</class>
+        <class>music.common.Composer</class>
+        <class>music.common.Publisher</class>
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />

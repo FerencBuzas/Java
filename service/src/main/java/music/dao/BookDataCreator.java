@@ -14,27 +14,27 @@ import java.util.List;
  * Creates a list of Book objects; it can be used in memory, or persisted.
  */
 @Service
-public class BookDataCreator {
+class BookDataCreator {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(BookDataCreator.class);
 
-    List<Book> createBookList(ComposerDao composerDao, PublisherDao publisherDao) {
+    List<Book> createBookList(List<Composer> composerList, List<Publisher> publisherList) {
 
         List<Book> list = new ArrayList<>();
 
-        Composer bach = composerDao.getComposersByName("Bach").stream().findFirst().get();
-        Composer beethoven = composerDao.getComposersByName("Beethoven").stream().findFirst().get();
-        Composer liszt = composerDao.getComposersByName("Liszt").stream().findFirst().get();
+        Composer bach = ComposerDataCreator.findComposerByName(composerList, "Bach");
+        Composer beethoven = ComposerDataCreator.findComposerByName(composerList, "Beethoven");
+        Composer liszt = ComposerDataCreator.findComposerByName(composerList, "Liszt");
 
-        Publisher peters = publisherDao.getPublishersByName("Peters").stream().findFirst().get();
-        Publisher emb = publisherDao.getPublishersByName("Editio").stream().findFirst().get();
+        Publisher peters = PublisherDataCreator.findPublisherByName(publisherList, "Peters");
+        Publisher emb = PublisherDataCreator.findPublisherByName(publisherList, "Editio");
 
-        list.add(new Book(1, "Wohltemperiertes Klavier I", bach, peters, 1998));
-        list.add(new Book(2, "Wohltemperiertes Klavier II", bach, peters, 1998));
-        list.add(new Book(3, "Zongoraszonáták I", beethoven, emb, 1992));
-        list.add(new Book(4, "Zongoraszonáták II", beethoven, emb, 1992));
-        list.add(new Book(5, "Zongoraszonáták III", beethoven, emb, 1992));
-        list.add(new Book(6, "Sonate h-moll", liszt, emb, 1988));
+        list.add(new Book("Wohltemperiertes Klavier I", bach, peters, 1998));
+        list.add(new Book("Wohltemperiertes Klavier II", bach, peters, 1998));
+        list.add(new Book("Zongoraszonáták I", beethoven, emb, 1992));
+        list.add(new Book("Zongoraszonáták II", beethoven, emb, 1992));
+        list.add(new Book("Zongoraszonáták III", beethoven, emb, 1992));
+        list.add(new Book("Sonate h-moll", liszt, emb, 1988));
         return list;
     }
 }

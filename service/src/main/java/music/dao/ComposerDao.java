@@ -14,6 +14,4 @@ public interface ComposerDao {
     List<Composer> getComposers();
 
     List<Composer> getComposersByName(String name);
-
-    Composer getComposerById(long id);
 }

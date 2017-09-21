@@ -14,6 +14,4 @@ public interface PublisherDao {
     List<Publisher> getPublishers();
 
     List<Publisher> getPublishersByName(String name);
-
-    Publisher getPublisherById(long id);
 }

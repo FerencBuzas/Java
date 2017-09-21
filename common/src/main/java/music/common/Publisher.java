@@ -14,20 +14,17 @@ public class Publisher {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    public long id;
-    public String name;
+    private long id;
+
+    private String name;
 
     public Publisher() {
-        LOGGER.debug("## Composer()");
-
-        id = 0;
-        name = null;
+        LOGGER.debug("Publisher()");
     }
 
-    public Publisher(long id, String name) {
-        LOGGER.debug("## Publisher() id={}, title={}", id, name);
+    public Publisher(String name) {
+        LOGGER.debug("Publisher() name={}", name);
 
-        this.id = id;
         this.name = name;
     }
 
@@ -41,7 +38,6 @@ public class Publisher {
 
     public String toString() {
 
-        return "Composer[id=" +id+ ", title=" +name +"]";
+        return "Publisher[id=" +id+ ", name=" +name +"]";
     }
-
 }

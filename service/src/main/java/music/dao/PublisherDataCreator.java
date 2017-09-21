@@ -20,16 +20,16 @@ class PublisherDataCreator {
 
         List<Publisher> list = new ArrayList<>();
 
-        list.add(new Publisher(1, "Breitkopf"));
-        list.add(new Publisher(2, "Editio Musica Budapest"));
-        list.add(new Publisher(3, "Peters"));
+        list.add(new Publisher("Breitkopf"));
+        list.add(new Publisher("Editio Musica Budapest"));
+        list.add(new Publisher("Peters"));
 
         return list;
     }
 
     static Publisher findPublisherByName(List<Publisher> publishers, String name) {
         for (Publisher publisher: publishers) {
-            if (publisher.name.startsWith(name)) {
+            if (publisher.getName().startsWith(name)) {
                 return publisher;
             }
         }

@@ -22,17 +22,12 @@ public class BookDaoJpa implements BookDao {
     @Override
     public List<Book> getBooks() {
 
-        String query = "SELECT p FROM book";
+        String query = "from Book";
         return fetchBooks(query);
     }
 
-    @Override
-    public Book getBookById(long id) {
-
-        return null;
-    }
-
     private List<Book> fetchBooks(String query) {
+
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
 

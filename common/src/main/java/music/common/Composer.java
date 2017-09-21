@@ -18,22 +18,21 @@ public class Composer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    public long id;
-    public String name;
-    public int birthYear;
+    private long id;
+
+    private String name;
+    private int birthYear;
+
 
     public Composer() {
         LOGGER.debug("Composer()");
 
-        id = 0;
-        name = null;
-        birthYear = 0;
     }
 
-    public Composer(long id, String name, int birthYear) {
-        LOGGER.debug("Composer() id={}, title={}", id, name);
+    // Note: the Id must not be set when managed by JPA
+    public Composer(String name, int birthYear) {
+        LOGGER.debug("Composer() name={} birthYear={}", name, birthYear);
 
-        this.id = id;
         this.name = name;
         this.birthYear = birthYear;
     }
@@ -52,6 +51,6 @@ public class Composer {
 
     public String toString() {
 
-        return "Composer[id=" +id+ ", title=" +name+ " birthYear=" + birthYear +"]";
+        return "Composer[id=" +id+ ", name=" +name+ " birthYear=" + birthYear +"]";
     }
 }

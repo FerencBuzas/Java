@@ -13,10 +13,10 @@ import java.util.List;
 public class BookDaoMemory implements BookDao {
 
     @Autowired
-    private ComposerDao composerDao;
+    private ComposerDaoMemory composerDao;
 
     @Autowired
-    private PublisherDao publisherDao;
+    private PublisherDaoMemory publisherDao;
 
     @Autowired
     private BookDataCreator bookDataCreator;
@@ -29,7 +29,8 @@ public class BookDaoMemory implements BookDao {
      */
     private void createDataIfNotYet() {
         if (books == null) {
-            books = bookDataCreator.createBookList(composerDao, publisherDao);
+            books = bookDataCreator.createBookList(composerDao.getComposers(),
+                    publisherDao.getPublishers());
         }
     }
 
@@ -39,19 +40,5 @@ public class BookDaoMemory implements BookDao {
         createDataIfNotYet();
 
         return books;
-    }
-
-    @Override
-    public Book getBookById(long id) {
-
-        createDataIfNotYet();
-
-        for (Book book : books) {
-            if (book.getId() == id) {
-                return book;
-            }
-        }
-
-        return null;
     }
 }

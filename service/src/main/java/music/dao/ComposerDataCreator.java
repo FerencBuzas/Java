@@ -20,18 +20,27 @@ class ComposerDataCreator {
 
         List<Composer> list = new ArrayList<>();
 
-        list.add(new Composer(1, "Bach", 1685));
-        list.add(new Composer(2, "Haydn", 1732));
-        list.add(new Composer(3, "Mozart", 1756));
-        list.add(new Composer(4, "Beethoven", 1770));
-        list.add(new Composer(5, "Schubert", 1797));
+        list.add(new Composer("Bach", 1685));
+        list.add(new Composer("Haydn", 1732));
+        list.add(new Composer("Mozart", 1756));
+        list.add(new Composer("Beethoven", 1770));
+        list.add(new Composer("Schubert", 1797));
+        list.add(new Composer("Schumann", 1810));
+//        list.add(new Composer("Chopin", 1810));
+        list.add(new Composer("Liszt", 1811));
+        list.add(new Composer("Brahms", 1833));
+        list.add(new Composer("Muszorgszkij", 1839));
+//        list.add(new Composer("Tschaikowskij", 1840));
+//        list.add(new Composer("Debussy", 1862));
+        list.add(new Composer("Rachmaninov", 1873));
+        list.add(new Composer("Bartók", 1881));
 
         return list;
     }
 
     static Composer findComposerByName(List<Composer> composers, String name) {
         for (Composer composer: composers) {
-            if (composer.name.startsWith(name)) {
+            if (composer.getName().startsWith(name)) {
                 return composer;
             }
         }

@@ -22,7 +22,7 @@ public class PublisherDaoJpa implements PublisherDao {
     @Override
     public List<Publisher> getPublishers() {
 
-        String query = "SELECT p FROM publisher";
+        String query = "from Publisher";
         return fetchPublishers(query);
     }
 
@@ -31,12 +31,6 @@ public class PublisherDaoJpa implements PublisherDao {
 
         String query = "SELECT p FROM publisher WHERE name LIKE '"+name+"%'";
         return fetchPublishers(query);
-    }
-
-    @Override
-    public Publisher getPublisherById(long id) {
-
-        return null;
     }
 
     private List<Publisher> fetchPublishers(String query) {

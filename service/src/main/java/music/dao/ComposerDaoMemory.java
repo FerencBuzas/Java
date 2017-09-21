@@ -30,24 +30,12 @@ public class ComposerDaoMemory implements ComposerDao {
     public List<Composer> getComposersByName(String name) {
 
         List<Composer> result = new ArrayList<>();
-        for (int i = 0; i < composers.size(); ++i) {
-            if (composers.get(i).name.startsWith(name)) {
-                result.add(composers.get(i));
+        for (Composer composer : composers) {
+            if (composer.getName().startsWith(name)) {
+                result.add(composer);
             }
         }
 
         return result;
-    }
-
-    @Override
-    public Composer getComposerById(long id) {
-
-        for (int i = 0; i < composers.size(); ++i) {
-            if (composers.get(i).id == id) {
-                return composers.get(i);
-            }
-        }
-
-        return null;
     }
 }

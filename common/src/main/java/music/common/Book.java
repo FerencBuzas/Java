@@ -3,10 +3,7 @@ package music.common;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * Actually this is 'sheet music', but 'book' is simpler.
@@ -20,26 +17,26 @@ public class Book {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    long id;
-    String title;
-    Composer composer;
-    Publisher publisher;
-    int pubYear;
+    private long id;
+
+    private String title;
+
+    @ManyToOne
+    private Composer composer;
+
+    @ManyToOne
+    private Publisher publisher;
+
+    private int pubYear;
 
     public Book() {
-        LOGGER.debug("## Book()");
-
-        id = 0;
-        title = null;
-        composer = null;
-        publisher = null;
-        pubYear = 0;
+        LOGGER.debug("Book()");
     }
 
-    public Book(long id, String title, Composer composer, Publisher publisher, int pubYear) {
-        LOGGER.debug("## Book() id={}, title={}", id, title);
+    // Note: the Id must not be set when managed by JPA
+    public Book(String title, Composer composer, Publisher publisher, int pubYear) {
+        LOGGER.debug("Book() title={} composer={}", title, composer.getName());
 
-        this.id = id;
         this.title = title;
         this.composer = composer;
         this.publisher = publisher;

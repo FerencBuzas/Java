@@ -40,7 +40,7 @@ Modules
   service
 
     Contains a REST service, which retrieves Composers, Publishers, Books.
-    It can return hardcoded values, or TODO: use JPA or Spring Data.
+    It can return hardcoded values, or TODO: use JPA
     The browsers had Cross Origion problems. When I added a Cross Origin extension Chrome,
       it had Authentication error.
     Then I added Cross Origin header to the service, following

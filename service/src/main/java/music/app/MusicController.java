@@ -5,7 +5,6 @@ import music.common.Composer;
 import music.common.Publisher;
 import music.dao.BookDao;
 import music.dao.ComposerDao;
-import music.dao.DataCreator;
 import music.dao.PublisherDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +20,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 @RestController
 @CrossOrigin     // Adds Allow Cross Origin to header; TODO: restrict to address ...
-@ComponentScan(basePackages = "music.dao")
+@ComponentScan(basePackages = "music.common, music.dao")
 public class MusicController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MusicController.class);
@@ -37,9 +36,6 @@ public class MusicController {
     @Autowired
     private PublisherDao publisherDao;
 
-    @Autowired
-    private DataCreator dataCreator;
-
     private final AtomicLong counter = new AtomicLong();
 
 //    @RequestMapping("/music/books")
@@ -50,16 +46,11 @@ public class MusicController {
 
     @RequestMapping("/music")
     public String music() {
-        return cmd("book") + cmd("composer") + cmd("publisher");
+        return link("book") + link("composer") + link("publisher");
     }
 
-    private static String cmd(String lastWord) {
+    private static String link(String lastWord) {
         return String.format("<a href=\"%s/%s\">%s</a><br>", URL_BASE, lastWord, lastWord);
-    }
-
-    @RequestMapping("/music/create")
-    public String create() {
-        return dataCreator.createData(composerDao, publisherDao);
     }
 
     @RequestMapping("/music/book")

@@ -1,6 +1,8 @@
 package music.dao;
 
 import music.common.Composer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
@@ -16,13 +18,15 @@ import java.util.List;
 @Primary
 public class ComposerDaoJpa implements ComposerDao {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(ComposerDao.class);
+
     @Autowired
     private EntityManagerFactory entityManagerFactory;
 
     @Override
     public List<Composer> getComposers() {
 
-        String query = "SELECT p FROM composer";
+        String query = "from Composer";
         return fetchComposers(query);
     }
 
@@ -33,13 +37,9 @@ public class ComposerDaoJpa implements ComposerDao {
         return fetchComposers(query);
     }
 
-    @Override
-    public Composer getComposerById(long id) {
-
-        return null;
-    }
-
     private List<Composer> fetchComposers(String query) {
+        LOGGER.debug("fetchComposers() q={} ###", query);
+
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
 
