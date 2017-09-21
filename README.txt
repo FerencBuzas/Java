@@ -1,9 +1,10 @@
-JpaRestAngular
+JpaRestAngular v1.1
 
 Simple demo program which uses REST service and several clients.
 
 Author: Ferenc Buzas
 Starting date: 13 Sep 2017
+v1.1:          21 Sep 2017
 
 Server side: REST service
 Client:      Java app / or Angular / or just browse URLs.
