@@ -12,16 +12,20 @@ import java.util.List;
 @Repository
 public class BookDaoMemory implements BookDao {
 
-    @Autowired
     private ComposerDaoMemory composerDao;
-
-    @Autowired
     private PublisherDaoMemory publisherDao;
-
-    @Autowired
     private BookDataCreator bookDataCreator;
 
     private List<Book> books;
+
+    @Autowired
+    BookDaoMemory(ComposerDaoMemory composerDao,
+            PublisherDaoMemory publisherDao,
+            BookDataCreator bookDataCreator) {
+        this.composerDao = composerDao;
+        this.publisherDao = publisherDao;
+        this.bookDataCreator = bookDataCreator;
+    }
 
     /*
      * This cannot be in the constructor, as bookDataCreator needs other two DAOs,
