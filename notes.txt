@@ -1,0 +1,8 @@
+Cross Origin
+    The browsers had Cross Origin problems. When I added a Cross Origin extension Chrome,
+      it had Authentication error.
+    Then I added Cross Origin header to the service, following
+      https://spring.io/guides/gs/rest-service-cors/.
+
+Spring injection
+  If an I/F has 2 implementations, one can be annotated as @Primary.
