@@ -7,7 +7,6 @@ import { RouterModule }   from '@angular/router';
 import { AppComponent }        from './app.component';
 import { MusicConfig }     from './util/music-config';
 import { MusicLogger }       from './util/music-logger';
-import { DashboardComponent }  from './dashboard/dashboard.component';
 import { BookDetailComponent } from './book/book-detail.component';
 import { BooksComponent }     from './book/books.component';
 import { BookService }         from './book/book.service';
@@ -29,7 +28,6 @@ import { AppRoutingModule }     from './app-routing.module';
   ],
   declarations: [
     AppComponent,
-    DashboardComponent,
     BookDetailComponent,
     BooksComponent,
     ComposerDetailComponent,
