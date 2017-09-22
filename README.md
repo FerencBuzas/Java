@@ -1,4 +1,4 @@
-JpaRestAngular v1.1
+#JpaRestAngular v1.1
 
 Simple demo program which uses REST service and several clients.
 
@@ -9,20 +9,23 @@ v1.1:          21 Sep 2017
 Server side: Spring REST service,  with JPA / or hardcoded data.
 Client:      Spring Java app / or Angular / or just browse URLs.
 
-Usage:
-  Run service/.../music/app/MusicServiceApp
+##Usage:
+  service: run service/.../music/app/MusicServiceApp
+    (it uses an embedded Tomcat, uses port 8080)
   browser: http://localhost:8080/music - this gives help about calling
+  angular: cd angular && npm start
 
 ------------------------------------------------------------------
-Modules
+##Modules
 
-  common: classes, which are used in the backend and also in the Java client.
+###common:
+  classes, which are used in the backend and also in the Java client.
 
     Composer:   id, title,  birth
     Publisher:  id, title
     Book:       id, title, composer, publisher, pubDate
 
-  angular
+###angular
     The client runs in a browser, with Angular-js.
 
     git clone https://github.com/angular/quickstart.git angular-client
@@ -32,12 +35,12 @@ Modules
     Then used as a guide: https://angular.io/tutorial/toh-pt1
     Started with copying ~/develop/js/angular-tour-of-heroes.
 
-  client-java
+###client-java
 
     The client is a standalone application.
     It writes the contents of the containers (Composers, Publishers, Books) to System.out.
 
-  service
+###service
 
     Contains a REST service, which retrieves Composers, Publishers, Books.
     It uses JPA, or it can return hardcoded values.
