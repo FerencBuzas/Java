@@ -7,5 +7,4 @@ target/
 *.js
 *.js.map
 *.swp
-package-lock.json
 .vscode
