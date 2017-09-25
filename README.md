@@ -1,6 +1,6 @@
-# JpaRestAngular v1.1
+# SheetMusicRegister v1.1
 
-A simple demo program which uses JPA, RESTful service and Angular client.
+A simple demo where JPA, RESTful service and Angular client work together.
 
 Author: Ferenc Buzas  
 Starting date: 13 Sep 2017  
@@ -61,7 +61,6 @@ To demonstrate the cooperation of JPA, RESTful service, Angular.
 
 # TODO
 
-  - Do something with node_modules/ (either put in repo or solve peer problem)
   - Create a correct way of selecting either service or mock data in angular/
   - Create a correct way of selecting either JPA or mock data in service/.
   - Add error handling

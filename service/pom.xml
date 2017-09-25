@@ -11,8 +11,8 @@
     </properties>
 
     <parent>
-        <artifactId>jpa-rest-angular</artifactId>
-        <groupId>jpa-rest-group</groupId>
+        <artifactId>sheet-music-register</artifactId>
+        <groupId>sheet-music-group</groupId>
         <version>1.1-SNAPSHOT</version>
     </parent>
 
@@ -24,7 +24,7 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
-            <groupId>jpa-rest-group</groupId>
+            <groupId>sheet-music-group</groupId>
             <artifactId>common</artifactId>
             <version>1.1-SNAPSHOT</version>
         </dependency>
