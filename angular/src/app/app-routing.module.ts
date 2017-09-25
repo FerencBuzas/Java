@@ -1,7 +1,6 @@
 import { NgModule }             from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { DashboardComponent }   from './dashboard/dashboard.component';
 import { BooksComponent }        from './book/books.component';
 import { BookDetailComponent }        from './book/book-detail.component';
 import { ComposersComponent }      from './composer/composers.component';
@@ -12,7 +11,6 @@ import { PublisherDetailComponent } from './publisher/publisher-detail.component
 
 const routes: Routes = [
   { path: '', redirectTo: '/composers', pathMatch: 'full' },
-  { path: 'dashboard',  component: DashboardComponent },
   { path: 'books',     component: BooksComponent },
   { path: 'bookDetail/:id', component: BookDetailComponent },
   { path: 'composers',  component: ComposersComponent },

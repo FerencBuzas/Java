@@ -3,6 +3,6 @@
 target/
 **/node_modules
 *.log
-angular/app/*.js
+angular/**/app/**/*.js
 *.js.map
 .vscode
