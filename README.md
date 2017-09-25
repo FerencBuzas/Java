@@ -15,7 +15,8 @@ After downloading and building the components:
   - start the service: run service/.../music/app/MusicServiceApp  
     (it uses embedded Tomcat, needs port 8080)  
   - use with angular: cd angular && npm start
-      (NOTE: node_modules/ is not included, so there may be problems with running it)
+      (NOTE: node_modules/ is not included, so there may be problems with running it,
+        due to version conflicts between node, npm, and the libraries)
   - use by URLs: http://localhost:8080/music - gives a simple page with links
 
 # About the Project
@@ -70,3 +71,4 @@ To demonstrate the cooperation of JPA, RESTful service, Angular.
   - Add new functionality to add/modify/delete elements
   - Add scrolling in tables
   - Add searching/filtering by composer, publisher
+  - Deployment
