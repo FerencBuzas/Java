@@ -11,7 +11,7 @@
 
     <persistence-unit name="SheetMusic">
         <description>
-            Persistence unit for the JpaRestAngular project
+            Persistence unit for the SheetMusicRegister project
         </description>
 
         <class>music.common.Book</class>

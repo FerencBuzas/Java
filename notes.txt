@@ -11,7 +11,7 @@ Spring injection
 About the Angular app
 Steps:
 
-- Copied develop/tour-of-heroes/ go JpaRestAngular/angular
+- Copied develop/tour-of-heroes/ go SheetMusicRegister/angular
 -   checked the Heroes, committed
 - created subdir hero, moved all heroes there
 -   checked the Heroes, committed
