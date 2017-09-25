@@ -8,8 +8,3 @@
       <span class="badge">{{publisher.id}}</span> {{publisher.name}}
   </li>
 </ul>
-
-<div *ngIf="selectedPublisher">
-  <h2>Selected publisher: {{selectedPublisher.name | uppercase}}</h2>
-  <button (click)="gotoDetail()">View Details</button>
-</div>

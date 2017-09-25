@@ -20,19 +20,19 @@ export class ComposersComponent implements OnInit {
               private router: Router ) { 
   }
 
+  // When the service sends the composers, store them to member.
   getComposers(): void {   // a future is involved
     this.composerService.getComposers().then(h => this.composers = h);
   }
 
-  ngOnInit(): void {    // The constructor must be short and fast
+  // The constructor must be short and fast, so loading is here.
+  ngOnInit(): void {
     this.getComposers();
   }
 
+  // When the user selects a composer, store its references to member.
   onSelect(composer: Composer): void {
     this.selectedComposer = composer;
-  }
-
-  gotoDetail(): void {
     this.router.navigate(['/composerDetail', this.selectedComposer.id]);
   }
 }

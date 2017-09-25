@@ -8,10 +8,3 @@
       <span class="badge">{{composer.id}}</span> {{composer.name}}
   </li>
 </ul>
-
-<div *ngIf="selectedComposer">
-  <h2>
-    Selected composer: {{selectedComposer.name | uppercase}}
-  </h2>
-  <button (click)="gotoDetail()">View Details</button>
-</div>

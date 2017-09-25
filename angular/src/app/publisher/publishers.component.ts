@@ -30,9 +30,6 @@ export class PublishersComponent implements OnInit {
 
   onSelect(publisher: Publisher): void {
     this.selectedPublisher = publisher;
-  }
-
-  gotoDetail(): void {
     this.router.navigate(['/publisherDetail', this.selectedPublisher.id]);
   }
 }
