@@ -34,3 +34,14 @@ Then: Not authorized
 # install karma for test:
   from: https://www.npmjs.com/package/karma-systemjs
 npm install karma-systemjs systemjs es6-module-loader systemjs-plugin-babel
+
+# To avoid testing error about like "Cannot load app.component.css":
+    TestBed.configureTestingModule({
+      declarations: [
+        AppComponent
+      ],
+    }).overrideComponent(AppComponent, {  // add this
+        set: { styleUrls: [] }
+    }).compileComponents();
+    
+  (It has also been solved in Angular-CLI).

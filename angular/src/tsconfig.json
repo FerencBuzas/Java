@@ -14,6 +14,8 @@
     ]
   },
   "compileOnSave": true,
+  // "compileOnSave": false,   // for Karma tests, suggested on the net
+  // "buildOnSave": false,     // for Karma tests, suggested on the net
   "exclude": [
     "node_modules/*",
     "**/*-aot.ts"
