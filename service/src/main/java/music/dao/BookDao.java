@@ -2,6 +2,7 @@ package music.dao;
 
 import music.common.Book;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -14,4 +15,8 @@ import java.util.List;
 public interface BookDao {
 
     List<Book> getBooks();
+
+    ResponseEntity<?> addBook(Book book);
+
+    void deleteBook(long id);
 }

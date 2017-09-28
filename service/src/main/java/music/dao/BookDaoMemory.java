@@ -2,6 +2,7 @@ package music.dao;
 
 import music.common.Book;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -44,5 +45,16 @@ public class BookDaoMemory implements BookDao {
         createDataIfNotYet();
 
         return books;
+    }
+
+    @Override
+    public ResponseEntity<?> addBook(Book book) {
+        books.add(book);
+        return ResponseEntity.ok(book);
+    }
+
+    @Override
+    public void deleteBook(long id) {
+        books.remove(id);
     }
 }

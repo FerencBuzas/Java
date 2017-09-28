@@ -10,10 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 import java.util.concurrent.atomic.AtomicLong;
@@ -38,12 +35,6 @@ public class MusicController {
 
     private final AtomicLong counter = new AtomicLong();
 
-//    @RequestMapping("/music/books")
-//    public List<Book>(@RequestParam(value="title", defaultValue="World") String name) {
-//
-//        return new Composer(counter.incrementAndGet(), "Beethoven", 1770); // TODO
-//    }
-
     @RequestMapping("/music")
     public String music() {
         return link("book") + link("composer") + link("publisher");
@@ -52,13 +43,21 @@ public class MusicController {
     private static String link(String lastWord) {
         return String.format("<a href=\"%s/%s\">%s</a><br>", URL_BASE, lastWord, lastWord);
     }
-
-    @RequestMapping("/music/book")
+    
+    @RequestMapping(method = RequestMethod.GET, value="/music/book")
     public Collection<Book> books() {
         return bookDao.getBooks();
     }
 
-    @RequestMapping("/music/composer")
+    // TODO: use RequestMethod.DELETE (and in all similar places)
+    @RequestMapping(value="/music/book/delete")
+    public String removeBook(@RequestParam(value="id") String id) {
+        LOGGER.debug("removeBook id={} ##", id);
+        bookDao.deleteBook(Long.parseLong(id));
+        return "{ \"status\": \"OK\" }";
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value="/music/composer")
     public Collection<Composer> composers(@RequestParam(value="name", defaultValue="") String name) {
         if (name.isEmpty()) {
             return composerDao.getComposers();
@@ -67,8 +66,8 @@ public class MusicController {
             return composerDao.getComposersByName(name);
         }
     }
-
-    @RequestMapping("/music/publisher")
+    
+    @RequestMapping(method = RequestMethod.GET, value="/music/publisher")
     public Collection<Publisher> publishers(@RequestParam(value="name", defaultValue="") String name) {
         return publisherDao.getPublishers();
     }

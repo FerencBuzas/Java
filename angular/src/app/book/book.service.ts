@@ -24,6 +24,7 @@ export class BookService {
     getBooks(): Promise<Book[]> {
         var url = MusicConfig.URL_BASE + '/book';
         this.logger.info("getBooks() url=" + url);
+        
         return this.http.get(url).toPromise() // Observable<Response> --> Promise<Response>
     	   .then(this.extractData)            // --> Promise<Book[]>  (as map() with Obs.)
     	   .catch(this.handleErrorPromise);
@@ -36,12 +37,23 @@ export class BookService {
     }
 
     private handleErrorPromise(error: Response | any) {
-        this.logger.error("handleErrorPromise() ## " +(error.message || error));
+        console.log(error.message || error);
     	return Promise.reject(error.message || error);
     }
 
     getBook(id: number): Promise<Book> {
-      return this.getBooks()
-        .then(books => books.find(book => book.id === id));
+        return this.getBooks()
+            .then(books => books.find(book => book.id === id));
+    }
+    
+    deleteBook(id: number): Promise<String> {
+                                  
+        var url = MusicConfig.URL_BASE + '/book/delete?id=' + id;
+        // NO logger here
+
+        return this.http.get(url).toPromise() // Observable<Response> --> Promise<Response>
+                .then(this.extractData)            
+                .catch(this.handleErrorPromise);
+        }
     }
 }

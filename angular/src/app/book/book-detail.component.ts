@@ -4,6 +4,7 @@ import { Location }                 from '@angular/common';
 
 import { Book } from './book';
 import { BookService } from './book.service';
+import { MusicLogger } from '../util/music-logger';
 
 @Component({
   moduleId: module.id,
@@ -18,7 +19,8 @@ export class BookDetailComponent implements OnInit{
   constructor(
     private bookService: BookService,
     private route: ActivatedRoute,
-    private location: Location
+    private location: Location,
+    private logger: MusicLogger
   ) {}
 
   ngOnInit(): void {
@@ -31,5 +33,11 @@ export class BookDetailComponent implements OnInit{
 
   goBack(): void {
     this.location.back();
+  }
+  
+  delete(): void {
+     
+    this.logger.info("delete() book, title=" +this.book.title+ " id=" +this.book.id);
+    this.bookService.deleteBook(this.book.id);
   }
 }
