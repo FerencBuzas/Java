@@ -35,9 +35,13 @@ export class BookDetailComponent implements OnInit{
     this.location.back();
   }
   
-  delete(): void {
-     
+  delete(): void {    
     this.logger.info("delete() book, title=" +this.book.title+ " id=" +this.book.id);
     this.bookService.deleteBook(this.book.id);
+  }
+  
+  addChopin(): void {    
+    this.logger.info("addChopin()");
+    this.bookService.addBook("Ballada", "Chopin", "Peters", 2017);
   }
 }

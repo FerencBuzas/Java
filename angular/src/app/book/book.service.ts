@@ -46,14 +46,27 @@ export class BookService {
             .then(books => books.find(book => book.id === id));
     }
     
-    deleteBook(id: number): Promise<String> {
-                                  
+    deleteBook(id: number): Promise<String> {                                  
         var url = MusicConfig.URL_BASE + '/book/delete?id=' + id;
         // NO logger here
-
-        return this.http.get(url).toPromise() // Observable<Response> --> Promise<Response>
+        return this.http.get(url).toPromise()
                 .then(this.extractData)            
                 .catch(this.handleErrorPromise);
-        }
+    }
+    
+    addBook(title: String,
+            composer: String, 
+            publisher: String,
+            pubYear: number): Promise<String> {
+                                              
+        var url = MusicConfig.URL_BASE + '/book/add?'
+                   + 'title=' + title 
+                   + '&composer=' + composer
+                   + '&publisher=' + publisher
+                   + '&pubYear=' + pubYear;
+        console.log('## url='+url+' ##');  // NO logger here
+        return this.http.get(url).toPromise()
+                .then(this.extractData)            
+                .catch(this.handleErrorPromise);
     }
 }

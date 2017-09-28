@@ -33,7 +33,7 @@ public class ComposerDaoJpa implements ComposerDao {
     @Override
     public List<Composer> getComposersByName(String name) {
 
-        String query = "SELECT p FROM composer WHERE name LIKE '"+name+"%'";
+        String query = "SELECT p FROM Composer p WHERE p.name LIKE '"+name+"%'";
         return fetchComposers(query);
     }
 

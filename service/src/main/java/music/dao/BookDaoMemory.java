@@ -2,7 +2,6 @@ package music.dao;
 
 import music.common.Book;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -48,9 +47,8 @@ public class BookDaoMemory implements BookDao {
     }
 
     @Override
-    public ResponseEntity<?> addBook(Book book) {
+    public void addBook(Book book) {
         books.add(book);
-        return ResponseEntity.ok(book);
     }
 
     @Override

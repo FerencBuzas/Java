@@ -13,6 +13,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 @RestController
@@ -54,6 +55,29 @@ public class MusicController {
     public String removeBook(@RequestParam(value="id") String id) {
         LOGGER.debug("removeBook id={} ##", id);
         bookDao.deleteBook(Long.parseLong(id));
+        return "{ \"status\": \"OK\" }";
+    }
+
+    @RequestMapping(value="/music/book/add")
+    public String addBook(@RequestParam(value="title") String title,
+                          @RequestParam(value="composer") String composerName,
+                          @RequestParam(value="publisher") String publisherName,
+                          @RequestParam(value="pubYear") int pubYear) {
+        LOGGER.debug("addBook title={} ##", title);
+        
+        List<Composer> composers = composerDao.getComposersByName(composerName);
+        int nCo = composers.size();  
+        if (nCo != 1) {
+            return "{ \"status\": \"Failure (number of composers: "+nCo+")\"";
+        }
+        
+        List<Publisher> publishers = publisherDao.getPublishersByName(publisherName);
+        int nPu = publishers.size();
+        if (nPu != 1) {
+            return "{ \"status\": \"Failure (number of publishers: "+nPu+")\"";
+        }
+        
+        bookDao.addBook(new Book(title, composers.get(0), publishers.get(0), pubYear));
         return "{ \"status\": \"OK\" }";
     }
 

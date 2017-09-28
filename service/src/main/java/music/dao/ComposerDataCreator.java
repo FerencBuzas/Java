@@ -26,7 +26,7 @@ class ComposerDataCreator {
         list.add(new Composer("Beethoven", 1770));
         list.add(new Composer("Schubert", 1797));
         list.add(new Composer("Schumann", 1810));
-//        list.add(new Composer("Chopin", 1810));
+        list.add(new Composer("Chopin", 1810));
         list.add(new Composer("Liszt", 1811));
         list.add(new Composer("Brahms", 1833));
         list.add(new Composer("Muszorgszkij", 1839));

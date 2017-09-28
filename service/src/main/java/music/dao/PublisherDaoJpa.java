@@ -29,7 +29,7 @@ public class PublisherDaoJpa implements PublisherDao {
     @Override
     public List<Publisher> getPublishersByName(String name) {
 
-        String query = "SELECT p FROM publisher WHERE name LIKE '"+name+"%'";
+        String query = "SELECT p FROM Publisher p WHERE name LIKE '"+name+"%'";
         return fetchPublishers(query);
     }
 

@@ -5,13 +5,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import java.net.URI;
 import java.util.List;
 
 /**
@@ -35,7 +32,7 @@ public class BookDaoJpa implements BookDao {
     }
 
     @Override
-    public ResponseEntity<?> addBook(Book book) {
+    public void addBook(Book book) {
         LOGGER.debug("addBook({})", book);
         
         EntityManager entityManager = entityManagerFactory.createEntityManager();
@@ -45,11 +42,7 @@ public class BookDaoJpa implements BookDao {
         
         entityManager.getTransaction().commit();
         entityManager.close();
-        
-        URI location = ServletUriComponentsBuilder
-                .fromCurrentRequest().path("/{id}")
-                .buildAndExpand(book.getId()).toUri();
-        return ResponseEntity.created(location).build();    }
+    }
 
     @Override
     public void deleteBook(long id) {
@@ -60,7 +53,7 @@ public class BookDaoJpa implements BookDao {
         
         // Find managed Entity reference
         Book book = entityManager.find(Book.class, id);
-        if (book != null){
+        if (book != null) {
             entityManager.remove(book);
         }
         else {
