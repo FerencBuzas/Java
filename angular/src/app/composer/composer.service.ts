@@ -13,27 +13,26 @@ export class ComposerService {
 
     constructor(private http: Http,
                 private logger: MusicLogger) {
-        this.logger.info("ComposerService constructor http: " + http + " logger: " + logger);
     }
 
     getComposers(): Promise<Composer[]> {
-        var url = MusicConfig.URL_BASE + '/composer';
-        this.logger.info("getComposers() url=" + url);
+        let url = MusicConfig.URL_BASE + '/composer';
+        this.logger.info('getComposers() url=' + url);
 
         return this.http.get(url).toPromise() // Observable<Response> --> Promise<Response>
-    	   .then(this.extractData)            // --> Promise<Composer[]>  (as map() with Obs.)
-    	   .catch(this.handleErrorPromise);
+            .then(this.extractData)            // --> Promise<Composer[]>  (as map() with Obs.)
+            .catch(this.handleErrorPromise);
     }
 
     private extractData(res: Response) {
         // NOTE: 'this.logger' can not be used here!!
-	    let body = res.json();
+        let body = res.json();
         return body;
     }
 
     private handleErrorPromise(error: Response | any) {
         console.log(error.message || error);
-    	return Promise.reject(error.message || error);
+        return Promise.reject(error.message || error);
     }
 
     getComposer(id: number): Promise<Composer> {
@@ -49,17 +48,12 @@ export class ComposerService {
                 .catch(this.handleErrorPromise);
     }
 
-    addComposer(title: String,
-            composer: String, 
-            publisher: String,
-            pubYear: number): Promise<String> {
+    addComposer(name: String, birthYear: number): Promise<String> {
 
         let url = MusicConfig.URL_BASE + '/composer/add?'
-                   + 'title=' + title 
-                   + '&composer=' + composer
-                   + '&publisher=' + publisher
-                   + '&pubYear=' + pubYear;
-        console.log('## url=' + url + ' ##');  // NO logger here
+                   + 'name=' + name
+                   + '&birthYear=' + birthYear;
+        console.log('## addComposer() url=' + url + ' ##');  // NO logger here
         return this.http.get(url).toPromise()
                 .then(this.extractData)
                 .catch(this.handleErrorPromise);

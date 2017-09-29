@@ -13,11 +13,11 @@ import { PublisherService } from './publisher.service';
 
 export class PublishersComponent implements OnInit {
 
-  publishers = []
+  publishers = [];
   selectedPublisher: Publisher;
 
   constructor(private publisherService: PublisherService,
-              private router: Router ) { 
+              private router: Router ) {
   }
 
   getPublishers(): void {   // a future is involved
@@ -25,6 +25,7 @@ export class PublishersComponent implements OnInit {
   }
 
   ngOnInit(): void {    // The constructor must be short and fast
+    console.debug("ngOnInit() ##");
     this.getPublishers();
   }
 

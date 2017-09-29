@@ -13,11 +13,11 @@ import { ComposerService } from './composer.service';
 
 export class ComposersComponent implements OnInit {
 
-  composers = []
+  composers = [];
   selectedComposer: Composer;
 
   constructor(private composerService: ComposerService,
-              private router: Router ) { 
+              private router: Router ) {
   }
 
   // When the service sends the composers, store them to member.

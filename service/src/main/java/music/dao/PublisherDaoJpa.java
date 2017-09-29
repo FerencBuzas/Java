@@ -28,6 +28,7 @@ public class PublisherDaoJpa implements PublisherDao {
 
     @Override
     public List<Publisher> getPublishers() {
+        LOGGER.info("getPublishers() ##");
 
         String query = "from Publisher";
         return fetchPublishers(query);
@@ -42,7 +43,7 @@ public class PublisherDaoJpa implements PublisherDao {
 
     @Override
     public void addPublisher(Publisher publisher) {
-        LOGGER.debug("addPublisher({})", publisher);
+        LOGGER.info("addPublisher() {} ##", publisher);
 
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         daoUtil.funcInTrans(entityManager, () -> {

@@ -13,13 +13,11 @@ export class PublisherService {
 
     constructor(
             private http: Http,
-            private logger: MusicLogger) {
-        this.logger.info("PublisherService constructor http: " + http + " logger: " + logger);
-    }
+            private logger: MusicLogger) {}
 
     getPublishers(): Promise<Publisher[]> {
-        let url = MusicConfig.URL_BASE + '/Publisher';
-        this.logger.info("getPublishers() url=" + url);
+        let url = MusicConfig.URL_BASE + '/publisher';
+        this.logger.info('getPublishers() ## url=' + url);
 
         return this.http.get(url).toPromise() // Observable<Response> --> Promise<Response>
             .then(this.extractData)            // --> Promise<Publisher[]>  (as map() with Obs.)
@@ -52,9 +50,8 @@ export class PublisherService {
 
     addPublisher(name: String): Promise<String> {
 
-        let url = MusicConfig.URL_BASE + '/publisher/add?'
-                   + 'name=' + name;
-        console.log('## url=' + url + ' ##');  // NO logger here
+        let url = MusicConfig.URL_BASE + '/publisher/add?name=' + name;
+        console.log('## addPublisher() url=' + url + ' ##');  // NO logger here
         return this.http.get(url).toPromise()
                 .then(this.extractData)
                 .catch(this.handleErrorPromise);

@@ -47,12 +47,13 @@ export class PublisherDetailComponent implements OnInit {
 
   save(): void {
     this.logger.info('TODO: save ##');
-    this.publisherService.deletePublisher(this.publisher.id.valueOf());
+    this.publisherService.addPublisher(this.publisher.name);
     this.location.back();
   }
 
   delete(): void {
     this.logger.info('TODO: delete ##');
+    this.publisherService.deletePublisher(this.publisher.id.valueOf());
     this.location.back();
   }
 

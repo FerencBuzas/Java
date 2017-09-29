@@ -48,12 +48,15 @@ export class ComposerDetailComponent implements OnInit {
 
   save(): void {
     this.logger.info('TODO: save ##');
-    this.composerService.deleteComposer(this.composer.id.valueOf());
+    this.composerService.addComposer(
+      this.composer.name,
+      this.composer.birthYear.valueOf());
     this.location.back();
   }
 
   delete(): void {
     this.logger.info('TODO: delete ##');
+    this.composerService.deleteComposer(this.composer.id.valueOf());
     this.location.back();
   }
 

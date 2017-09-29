@@ -54,7 +54,7 @@ export class BookService {
     }
 
     addBook(title: String,
-            composer: String, 
+            composer: String,
             publisher: String,
             pubYear: number): Promise<String> {
 
