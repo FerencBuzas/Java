@@ -27,7 +27,7 @@ class PublisherDataCreator {
         return list;
     }
 
-    static Publisher findPublisherByName(List<Publisher> publishers, String name) {
+    Publisher findPublisherByName(List<Publisher> publishers, String name) {
         for (Publisher publisher: publishers) {
             if (publisher.getName().startsWith(name)) {
                 return publisher;

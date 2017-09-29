@@ -22,6 +22,9 @@ public class BookDaoJpa implements BookDao {
     
     @Autowired
     private EntityManagerFactory entityManagerFactory;
+    
+    @Autowired
+    private DaoUtil daoUtil;
 
     @Override
     public List<Book> getBooks() {
@@ -36,43 +39,30 @@ public class BookDaoJpa implements BookDao {
         LOGGER.debug("addBook({})", book);
         
         EntityManager entityManager = entityManagerFactory.createEntityManager();
-        entityManager.getTransaction().begin();
-
-        entityManager.persist(book);
-        
-        entityManager.getTransaction().commit();
-        entityManager.close();
+        daoUtil.funcInTrans(entityManager, 
+                () -> { entityManager.persist(book); return ""; });
     }
-
+    
     @Override
     public void deleteBook(long id) {
         LOGGER.info("deleteBook() id={} ##", id);
-
+        
         EntityManager entityManager = entityManagerFactory.createEntityManager();
-        entityManager.getTransaction().begin();
-        
-        // Find managed Entity reference
-        Book book = entityManager.find(Book.class, id);
-        if (book != null) {
-            entityManager.remove(book);
-        }
-        else {
-            LOGGER.info("  Could not find book id=" + id);
-        }
-        
-        entityManager.getTransaction().commit();
-        entityManager.close();
+        daoUtil.funcInTrans(entityManager, () -> {
+            Book book = entityManager.find(Book.class, id);
+            if (book != null) {
+                entityManager.remove(book);
+            } else {
+                LOGGER.info("  Could not find book id=" + id);
+            }
+            return "";
+        });
     }
 
     private List<Book> fetchBooks(String query) {
-
+            
         EntityManager entityManager = entityManagerFactory.createEntityManager();
-        entityManager.getTransaction().begin();
-
-        List<Book> result = entityManager.createQuery(query, Book.class ).getResultList();
-
-        entityManager.getTransaction().commit();
-        entityManager.close();
-        return result;
+        return daoUtil.funcInTrans(entityManager, () ->
+            entityManager.createQuery(query, Book.class).getResultList());
     }
 }

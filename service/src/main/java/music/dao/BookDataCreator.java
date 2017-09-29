@@ -5,6 +5,7 @@ import music.common.Composer;
 import music.common.Publisher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -18,16 +19,22 @@ class BookDataCreator {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(BookDataCreator.class);
 
+    @Autowired
+    ComposerDataCreator composerDataCreator;
+    
+    @Autowired
+    PublisherDataCreator publisherDataCreator;
+    
     List<Book> createBookList(List<Composer> composerList, List<Publisher> publisherList) {
 
         List<Book> list = new ArrayList<>();
 
-        Composer bach = ComposerDataCreator.findComposerByName(composerList, "Bach");
-        Composer beethoven = ComposerDataCreator.findComposerByName(composerList, "Beethoven");
-        Composer liszt = ComposerDataCreator.findComposerByName(composerList, "Liszt");
+        Composer bach = composerDataCreator.findComposerByName(composerList, "Bach");
+        Composer beethoven = composerDataCreator.findComposerByName(composerList, "Beethoven");
+        Composer liszt = composerDataCreator.findComposerByName(composerList, "Liszt");
 
-        Publisher peters = PublisherDataCreator.findPublisherByName(publisherList, "Peters");
-        Publisher emb = PublisherDataCreator.findPublisherByName(publisherList, "Editio");
+        Publisher peters = publisherDataCreator.findPublisherByName(publisherList, "Peters");
+        Publisher emb = publisherDataCreator.findPublisherByName(publisherList, "Editio");
 
         list.add(new Book("Wohltemperiertes Klavier I", bach, peters, 1998));
         list.add(new Book("Wohltemperiertes Klavier II", bach, peters, 1998));

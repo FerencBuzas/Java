@@ -23,6 +23,9 @@ public class ComposerDaoJpa implements ComposerDao {
     @Autowired
     private EntityManagerFactory entityManagerFactory;
 
+    @Autowired
+    private DaoUtil daoUtil;
+    
     @Override
     public List<Composer> getComposers() {
 
@@ -38,15 +41,10 @@ public class ComposerDaoJpa implements ComposerDao {
     }
 
     private List<Composer> fetchComposers(String query) {
-        LOGGER.debug("fetchComposers() q={} ###", query);
+        LOGGER.debug("fetchComposers() q={} ##", query);
 
         EntityManager entityManager = entityManagerFactory.createEntityManager();
-        entityManager.getTransaction().begin();
-
-        List<Composer> result = entityManager.createQuery(query, Composer.class ).getResultList();
-
-        entityManager.getTransaction().commit();
-        entityManager.close();
-        return result;
+        return daoUtil.funcInTrans(entityManager, 
+                () -> entityManager.createQuery(query, Composer.class).getResultList());
     }
 }

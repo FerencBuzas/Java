@@ -19,6 +19,9 @@ public class PublisherDaoJpa implements PublisherDao {
     @Autowired
     private EntityManagerFactory entityManagerFactory;
 
+    @Autowired
+    private DaoUtil daoUtil;
+    
     @Override
     public List<Publisher> getPublishers() {
 
@@ -35,12 +38,8 @@ public class PublisherDaoJpa implements PublisherDao {
 
     private List<Publisher> fetchPublishers(String query) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
-        entityManager.getTransaction().begin();
-
-        List<Publisher> result = entityManager.createQuery(query, Publisher.class ).getResultList();
-
-        entityManager.getTransaction().commit();
-        entityManager.close();
-        return result;
+    
+        return daoUtil.funcInTrans(entityManager,
+                () -> entityManager.createQuery(query, Publisher.class ).getResultList());
     }
 }

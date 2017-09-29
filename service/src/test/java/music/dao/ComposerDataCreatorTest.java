@@ -35,7 +35,7 @@ public class ComposerDataCreatorTest {
     @Test
     public void findComposerByName() throws Exception {
 
-        Composer p = ComposerDataCreator.findComposerByName(composerList, "Mozart");
+        Composer p = creator.findComposerByName(composerList, "Mozart");
         assertNotNull(p);
         assertEquals("Mozart", p.getName());
     }

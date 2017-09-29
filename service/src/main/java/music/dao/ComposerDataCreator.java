@@ -38,7 +38,7 @@ class ComposerDataCreator {
         return list;
     }
 
-    static Composer findComposerByName(List<Composer> composers, String name) {
+    Composer findComposerByName(List<Composer> composers, String name) {
         for (Composer composer: composers) {
             if (composer.getName().startsWith(name)) {
                 return composer;

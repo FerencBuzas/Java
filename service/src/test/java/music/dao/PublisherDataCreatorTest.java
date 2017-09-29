@@ -37,7 +37,7 @@ public class PublisherDataCreatorTest {
     @Test
     public void findPublisherByName() throws Exception {
 
-        Publisher p = PublisherDataCreator.findPublisherByName(publisherList, "Peters");
+        Publisher p = creator.findPublisherByName(publisherList, "Peters");
         assertNotNull(p);
         assertEquals("Peters", p.getName());
     }
