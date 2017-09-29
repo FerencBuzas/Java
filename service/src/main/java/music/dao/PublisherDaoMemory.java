@@ -37,4 +37,14 @@ public class PublisherDaoMemory implements PublisherDao {
         }
         return result;
     }
+
+    @Override
+    public void addPublisher(Publisher publisher) {
+        publishers.add(publisher);
+    }
+
+    @Override
+    public void deletePublisher(long id) {
+        publishers.remove(id);
+    }
 }

@@ -32,4 +32,10 @@ export class PublishersComponent implements OnInit {
     this.selectedPublisher = publisher;
     this.router.navigate(['/publisherDetail', this.selectedPublisher.id]);
   }
+
+  newPub(): void {
+    console.log('newPub()');
+    this.selectedPublisher = null;
+    this.router.navigate(['/publisherDetail', 0]);
+  }
 }

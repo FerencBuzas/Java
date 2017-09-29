@@ -1,10 +1,27 @@
 <div *ngIf="publisher">
-  <h2>{{publisher.name}} details</h2>
-  <div>
-    <label>id: </label>{{publisher.id}}</div>
+
+  <!-- title: name or new -->
+  <h2 *ngIf="publisher.id != 0">{{publisher.name}} details</h2>
+  <h2 *ngIf="publisher.id == 0">New publisher</h2>
+
+  <!-- write the Id if not new -->
+  <div *ngIf="publisher.id !== 0">
+    <label>id: {{publisher.id}} </label>
+  </div>
+
+  <!-- name of publisher -->
   <div>
     <label>name: </label>
     <input [(ngModel)]="publisher.name" placeholder="name" />
   </div>
+
+  <!-- [Back] -->
   <button (click)="goBack()">Back</button>
-</div>
+
+  <!-- [Save] -->
+  <button *ngIf="isDirty()" (click)="save()">Save</button>
+
+  <!-- [Delete] -->
+  <button *ngIf="canDelete()" (click)="delete()">Delete</button>
+  
+  </div>

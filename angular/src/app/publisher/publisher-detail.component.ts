@@ -11,10 +11,11 @@ import { PublisherService } from './publisher.service';
   templateUrl: 'publisher-detail.component.html',
   styleUrls: [ 'publisher-detail.component.css' ]
 })
-
 export class PublisherDetailComponent implements OnInit{
-    //@Input()
+
     publisher: Publisher;
+    oriPublisher: Publisher;
+
   constructor(
     private publisherService: PublisherService,
     private route: ActivatedRoute,
@@ -24,12 +25,39 @@ export class PublisherDetailComponent implements OnInit{
   ngOnInit(): void {
     this.route.params.forEach((params: Params) => {
       let id = +params['id'];       // '+' operator: converts string to number
-      this.publisherService.getPublisher(id)
-        .then(publisher => this.publisher = publisher);
+      if (id !== 0) {
+        this.publisherService.getPublisher(id)
+        .then(publisher => {
+            this.publisher = publisher;
+            this.oriPublisher = { id: this.publisher.id, name: this.publisher.name }
+        });
+      }
+      else {
+        this.publisher = { id: 0, name: '' };
+        this.oriPublisher = { id: 0, name: '' };
+      }
     });
   }
 
   goBack(): void {
     this.location.back();
+  }
+
+  save(): void {
+    console.log('TODO: save ##');
+    this.location.back();
+  }
+
+  delete(): void {
+    console.log('TODO: delete ##');
+    this.location.back();
+  }
+
+  isDirty(): Boolean {
+    return this.publisher.name !== this.oriPublisher.name;
+  }
+
+  canDelete(): Boolean {
+    return this.publisher.id !== 0 && this.publisher.name === this.oriPublisher.name;
   }
 }

@@ -1,6 +1,8 @@
 package music.dao;
 
 import music.common.Publisher;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
@@ -16,6 +18,8 @@ import java.util.List;
 @Primary
 public class PublisherDaoJpa implements PublisherDao {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(PublisherDaoJpa.class);
+    
     @Autowired
     private EntityManagerFactory entityManagerFactory;
 
@@ -42,4 +46,28 @@ public class PublisherDaoJpa implements PublisherDao {
         return daoUtil.funcInTrans(entityManager,
                 () -> entityManager.createQuery(query, Publisher.class ).getResultList());
     }
-}
+
+    @Override
+    public void addPublisher(Publisher publisher) {
+        LOGGER.debug("addPublisher({})", publisher);
+
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        daoUtil.funcInTrans(entityManager,
+                () -> { entityManager.persist(publisher); return ""; });
+    }
+
+    @Override
+    public void deletePublisher(long id) {
+        LOGGER.info("deletePublisher() id={} ##", id);
+
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        daoUtil.funcInTrans(entityManager, () -> {
+            Publisher publisher = entityManager.find(Publisher.class, id);
+            if (publisher != null) {
+                entityManager.remove(publisher);
+            } else {
+                LOGGER.info("  Could not find publisher id=" + id);
+            }
+            return "";
+        });
+    }}
