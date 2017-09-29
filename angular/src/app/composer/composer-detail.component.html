@@ -1,10 +1,33 @@
 <div *ngIf="composer">
-  <h2>{{composer.name}} details</h2>
-  <div>
-    <label>id: </label>{{composer.id}}</div>
-  <div>
-    <label>name: </label>
-    <input [(ngModel)]="composer.name" placeholder="name" />
-  </div>
-  <button (click)="goBack()">Back</button>
+
+    <!-- title: name or new -->
+    <h2 *ngIf="composer.id != 0">{{composer.name}} details</h2>
+    <h2 *ngIf="composer.id == 0">New composer</h2>
+
+    <!-- write the Id if not new -->
+    <div *ngIf="composer.id !== 0">
+      <label>id: {{composer.id}} </label>
+    </div>
+  
+    <!-- name of composer -->
+    <div>
+      <label>name: </label>
+      <input [(ngModel)]="composer.name" placeholder="name" />
+    </div>
+
+    <!-- birthYear -->
+    <div>
+        <label>birthYear: </label>
+        <input [(ngModel)]="composer.birthYear" placeholder="year" />
+    </div>
+  
+      <!-- [Back] -->
+    <button (click)="goBack()">Back</button>
+  
+    <!-- [Save] -->
+    <button *ngIf="isDirty()" (click)="save()">Save</button>
+  
+    <!-- [Delete] -->
+    <button *ngIf="canDelete()" (click)="delete()">Delete</button>
+    
 </div>

@@ -30,9 +30,12 @@ export class BooksComponent implements OnInit {
 
   onSelect(book: Book): void {
     this.selectedBook = book;
+    this.router.navigate(['/bookDetail', this.selectedBook.id]);
   }
 
-  gotoDetail(): void {
-    this.router.navigate(['/bookDetail', this.selectedBook.id]);
+  newBook(): void {
+    console.log('newBook()');
+    this.selectedBook = null;
+    this.router.navigate(['/bookDetail', 0]);
   }
 }

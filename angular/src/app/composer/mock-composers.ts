@@ -1,9 +1,8 @@
 import { Composer } from './composer';
 
 export const COMPOSERS: Composer[] = [
-  { id: 1, name: 'Bach', birthYear: 1685 },
-  { id: 2, name: 'Haydn', birthYear: 1732 },
-  { id: 3, name: "Mozart", birthYear: 1756 },
-  { id: 4, name: "Beethoven", birthYear: 1770 },
-  { id: 5, name: "Schubert", birthYear: 1797 }
-];
+  new Composer(1, 'Bach', 1685 ),
+  new Composer(2, 'Haydn', 1732 ),
+  new Composer(3, 'Mozart', 1756),
+  new Composer(4, 'Beethoven', 1770),
+  new Composer(5, 'Schubert', 1797)];

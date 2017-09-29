@@ -40,6 +40,32 @@ public class ComposerDaoJpa implements ComposerDao {
         return fetchComposers(query);
     }
 
+    @Override
+    public void addComposer(Composer composer) {
+        LOGGER.debug("addComposer({})", composer);
+
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        daoUtil.funcInTrans(entityManager,
+                () -> { entityManager.persist(composer); return ""; });
+    }
+
+    @Override
+    public void deleteComposer(long id) {
+        LOGGER.info("deleteComposer() id={} ##", id);
+
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        daoUtil.funcInTrans(entityManager, () -> {
+            Composer composer = entityManager.find(Composer.class, id);
+            if (composer != null) {
+                entityManager.remove(composer);
+            } else {
+                LOGGER.info("  Could not find composer id=" + id);
+            }
+            return "";
+        });
+    }
+
+
     private List<Composer> fetchComposers(String query) {
         LOGGER.debug("fetchComposers() q={} ##", query);
 

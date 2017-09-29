@@ -35,4 +35,10 @@ export class ComposersComponent implements OnInit {
     this.selectedComposer = composer;
     this.router.navigate(['/composerDetail', this.selectedComposer.id]);
   }
+
+  newComp(): void {
+    console.log('newComp()');
+    this.selectedComposer = null;
+    this.router.navigate(['/composerDetail', 0]);
+  }
 }

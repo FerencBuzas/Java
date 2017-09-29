@@ -6,42 +6,13 @@ import { Book } from './book';
 import { Composer } from '../composer/composer';
 import { Publisher } from '../publisher/publisher';
 
-export const Bach: Composer = {
-    id:	1,
-    name:	"Bach",
-    birthYear:	1685
-};
+export const Bach = new Composer(1, 'Bach', 1685);
+export const Beethoven = new Composer(4, 'Beethoveh', 1770);
 
-export const Beethoven: Composer = {
-    id:	4,
-    name:	"Beethoven",
-    birthYear:	1770
-};
-
-export const Peters: Publisher = {
-    id:	3,
-    name:	"Peters"
-};
-
-export const EMB: Publisher = {
-    id:	2,
-    name:	"EMB"
-};
+export const Peters = new Publisher(3, 'Peters');
+export const EMB = new Publisher(2,	'EMB');
 
 export const BOOKS: Book[] = [
-  { id: 0, title: 'WTC I',
-     composer: Bach,
-     publisher: Peters,
-     pubYear:	1998
-  },
-  { id: 1, title: 'WTC II',
-     composer: Bach,
-     publisher: Peters,
-     pubYear:	1998
-  },
-  { id: 2, title: 'Son I',
-     composer: Beethoven,
-     publisher: EMB,
-     pubYear:	1992
-  }
-];
+    new Book(0, 'WTC I', Bach, Peters, 1998),
+    new Book(0, 'WTC II', Bach, Peters, 1998),
+    new Book(0, 'Son I', Beethoven, EMB, 1992) ];

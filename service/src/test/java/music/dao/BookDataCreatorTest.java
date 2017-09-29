@@ -21,7 +21,7 @@ public class BookDataCreatorTest {
         List<Composer> liCo = new ComposerDataCreator().createComposerList();
         List<Publisher> liPu = new PublisherDataCreator().createPublisherList();
 
-        creator = new BookDataCreator();
+        creator = new BookDataCreator(new ComposerDataCreator(), new PublisherDataCreator());
         bookList = creator.createBookList(liCo, liPu);
     }
 

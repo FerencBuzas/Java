@@ -18,13 +18,18 @@ import java.util.List;
 class BookDataCreator {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(BookDataCreator.class);
+    
+    private final ComposerDataCreator composerDataCreator;
+    private final PublisherDataCreator publisherDataCreator;
 
     @Autowired
-    ComposerDataCreator composerDataCreator;
-    
-    @Autowired
-    PublisherDataCreator publisherDataCreator;
-    
+    public BookDataCreator(ComposerDataCreator composerDataCreator,
+            PublisherDataCreator publisherDataCreator) {
+
+        this.composerDataCreator = composerDataCreator;
+        this.publisherDataCreator = publisherDataCreator;
+    }
+       
     List<Book> createBookList(List<Composer> composerList, List<Publisher> publisherList) {
 
         List<Book> list = new ArrayList<>();

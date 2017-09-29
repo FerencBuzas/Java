@@ -12,7 +12,7 @@ import javax.persistence.*;
  * Created by Ferenc_Buzas on 13 Sep 2017
  */
 @Entity
-public class Book {
+public class Book implements MusicObject {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Book.class);
 

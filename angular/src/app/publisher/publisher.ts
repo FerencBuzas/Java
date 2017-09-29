@@ -1,4 +1,11 @@
 export class Publisher {
-  id: number;
-  name: string;
+
+  constructor(
+    public id: Number = 0,
+    public name: String = '') {
+  }
+  
+  equals(other: Publisher): boolean {
+    return this.name === other.name;
+  }
 }

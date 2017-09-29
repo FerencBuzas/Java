@@ -9,7 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Publisher {
+public class Publisher implements MusicObject {
     private static final Logger LOGGER = LoggerFactory.getLogger(Composer.class);
 
     @Id

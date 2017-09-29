@@ -19,13 +19,13 @@ import java.util.List;
 public class PublisherDaoJpa implements PublisherDao {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PublisherDaoJpa.class);
-    
+
     @Autowired
     private EntityManagerFactory entityManagerFactory;
 
     @Autowired
     private DaoUtil daoUtil;
-    
+
     @Override
     public List<Publisher> getPublishers() {
 
@@ -36,15 +36,8 @@ public class PublisherDaoJpa implements PublisherDao {
     @Override
     public List<Publisher> getPublishersByName(String name) {
 
-        String query = "SELECT p FROM Publisher p WHERE name LIKE '"+name+"%'";
+        String query = "SELECT p FROM Publisher p WHERE name LIKE '" + name + "%'";
         return fetchPublishers(query);
-    }
-
-    private List<Publisher> fetchPublishers(String query) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-    
-        return daoUtil.funcInTrans(entityManager,
-                () -> entityManager.createQuery(query, Publisher.class ).getResultList());
     }
 
     @Override
@@ -52,9 +45,14 @@ public class PublisherDaoJpa implements PublisherDao {
         LOGGER.debug("addPublisher({})", publisher);
 
         EntityManager entityManager = entityManagerFactory.createEntityManager();
-        daoUtil.funcInTrans(entityManager,
-                () -> { entityManager.persist(publisher); return ""; });
+        daoUtil.funcInTrans(entityManager, () -> {
+            entityManager.persist(publisher);
+            return "";
+        });
     }
+
+//    public void deleteMusicObject(Class clazz, long id, EntityManagerFactory emf) {
+//    }
 
     @Override
     public void deletePublisher(long id) {
@@ -70,4 +68,11 @@ public class PublisherDaoJpa implements PublisherDao {
             }
             return "";
         });
-    }}
+    }
+
+    private List<Publisher> fetchPublishers(String query) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+
+        return daoUtil.funcInTrans(entityManager, () -> entityManager.createQuery(query, Publisher.class).getResultList());
+    }
+}

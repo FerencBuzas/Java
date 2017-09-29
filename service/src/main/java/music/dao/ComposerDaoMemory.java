@@ -38,4 +38,14 @@ public class ComposerDaoMemory implements ComposerDao {
 
         return result;
     }
+
+    @Override
+    public void addComposer(Composer composer) {
+        composers.add(composer);
+    }
+
+    @Override
+    public void deleteComposer(long id) {
+        composers.remove(id);
+    }
 }

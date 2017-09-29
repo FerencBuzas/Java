@@ -1,19 +1,37 @@
 <div *ngIf="book">
-  <h2>{{book.title}} details</h2>
-  <div>
-    <label>id: </label>{{book.id}}
-  </div>
-  <div>
-    <label>title: </label>
-    <input [(ngModel)]="book.title" placeholder="title" />
-  </div>
-  <div>
-    <label>composer: </label>{{book.composer.name}}  ({{book.composer.birthYear}})
-  </div>
-  <div>
-    <label>published: </label>{{book.publisher.name}}, {{book.pubYear}}
-  </div>
-  <button (click)="goBack()">Back</button>
-  <button (click)="delete()">Delete</button>
-  <button (click)="addChopin()">Add Chopin</button>
+
+    <!-- title: name or new -->
+    <h2 *ngIf="book.id != 0">{{book.title}} details</h2>
+    <h2 *ngIf="book.id == 0">New book</h2>
+
+    <!-- write the Id if not new -->
+    <div *ngIf="book.id !== 0">
+        <label>id: {{book.id}} </label>
+    </div>
+
+    <!-- title -->
+    <div>
+       <label>title: </label>
+       <input [(ngModel)]="book.title" placeholder="title" />
+    </div>
+  
+    <!-- composer -->
+    <div>
+       <label>composer: </label>{{book.composer.name}}  ({{book.composer.birthYear}})
+    </div>
+
+    <!-- book -->
+    <div>
+       <label>published: </label>{{book.book.name}}, {{book.pubYear}}
+    </div>
+
+    <!-- [Back] -->
+    <button (click)="goBack()">Back</button>
+    
+    <!-- [Save] -->
+    <button *ngIf="isDirty()" (click)="save()">Save</button>
+    
+    <!-- [Delete] -->
+    <button *ngIf="canDelete()" (click)="delete()">Delete</button>
+      
 </div>

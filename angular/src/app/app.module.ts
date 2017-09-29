@@ -2,11 +2,11 @@ import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule }   from '@angular/forms';
 import { HttpModule }    from '@angular/http';
-import { RouterModule }   from '@angular/router';
 
 import { AppComponent }        from './app.component';
 import { MusicConfig }     from './util/music-config';
 import { MusicLogger }       from './util/music-logger';
+import { MusicUtil }       from './util/music-util';
 import { BookDetailComponent } from './book/book-detail.component';
 import { BooksComponent }     from './book/books.component';
 import { BookService }         from './book/book.service';
@@ -38,6 +38,7 @@ import { AppRoutingModule }     from './app-routing.module';
   providers: [
     MusicConfig,
     MusicLogger,
+    MusicUtil,
     BookService,
     ComposerService,
     PublisherService

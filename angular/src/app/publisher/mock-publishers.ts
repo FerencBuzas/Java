@@ -1,7 +1,6 @@
 import { Publisher } from './publisher';
 
 export const PUBLISHERS: Publisher[] = [
-  { id: 1, name: 'Breitkopf' },
-  { id: 2, name: 'Editio Musica Budapest' },
-  { id: 3, name: 'Peters' }
-];
+  new Publisher(1, 'Breitkopf'),
+  new Publisher(2, 'Editio Musica Budapest'),
+  new Publisher(3, 'Peters')];

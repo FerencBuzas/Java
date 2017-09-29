@@ -1,9 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Params }   from '@angular/router';
-import { Location }                 from '@angular/common';
+import { Component, OnInit }      from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
+import { Location }               from '@angular/common';
 
 import { Publisher } from './publisher';
 import { PublisherService } from './publisher.service';
+import { MusicLogger } from '../util/music-logger';
+import { MusicUtil } from '../util/music-util';
 
 @Component({
   moduleId: module.id,
@@ -11,7 +13,7 @@ import { PublisherService } from './publisher.service';
   templateUrl: 'publisher-detail.component.html',
   styleUrls: [ 'publisher-detail.component.css' ]
 })
-export class PublisherDetailComponent implements OnInit{
+export class PublisherDetailComponent implements OnInit {
 
     publisher: Publisher;
     oriPublisher: Publisher;
@@ -19,22 +21,22 @@ export class PublisherDetailComponent implements OnInit{
   constructor(
     private publisherService: PublisherService,
     private route: ActivatedRoute,
-    private location: Location
-  ) {}
+    private location: Location,
+    private logger: MusicLogger) {}
 
   ngOnInit(): void {
     this.route.params.forEach((params: Params) => {
       let id = +params['id'];       // '+' operator: converts string to number
       if (id !== 0) {
         this.publisherService.getPublisher(id)
-        .then(publisher => {
+          .then(publisher => {
             this.publisher = publisher;
-            this.oriPublisher = { id: this.publisher.id, name: this.publisher.name }
+            this.oriPublisher = MusicUtil.deepCopy(this.publisher);
         });
       }
       else {
-        this.publisher = { id: 0, name: '' };
-        this.oriPublisher = { id: 0, name: '' };
+        this.publisher = new Publisher();
+        this.oriPublisher = MusicUtil.deepCopy(this.publisher);
       }
     });
   }
@@ -44,20 +46,21 @@ export class PublisherDetailComponent implements OnInit{
   }
 
   save(): void {
-    console.log('TODO: save ##');
+    this.logger.info('TODO: save ##');
+    this.publisherService.deletePublisher(this.publisher.id.valueOf());
     this.location.back();
   }
 
   delete(): void {
-    console.log('TODO: delete ##');
+    this.logger.info('TODO: delete ##');
     this.location.back();
   }
 
   isDirty(): Boolean {
-    return this.publisher.name !== this.oriPublisher.name;
+    return ! this.publisher.equals(this.oriPublisher);
   }
 
   canDelete(): Boolean {
-    return this.publisher.id !== 0 && this.publisher.name === this.oriPublisher.name;
+    return this.publisher.id !== 0 && !this.isDirty();
   }
 }

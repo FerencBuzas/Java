@@ -9,9 +9,4 @@
   </li>
 </ul>
 
-<div *ngIf="selectedBook">
-  <h2>
-    Selected book: {{selectedBook.title | uppercase}}
-  </h2>
-  <button (click)="gotoDetail()">View Details</button>
-</div>
+<button (click)="newBook()">New book</button>

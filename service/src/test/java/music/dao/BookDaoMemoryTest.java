@@ -19,7 +19,8 @@ public class BookDaoMemoryTest {
         ComposerDaoMemory cdm = new ComposerDaoMemory(cdc);
         PublisherDataCreator pdc = new PublisherDataCreator();
         PublisherDaoMemory pdm = new PublisherDaoMemory(pdc);
-        BookDataCreator bookDataCreator = new BookDataCreator();
+        BookDataCreator bookDataCreator = new BookDataCreator(new ComposerDataCreator(),
+                new PublisherDataCreator());
         bdm = new BookDaoMemory(cdm, pdm, bookDataCreator);
     }
 

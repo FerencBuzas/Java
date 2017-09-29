@@ -12,7 +12,7 @@ import javax.persistence.Id;
  * Created by Ferenc_Buzas on 13 Sep 2017
  */
 @Entity
-public class Composer {
+public class Composer implements MusicObject {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Composer.class);
 
