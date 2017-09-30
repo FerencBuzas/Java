@@ -50,8 +50,8 @@ export class ComposerService {
         let url = MusicConfig.URL_BASE + '/composer/delete?id=' + id;
         // NO logger here
         return this.http.get(url).toPromise()
-                .then(this.extractData)
-                .catch(this.handleErrorPromise);
+            .then(response => response.json() as String)
+            .catch(this.handleErrorPromise);
     }
 
     addComposer(name: String, birthYear: number): Promise<String> {
@@ -61,7 +61,7 @@ export class ComposerService {
                    + '&birthYear=' + birthYear;
         console.log('## addComposer() url=' + url + ' ##');  // NO logger here
         return this.http.get(url).toPromise()
-                .then(this.extractData)
-                .catch(this.handleErrorPromise);
+            .then(response => response.json() as String)
+            .catch(this.handleErrorPromise);
     }
 }

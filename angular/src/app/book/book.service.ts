@@ -75,7 +75,7 @@ export class BookService {
                    + '&composer=' + composer
                    + '&publisher=' + publisher
                    + '&pubYear=' + pubYear;
-        console.log('## url='+url+' ##');  // NO logger here
+        console.log('## url=' + url + ' ##');  // NO logger here
         return this.http.get(url).toPromise()
                 .then(response => response.json() as String)
                 .catch(this.handleErrorPromise);

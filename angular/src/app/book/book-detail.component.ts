@@ -4,8 +4,9 @@ import { Location }                 from '@angular/common';
 
 import { Book } from './book';
 import { BookService } from './book.service';
+import { Composer } from '../composer/composer';
+import { Publisher } from '../publisher/publisher';
 import { MusicLogger } from '../util/music-logger';
-import { MusicUtil } from '../util/music-util';
 
 @Component({
   moduleId: module.id,
@@ -32,16 +33,12 @@ export class BookDetailComponent implements OnInit{
           this.bookService.getBook(id)
             .then(book => {
               this.book = book;
-              this.oriBook = MusicUtil.deepCopy(this.book);
-              this.oriBook.composer = MusicUtil.deepCopy(book.composer);
-              this.oriBook.publisher = MusicUtil.deepCopy(book.publisher);
+              this.oriBook = Book.deepCopy(this.book);
             });
       }
       else {
           this.book = new Book();
-          this.oriBook = MusicUtil.deepCopy(this.book);
-          this.oriBook.composer = null;
-          this.oriBook.publisher = null;
+          this.oriBook = Book.deepCopy(this.book);
       }
     });
   }
@@ -58,11 +55,6 @@ export class BookDetailComponent implements OnInit{
   delete(): void {
     this.logger.info('delete() book, title="' +this.book.title+ '" id=' +this.book.id);
     this.bookService.deleteBook(this.book.id.valueOf());
-  }
-
-  addChopin(): void {
-    this.logger.info('addChopin()');
-    this.bookService.addBook('Ballada', 'Chopin', 'Peters', 2017);
   }
 
   isDirty(): Boolean {

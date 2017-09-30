@@ -5,7 +5,6 @@ import { Location }               from '@angular/common';
 import { Publisher } from './publisher';
 import { PublisherService } from './publisher.service';
 import { MusicLogger } from '../util/music-logger';
-import { MusicUtil } from '../util/music-util';
 
 @Component({
   moduleId: module.id,
@@ -31,12 +30,12 @@ export class PublisherDetailComponent implements OnInit {
         this.publisherService.getPublisher(id)
           .then(publisher => {
             this.publisher = publisher;
-            this.oriPublisher = MusicUtil.deepCopy(this.publisher);
+            this.oriPublisher = Publisher.deepCopy(this.publisher);
         });
       }
       else {
         this.publisher = new Publisher();
-        this.oriPublisher = MusicUtil.deepCopy(this.publisher);
+        this.oriPublisher = Publisher.deepCopy(this.publisher);
       }
     });
   }

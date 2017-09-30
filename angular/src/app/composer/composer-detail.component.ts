@@ -5,7 +5,6 @@ import { Location }               from '@angular/common';
 import { Composer } from './composer';
 import { ComposerService } from './composer.service';
 import { MusicLogger } from '../util/music-logger';
-import { MusicUtil } from '../util/music-util';
 
 @Component({
   moduleId: module.id,
@@ -32,12 +31,12 @@ export class ComposerDetailComponent implements OnInit {
         this.composerService.getComposer(id)
           .then(composer => {
             this.composer = composer;
-            this.oriComposer = MusicUtil.deepCopy(this.composer);
+            this.oriComposer = Composer.deepCopy(this.composer);
           });
       }
       else {
         this.composer = new Composer();
-        this.oriComposer = MusicUtil.deepCopy(this.composer);
+        this.oriComposer = Composer.deepCopy(this.composer);
       }
     });
   }

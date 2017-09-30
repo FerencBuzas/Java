@@ -1,5 +1,5 @@
 //
-// Holds the data of one book.
+// Holds the data of one from.
 //
 
 import { Composer } from '../composer/composer';
@@ -17,10 +17,35 @@ export class Book {
 
   equals(other: Book): boolean {
 
-    return this.id === other.id
-      && this.title === other.title
-      && this.composer === other.composer
-      && this.publisher === other.publisher
-      && this.pubYear === other.pubYear;
+    // Multiple small blocks, to be able to set breakponits
+    if (this.id !== other.id) {
+        return false;
+    }
+    if (this.title !== other.title) {
+        return false;
+    }
+    if ( ! this.composer.equals(other.composer)) {
+        return false;
+    }
+    if ( ! this.publisher.equals(other.publisher)) {
+        return false;
+    }
+    if (this.pubYear !== other.pubYear) {
+        return false;
+    }
+
+    return true;
   }
-}
+
+  // Deep copy
+  static deepCopy(from: Book) : Book {
+    
+          let comp = from.composer;
+          let pub = from.publisher;
+          return new Book(from.id, from.title,
+              new Composer(comp.id, comp.name, comp.birthYear),
+              new Publisher(pub.id, pub.name),
+              from.pubYear);
+      }
+    
+    }
