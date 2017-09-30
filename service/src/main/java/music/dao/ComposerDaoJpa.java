@@ -41,8 +41,8 @@ public class ComposerDaoJpa implements ComposerDao {
     }
 
     @Override
-    public void addComposer(Composer composer) {
-        LOGGER.debug("addComposer({})", composer);
+    public void storeComposer(Composer composer) {
+        LOGGER.debug("storeComposer({})", composer);
 
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         daoUtil.funcInTrans(entityManager,

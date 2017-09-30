@@ -40,7 +40,7 @@ public class ComposerDaoMemory implements ComposerDao {
     }
 
     @Override
-    public void addComposer(Composer composer) {
+    public void storeComposer(Composer composer) {
         composers.add(composer);
     }
 

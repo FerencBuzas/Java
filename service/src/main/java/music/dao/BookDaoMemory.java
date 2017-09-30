@@ -47,7 +47,7 @@ public class BookDaoMemory implements BookDao {
     }
 
     @Override
-    public void addBook(Book book) {
+    public void storeBook(Book book) {
         books.add(book);
     }
 

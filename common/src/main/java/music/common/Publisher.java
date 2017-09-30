@@ -22,10 +22,15 @@ public class Publisher implements MusicObject {
         LOGGER.debug("Publisher()");
     }
 
-    public Publisher(String name) {
+    public Publisher(long id, String name) {
         LOGGER.debug("Publisher() name={}", name);
 
+        this.id = id;
         this.name = name;
+    }
+
+    public Publisher(String name) {
+        this(0, name);
     }
 
     public long getId() {

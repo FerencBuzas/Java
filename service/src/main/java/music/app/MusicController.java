@@ -54,18 +54,23 @@ public class MusicController {
 
     // TODO: use RequestMethod.DELETE (and in all similar places)
     @RequestMapping(value="/music/book/delete")
-    public String removeBook(@RequestParam(value="id") String id) {
-        LOGGER.debug("removeBook id={} ##", id);
+    public String removeBook(
+            @RequestParam(value="id") String id) {
+        LOGGER.info("removeBook id={} ##", id);
+        
         bookDao.deleteBook(Long.parseLong(id));
         return "{ \"status\": \"OK\" }";
     }
 
-    @RequestMapping(value="/music/book/add")
-    public String addBook(@RequestParam(value="title") String title,
-                          @RequestParam(value="composer") String composerName,
-                          @RequestParam(value="publisher") String publisherName,
-                          @RequestParam(value="pubYear") int pubYear) {
-        LOGGER.debug("addBook title={} ##", title);
+    @RequestMapping(value="/music/book/store")
+    public String storeBook(
+            @RequestParam(value="id", defaultValue="0") long id,
+            @RequestParam(value="title") String title,
+            @RequestParam(value="composer") String composerName,
+            @RequestParam(value="publisher") String publisherName,
+            @RequestParam(value="pubYear") int pubYear) {
+        
+        LOGGER.info("storeBook title={} ##", title);
         
         List<Composer> composers = composerDao.getComposersByName(composerName);
         int nCo = composers.size();  
@@ -79,14 +84,16 @@ public class MusicController {
             return "{ \"status\": \"Failure (number of publishers: "+nPu+")\"";
         }
         
-        bookDao.addBook(new Book(title, composers.get(0), publishers.get(0), pubYear));
+        bookDao.storeBook(new Book(id, title, composers.get(0), publishers.get(0), pubYear));
         return "{ \"status\": \"OK\" }";
     }
 
     // ======== Composer ================================
 
-    @RequestMapping(value="/music/composer")
-    public Collection<Composer> composers(@RequestParam(value="name", defaultValue="") String name) {
+    @RequestMapping(value="/music/composer/list")
+    public Collection<Composer> composers(
+            @RequestParam(value="name", defaultValue="") String name) {
+
         if (name.isEmpty()) {
             return composerDao.getComposers();
         }
@@ -95,18 +102,22 @@ public class MusicController {
         }
     }
 
-    @RequestMapping(value="/music/composer/add")
-    public String addComposer(@RequestParam(value="name") String name,
+    @RequestMapping(value="/music/composer/store")
+    public String storeComposer(
+            @RequestParam(value="id", defaultValue="0") long id,
+            @RequestParam(value="name") String name,
             @RequestParam(value="birthYear") int birthYear) {
-        LOGGER.debug("addComposer name={} ##", name);
+        
+        LOGGER.info("storeComposer id={} name={} ##", id, name);
 
-        composerDao.addComposer(new Composer(name, birthYear));
+        composerDao.storeComposer(new Composer(id, name, birthYear));
         return "{ \"status\": \"OK\" }";
     }
 
     @RequestMapping(value="/music/composer/delete")
-    public String removeComposer(@RequestParam(value="id") String id) {
-        LOGGER.debug("removeComposer id={} ##", id);
+    public String removeComposer(
+            @RequestParam(value="id") String id) {
+        LOGGER.info("removeComposer id={} ##", id);
         composerDao.deleteComposer(Long.parseLong(id));
         return "{ \"status\": \"OK\" }";
     }
@@ -114,24 +125,32 @@ public class MusicController {
     // ======== Publisher ================================
 
     @RequestMapping(value="/music/publisher")
-    public Collection<Publisher> publishers(@RequestParam(value="name", defaultValue="") String name) {
+    public Collection<Publisher> publishers(
+            @RequestParam(value="name", defaultValue="") String name) {
+        
         Collection<Publisher> result = publisherDao.getPublishers();
         LOGGER.info("publishers() returning {} elements", result.size());
         return result;
     }
     
-    @RequestMapping(value="/music/publisher/add")
-    public String addPublisher(@RequestParam(value="name") String name) {
-        LOGGER.debug("addPublisher name={} ##", name);
+    @RequestMapping(value="/music/publisher/store")
+    public String storePublisher(
+            @RequestParam(value="id", defaultValue="0") long id,
+            @RequestParam(value="name") String name) {
+        
+        LOGGER.info("storePublisher name={} ##", name);
 
-        publisherDao.addPublisher(new Publisher(name));
+        publisherDao.storePublisher(new Publisher(name));
         return "{ \"status\": \"OK\" }";
     }
 
     @RequestMapping(value="/music/publisher/delete")
-    public String removePublisher(@RequestParam(value="id") String id) {
-        LOGGER.debug("removePublisher id={} ##", id);
-        publisherDao.deletePublisher(Long.parseLong(id));
+    public String removePublisher(
+            @RequestParam(value="id") long id) {
+        
+        LOGGER.info("removePublisher id={} ##", id);
+        
+        publisherDao.deletePublisher(id);
         return "{ \"status\": \"OK\" }";
     }
 }

@@ -42,8 +42,8 @@ public class PublisherDaoJpa implements PublisherDao {
     }
 
     @Override
-    public void addPublisher(Publisher publisher) {
-        LOGGER.info("addPublisher() {} ##", publisher);
+    public void storePublisher(Publisher publisher) {
+        LOGGER.info("storePublisher() {} ##", publisher);
 
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         daoUtil.funcInTrans(entityManager, () -> {

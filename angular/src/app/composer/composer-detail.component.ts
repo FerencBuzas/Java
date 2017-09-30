@@ -47,7 +47,8 @@ export class ComposerDetailComponent implements OnInit {
 
   save(): void {
     this.logger.info('TODO: save ##');
-    this.composerService.addComposer(
+    this.composerService.storeComposer(
+      this.composer.id,
       this.composer.name,
       this.composer.birthYear.valueOf());
     this.location.back();

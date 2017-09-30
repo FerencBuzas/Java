@@ -30,13 +30,18 @@ public class Composer implements MusicObject {
     }
 
     // Note: the Id must not be set when managed by JPA
-    public Composer(String name, int birthYear) {
+    public Composer(long id, String name, int birthYear) {
         LOGGER.debug("Composer() name={} birthYear={}", name, birthYear);
 
+        this.id = id;
         this.name = name;
         this.birthYear = birthYear;
     }
-
+    
+    public Composer(String name, int birthYear) {
+        this(0, name, birthYear);
+    }
+    
     public long getId() {
         return id;
     }

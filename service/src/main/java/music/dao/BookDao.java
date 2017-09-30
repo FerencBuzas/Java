@@ -15,7 +15,7 @@ public interface BookDao {
 
     List<Book> getBooks();
 
-    void addBook(Book book);
+    void storeBook(Book book);
 
     void deleteBook(long id);
 }

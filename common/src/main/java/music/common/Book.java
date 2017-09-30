@@ -34,14 +34,18 @@ public class Book implements MusicObject {
         LOGGER.debug("Book()");
     }
 
-    // Note: the Id must not be set when managed by JPA
-    public Book(String title, Composer composer, Publisher publisher, int pubYear) {
-        LOGGER.debug("Book() title={} composer={}", title, composer.getName());
+    public Book(long id, String title, Composer composer, Publisher publisher, int pubYear) {
+        LOGGER.debug("Book() id={} title={} composer={}", id, title, composer.getName());
 
+        this.id = id;
         this.title = title;
         this.composer = composer;
         this.publisher = publisher;
         this.pubYear = pubYear;
+    }
+    
+    public Book(String title, Composer composer, Publisher publisher, int pubYear) {
+        this(0, title, composer, publisher, pubYear);
     }
 
     public long getId() {

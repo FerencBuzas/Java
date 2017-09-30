@@ -35,8 +35,8 @@ public class BookDaoJpa implements BookDao {
     }
 
     @Override
-    public void addBook(Book book) {
-        LOGGER.debug("addBook({})", book);
+    public void storeBook(Book book) {
+        LOGGER.debug("storeBook({})", book);
         
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         daoUtil.funcInTrans(entityManager, 

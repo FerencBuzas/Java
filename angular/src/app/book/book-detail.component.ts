@@ -48,13 +48,17 @@ export class BookDetailComponent implements OnInit{
   }
 
   save(): void {
-    console.log('TODO: save ##');
+    this.bookService.storeBook(this.book.id.valueOf(), this.book.title,
+        this.book.composer,
+        this.book.publisher,
+        this.book.pubYear.valueOf())
     this.location.back();
   }
 
   delete(): void {
     this.logger.info('delete() book, title="' +this.book.title+ '" id=' +this.book.id);
     this.bookService.deleteBook(this.book.id.valueOf());
+    this.location.back();
   }
 
   isDirty(): Boolean {

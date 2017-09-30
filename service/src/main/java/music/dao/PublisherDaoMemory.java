@@ -39,7 +39,7 @@ public class PublisherDaoMemory implements PublisherDao {
     }
 
     @Override
-    public void addPublisher(Publisher publisher) {
+    public void storePublisher(Publisher publisher) {
         publishers.add(publisher);
     }
 

@@ -57,10 +57,12 @@ export class PublisherService {
                 .catch(this.handleErrorPromise);
     }
 
-    addPublisher(name: String): Promise<String> {
+    storePublisher(id: number, name: String): Promise<String> {
 
-        let url = MusicConfig.URL_BASE + '/publisher/add?name=' + name;
-        console.log('## addPublisher() url=' + url + ' ##');  // NO logger here
+        let url = MusicConfig.URL_BASE + '/publisher/store?'
+            + 'id=' + id
+            + '&name=' + name;
+        console.log('## storePublisher() url=' + url + ' ##');  // NO logger here
         return this.http.get(url).toPromise()
                 .then(response => response.json().data as String)
                 .catch(this.handleErrorPromise);
