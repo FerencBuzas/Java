@@ -29,14 +29,12 @@ export class PublisherService {
     }
 
     private extractData(res: Response) {
-        // NOTE: 'this.logger' can not be used here!!
-        let body = res.json();
-        console.log("########## typeof body=" + typeof body);
-        let arr: Publisher[] = body as Publisher[];
+        let arr: Publisher[] = res.json() as Publisher[];
+
+        // Convert the JS array to an array of TS Publisher's
         let result: Publisher[] = [];
-        for (let p of arr) {
-            let pubi = new Publisher(p.id, p.name);
-            result.push(pubi);
+        for (let p of arr) {           // NOTE: 'p in arr' would return the indices
+            result.push(new Publisher(p.id, p.name));
         }
         return result;
     }

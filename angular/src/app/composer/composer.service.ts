@@ -25,11 +25,17 @@ export class ComposerService {
     }
 
     private extractData(res: Response) {
-        // NOTE: 'this.logger' can not be used here!!
-        let body = res.json();
-        return body;
+        let arr: Composer[] = res.json() as Composer[];
+
+        // Convert the JS array to an array of TS Composer's
+        let result: Composer[] = [];
+        for (let p of arr) {           // NOTE: 'p in arr' would return the indices
+            result.push(new Composer(p.id, p.name, p.birthYear));
+        }
+        return result;
     }
 
+    
     private handleErrorPromise(error: Response | any) {
         console.log(error.message || error);
         return Promise.reject(error.message || error);

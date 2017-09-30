@@ -7,6 +7,8 @@ import 'rxjs/add/operator/toPromise';
 import { MusicConfig } from '../util/music-config';
 import { MusicLogger } from '../util/music-logger';
 import { Book } from './book';
+import { Composer } from '../composer/composer';
+import { Publisher } from '../publisher/publisher';
 
 @Injectable()
 export class BookService {
@@ -31,10 +33,18 @@ export class BookService {
 
     // A good answer to a similar question:
     //   https://stackoverflow.com/questions/40256658/getting-an-object-array-from-an-angularjs-2-service
+    //
     private extractData(res: Response) {
-        // this.logger... NO!
-        let body = res.json();
-        return body;
+        let arr: Book[] = res.json() as Book[];
+
+        // Convert the JS array to an array of TS Book's
+        let result: Book[] = [];
+        for (let p of arr) {           // NOTE: 'p in arr' would return the indices
+            let comp = new Composer(p.composer.id, p.composer.name, p.composer.birthYear);
+            let pub = new Publisher(p.publisher.id, p.publisher.name);
+            result.push(new Book(p.id, p.title, comp, pub, p.pubYear));
+        }
+        return result;
     }
 
     private handleErrorPromise(error: Response | any) {
@@ -51,7 +61,7 @@ export class BookService {
         let url = MusicConfig.URL_BASE + '/book/delete?id=' + id;
         // NO logger here
         return this.http.get(url).toPromise()
-                .then(this.extractData)
+                .then(response => response.json() as String)
                 .catch(this.handleErrorPromise);
     }
 
@@ -67,7 +77,7 @@ export class BookService {
                    + '&pubYear=' + pubYear;
         console.log('## url='+url+' ##');  // NO logger here
         return this.http.get(url).toPromise()
-                .then(this.extractData)
+                .then(response => response.json() as String)
                 .catch(this.handleErrorPromise);
     }
 }

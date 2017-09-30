@@ -33,11 +33,15 @@ export class BookDetailComponent implements OnInit{
             .then(book => {
               this.book = book;
               this.oriBook = MusicUtil.deepCopy(this.book);
+              this.oriBook.composer = MusicUtil.deepCopy(book.composer);
+              this.oriBook.publisher = MusicUtil.deepCopy(book.publisher);
             });
       }
       else {
           this.book = new Book();
           this.oriBook = MusicUtil.deepCopy(this.book);
+          this.oriBook.composer = null;
+          this.oriBook.publisher = null;
       }
     });
   }
