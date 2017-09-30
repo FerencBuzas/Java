@@ -21,8 +21,15 @@ export class ComposersComponent implements OnInit {
   }
 
   // When the service sends the composers, store them to member.
+//  getComposers(): void {   // a future is involved
+//    this.composerService.getComposers().then(h => this.composers = h);
+//  }
   getComposers(): void {   // a future is involved
-    this.composerService.getComposers().then(h => this.composers = h);
+    console.log("## CompComp.getComposers()");
+    this.composerService.getComposers().then(
+      h => { this.composers = h;
+             console.log("  CompComp.getComposers: h=" + h);
+      });
   }
 
   // The constructor must be short and fast, so loading is here.

@@ -115,7 +115,9 @@ public class MusicController {
 
     @RequestMapping(value="/music/publisher")
     public Collection<Publisher> publishers(@RequestParam(value="name", defaultValue="") String name) {
-        return publisherDao.getPublishers();
+        Collection<Publisher> result = publisherDao.getPublishers();
+        LOGGER.info("publishers() returning {} elements", result.size());
+        return result;
     }
     
     @RequestMapping(value="/music/publisher/add")

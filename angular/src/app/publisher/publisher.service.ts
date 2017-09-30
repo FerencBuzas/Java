@@ -2,7 +2,9 @@
 
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
-import 'rxjs/add/operator/toPromise';
+import { Observable } from 'rxjs';
+//import 'rxjs/add/operator/map';
+//import 'rxjs/add/operator/toPromise';
 
 import { MusicConfig } from '../util/music-config';
 import { MusicLogger } from '../util/music-logger';
@@ -13,21 +15,30 @@ export class PublisherService {
 
     constructor(
             private http: Http,
-            private logger: MusicLogger) {}
+            private logger: MusicLogger) {
+        this.logger.info("PublisherService constructor");
+    }
 
     getPublishers(): Promise<Publisher[]> {
         let url = MusicConfig.URL_BASE + '/publisher';
-        this.logger.info('getPublishers() ## url=' + url);
+        this.logger.info('PubServ.getPublishers() ## url=' + url);
 
-        return this.http.get(url).toPromise() // Observable<Response> --> Promise<Response>
-            .then(this.extractData)            // --> Promise<Publisher[]>  (as map() with Obs.)
+        return this.http.get(url).toPromise()  // Observable<Resp..> --> Promise<Resp>
+            .then(this.extractData)
             .catch(this.handleErrorPromise);
     }
 
     private extractData(res: Response) {
-        // this.logger... NO!
+        // NOTE: 'this.logger' can not be used here!!
         let body = res.json();
-        return body;
+        console.log("########## typeof body=" + typeof body);
+        let arr: Publisher[] = body as Publisher[];
+        let result: Publisher[] = [];
+        for (let p of arr) {
+            let pubi = new Publisher(p.id, p.name);
+            result.push(pubi);
+        }
+        return result;
     }
 
     private handleErrorPromise(error: Response | any) {
@@ -44,7 +55,7 @@ export class PublisherService {
         let url = MusicConfig.URL_BASE + '/publisher/delete?id=' + id;
         // NO logger here
         return this.http.get(url).toPromise()
-                .then(this.extractData)
+                .then(response => response.json().data as String)
                 .catch(this.handleErrorPromise);
     }
 
@@ -53,7 +64,7 @@ export class PublisherService {
         let url = MusicConfig.URL_BASE + '/publisher/add?name=' + name;
         console.log('## addPublisher() url=' + url + ' ##');  // NO logger here
         return this.http.get(url).toPromise()
-                .then(this.extractData)
+                .then(response => response.json().data as String)
                 .catch(this.handleErrorPromise);
     }
 }

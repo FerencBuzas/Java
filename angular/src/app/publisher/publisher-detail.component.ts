@@ -46,19 +46,19 @@ export class PublisherDetailComponent implements OnInit {
   }
 
   save(): void {
-    this.logger.info('TODO: save ##');
+    this.logger.info('PublisherDetailC..save()');
     this.publisherService.addPublisher(this.publisher.name);
     this.location.back();
   }
 
   delete(): void {
-    this.logger.info('TODO: delete ##');
+    this.logger.info('PublisherDetailC..delete()');
     this.publisherService.deletePublisher(this.publisher.id.valueOf());
     this.location.back();
   }
 
   isDirty(): Boolean {
-    return ! this.publisher.equals(this.oriPublisher);
+    return this.publisher && ! this.publisher.equals(this.oriPublisher);
   }
 
   canDelete(): Boolean {

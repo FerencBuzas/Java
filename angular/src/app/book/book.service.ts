@@ -14,7 +14,7 @@ export class BookService {
     constructor(
             private http: Http,
             private logger: MusicLogger) {
-        this.logger.info("BookService constructor http: " + http + " logger: " + logger);
+        this.logger.info("BookService constructor");
     }
 
     // From: http://www.concretepage.com/angular-2/angular-2-http-get-example
@@ -29,6 +29,8 @@ export class BookService {
             .catch(this.handleErrorPromise);
     }
 
+    // A good answer to a similar question:
+    //   https://stackoverflow.com/questions/40256658/getting-an-object-array-from-an-angularjs-2-service
     private extractData(res: Response) {
         // this.logger... NO!
         let body = res.json();

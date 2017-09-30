@@ -5,7 +5,7 @@ export class Publisher {
     public name: String = '') {
   }
   
-  equals(other: Publisher): boolean {
+  public equals(other: Publisher): boolean {
     return this.name === other.name;
   }
 }
