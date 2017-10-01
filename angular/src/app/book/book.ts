@@ -8,11 +8,11 @@ import { Publisher } from '../publisher/publisher';
 export class Book {
 
   constructor(
-    public id: Number = 0,
-    public title: String = '',
+    public id: number = 0,
+    public title: string = '',
     public composer: Composer = null,
     public publisher: Publisher = null,
-    public pubYear: Number = 1970
+    public pubYear: number = 1970
   ) {}
 
   equals(other: Book): boolean {

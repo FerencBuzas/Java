@@ -47,7 +47,20 @@ public class PublisherDaoJpa implements PublisherDao {
 
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         daoUtil.funcInTrans(entityManager, () -> {
-            entityManager.persist(publisher);
+            long id = publisher.getId();
+            if (id != 0) {
+                // Read the original object
+                Publisher oriPublisher = entityManager.find(Publisher.class, id);
+                if (oriPublisher == null) {
+                    LOGGER.info("  Could not find publisher id=" + id);
+                    return ("Could not find publisher id=" + id);
+                }
+                // Modify the original with the new one, rewrite it
+                oriPublisher.modifyDataByOther(publisher);
+                entityManager.persist(oriPublisher);
+            } else {
+                entityManager.persist(publisher);
+            }
             return "";
         });
     }

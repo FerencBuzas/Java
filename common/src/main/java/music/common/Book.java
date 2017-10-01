@@ -67,7 +67,14 @@ public class Book implements MusicObject {
     public int getPubYear() {
         return pubYear;
     }
-
+    
+    public void modifyDataByOther(Book other) {
+        title = other.getTitle();
+        composer = other.composer;
+        publisher = other.publisher;
+        pubYear = other.pubYear;
+    }
+    
     public String toString() {
 
         return "Book[id=" +id+ ", title=" +title+ ", "+ composer +

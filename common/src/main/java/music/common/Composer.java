@@ -54,6 +54,11 @@ public class Composer implements MusicObject {
         return birthYear;
     }
 
+    public void modifyDataByOther(Composer other) {
+        name = other.getName();
+        birthYear = other.birthYear;
+    }
+    
     public String toString() {
 
         return "Composer[id=" +id+ ", name=" +name+ " birthYear=" + birthYear +"]";

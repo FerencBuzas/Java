@@ -1,9 +1,9 @@
 export class Composer {
 
   constructor(
-    public id: Number = 0,
-    public name: String = '',
-    public birthYear: Number = 0) {
+    public id: number = 0,
+    public name: string = '',
+    public birthYear: number = 0) {
   }
 
   equals(other: Composer) {

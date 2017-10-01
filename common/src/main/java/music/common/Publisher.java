@@ -40,7 +40,11 @@ public class Publisher implements MusicObject {
     public String getName() {
         return name;
     }
-
+    
+    public void modifyDataByOther(Publisher other) {
+        name = other.getName();
+    }
+    
     public String toString() {
 
         return "Publisher[id=" +id+ ", name=" +name +"]";

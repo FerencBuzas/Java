@@ -39,8 +39,23 @@ public class BookDaoJpa implements BookDao {
         LOGGER.debug("storeBook({})", book);
         
         EntityManager entityManager = entityManagerFactory.createEntityManager();
-        daoUtil.funcInTrans(entityManager, 
-                () -> { entityManager.persist(book); return ""; });
+        daoUtil.funcInTrans( entityManager, () -> {
+            long id = book.getId();
+            if (id != 0) {
+                // Read the original object
+                Book oriBook = entityManager.find(Book.class, id);
+                if (oriBook == null) {
+                    LOGGER.info("  Could not find book id=" + id);
+                    return ("Could not find book id=" + id);
+                }
+                // Modify the original with the new one, rewrite it
+                oriBook.modifyDataByOther(book);
+                entityManager.persist(oriBook);
+            } else {
+                entityManager.persist(book);
+            }
+            return "";
+        });
     }
     
     @Override
