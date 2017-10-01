@@ -5,6 +5,7 @@ import { Location }               from '@angular/common';
 import { Composer } from './composer';
 import { ComposerService } from './composer.service';
 import { MusicLogger } from '../util/music-logger';
+import { MusicUtil } from '../util/music-util';
 
 @Component({
   moduleId: module.id,
@@ -17,12 +18,14 @@ export class ComposerDetailComponent implements OnInit {
 
     composer: Composer;
     oriComposer: Composer;
+    errorMessage: string;
 
   constructor(
     private composerService: ComposerService,
     private route: ActivatedRoute,
     private location: Location,
-    private logger: MusicLogger) {}
+    private logger: MusicLogger,
+    private musicUtil: MusicUtil ) {}
 
   ngOnInit(): void {
     this.route.params.forEach((params: Params) => {
@@ -46,16 +49,20 @@ export class ComposerDetailComponent implements OnInit {
   }
 
   save(): void {
-    this.logger.info('TODO: save ##');
+    this.logger.info("CompDet.save()");
     this.composerService.storeComposer(
-      this.composer.id,
-      this.composer.name,
-      this.composer.birthYear.valueOf());
+        this.composer.id,
+        this.composer.name,
+        this.composer.birthYear.valueOf());
     this.location.back();
   }
 
   delete(): void {
-    this.logger.info('TODO: delete ##');
+    this.logger.info("CompDet.delete()");
+    if ( ! this.musicUtil.confirm("Sure you want to delete " + this.composer.name + "?")) {
+        this.errorMessage = "Not deleted.";
+        return;
+    }
     this.composerService.deleteComposer(this.composer.id.valueOf());
     this.location.back();
   }

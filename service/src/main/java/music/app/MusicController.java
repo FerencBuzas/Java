@@ -56,7 +56,7 @@ public class MusicController {
     @RequestMapping(value="/music/book/delete")
     public String removeBook(
             @RequestParam(value="id") String id) {
-        LOGGER.info("removeBook id={} ##", id);
+        LOGGER.info("removeBook id={}", id);
         
         bookDao.deleteBook(Long.parseLong(id));
         return "{ \"status\": \"OK\" }";
@@ -70,7 +70,7 @@ public class MusicController {
             @RequestParam(value="publisher") String publisherName,
             @RequestParam(value="pubYear") int pubYear) {
         
-        LOGGER.info("storeBook title={} ##", title);
+        LOGGER.info("storeBook title={}", title);
         
         List<Composer> composers = composerDao.getComposersByName(composerName);
         int nCo = composers.size();  
@@ -108,7 +108,7 @@ public class MusicController {
             @RequestParam(value="name") String name,
             @RequestParam(value="birthYear") int birthYear) {
         
-        LOGGER.info("storeComposer id={} name={} ##", id, name);
+        LOGGER.info("storeComposer id={} name={}", id, name);
 
         composerDao.storeComposer(new Composer(id, name, birthYear));
         return "{ \"status\": \"OK\" }";
@@ -117,7 +117,7 @@ public class MusicController {
     @RequestMapping(value="/music/composer/delete")
     public String removeComposer(
             @RequestParam(value="id") String id) {
-        LOGGER.info("removeComposer id={} ##", id);
+        LOGGER.info("removeComposer id={}", id);
         composerDao.deleteComposer(Long.parseLong(id));
         return "{ \"status\": \"OK\" }";
     }
@@ -138,7 +138,7 @@ public class MusicController {
             @RequestParam(value="id", defaultValue="0") long id,
             @RequestParam(value="name") String name) {
         
-        LOGGER.info("storePublisher name={} ##", name);
+        LOGGER.info("storePublisher name={}", name);
 
         publisherDao.storePublisher(new Publisher(name));
         return "{ \"status\": \"OK\" }";
@@ -148,7 +148,7 @@ public class MusicController {
     public String removePublisher(
             @RequestParam(value="id") long id) {
         
-        LOGGER.info("removePublisher id={} ##", id);
+        LOGGER.info("removePublisher id={}", id);
         
         publisherDao.deletePublisher(id);
         return "{ \"status\": \"OK\" }";

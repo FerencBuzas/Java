@@ -16,7 +16,7 @@ public class EntityManagerFactoryBean implements FactoryBean<EntityManagerFactor
     @Override
     public EntityManagerFactory getObject() throws Exception {
 
-        System.out.println("  EntityManagerFactoryBean.getObject #####");
+        System.out.println("  EntityManagerFactoryBean.getObject()");
 
         return Persistence.createEntityManagerFactory( "SheetMusic" );
     }

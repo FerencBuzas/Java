@@ -51,7 +51,8 @@ public class BookDaoJpa implements BookDao {
                 // Modify the original with the new one, rewrite it
                 oriBook.modifyDataByOther(book);
                 entityManager.persist(oriBook);
-            } else {
+            }
+            else {  // a new object
                 entityManager.persist(book);
             }
             return "";
@@ -60,7 +61,7 @@ public class BookDaoJpa implements BookDao {
     
     @Override
     public void deleteBook(long id) {
-        LOGGER.info("deleteBook() id={} ##", id);
+        LOGGER.info("deleteBook() id={}", id);
         
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         daoUtil.funcInTrans(entityManager, () -> {

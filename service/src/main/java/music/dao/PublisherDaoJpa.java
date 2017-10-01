@@ -28,7 +28,7 @@ public class PublisherDaoJpa implements PublisherDao {
 
     @Override
     public List<Publisher> getPublishers() {
-        LOGGER.info("getPublishers() ##");
+        LOGGER.info("getPublishers()");
 
         String query = "from Publisher";
         return fetchPublishers(query);
@@ -43,7 +43,7 @@ public class PublisherDaoJpa implements PublisherDao {
 
     @Override
     public void storePublisher(Publisher publisher) {
-        LOGGER.info("storePublisher() {} ##", publisher);
+        LOGGER.info("storePublisher() {}", publisher);
 
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         daoUtil.funcInTrans(entityManager, () -> {
@@ -65,12 +65,9 @@ public class PublisherDaoJpa implements PublisherDao {
         });
     }
 
-//    public void deleteMusicObject(Class clazz, long id, EntityManagerFactory emf) {
-//    }
-
     @Override
     public void deletePublisher(long id) {
-        LOGGER.info("deletePublisher() id={} ##", id);
+        LOGGER.info("deletePublisher() id={}", id);
 
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         daoUtil.funcInTrans(entityManager, () -> {

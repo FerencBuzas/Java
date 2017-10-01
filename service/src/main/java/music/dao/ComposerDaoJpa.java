@@ -57,7 +57,8 @@ public class ComposerDaoJpa implements ComposerDao {
                 // Modify the original with the new one, rewrite it
                 oriComposer.modifyDataByOther(composer);
                 entityManager.persist(oriComposer);
-            } else {
+            }
+            else {  // new object
                 entityManager.persist(composer);
             }
             return "";
@@ -66,7 +67,7 @@ public class ComposerDaoJpa implements ComposerDao {
 
     @Override
     public void deleteComposer(long id) {
-        LOGGER.info("deleteComposer() id={} ##", id);
+        LOGGER.info("deleteComposer() id={}", id);
 
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         daoUtil.funcInTrans(entityManager, () -> {
@@ -82,7 +83,7 @@ public class ComposerDaoJpa implements ComposerDao {
 
 
     private List<Composer> fetchComposers(String query) {
-        LOGGER.debug("fetchComposers() q={} ##", query);
+        LOGGER.debug("fetchComposers() q={}", query);
 
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         return daoUtil.funcInTrans(entityManager, 

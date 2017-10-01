@@ -35,7 +35,7 @@ public class DataCreator {
     private BookDataCreator bookDataCreator;
 
     public void createData() {
-        LOGGER.info("DataCreator.createData ##");
+        LOGGER.info("DataCreator.createData()");
 
         // Create lists in memory
         List<Composer> composers = composerDataCreator.createComposerList();

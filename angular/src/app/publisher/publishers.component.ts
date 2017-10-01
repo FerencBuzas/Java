@@ -29,7 +29,7 @@ export class PublishersComponent implements OnInit {
   }
 
   ngOnInit(): void {    // The constructor must be short and fast
-    console.debug("ngOnInit() ##");
+    console.debug("ngOnInit()");
     this.getPublishers();
   }
 

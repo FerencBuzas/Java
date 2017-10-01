@@ -26,13 +26,13 @@ class ComposerDataCreator {
         list.add(new Composer("Beethoven", 1770));
         list.add(new Composer("Schubert", 1797));
         list.add(new Composer("Schumann", 1810));
-        list.add(new Composer("Chopin", 1810));
+//        list.add(new Composer("Chopin", 1810));
         list.add(new Composer("Liszt", 1811));
-        list.add(new Composer("Brahms", 1833));
+//        list.add(new Composer("Brahms", 1833));
         list.add(new Composer("Muszorgszkij", 1839));
 //        list.add(new Composer("Tschaikowskij", 1840));
 //        list.add(new Composer("Debussy", 1862));
-        list.add(new Composer("Rachmaninov", 1873));
+//        list.add(new Composer("Rachmaninov", 1873));
         list.add(new Composer("Bartók", 1881));
 
         return list;

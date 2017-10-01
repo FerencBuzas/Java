@@ -30,4 +30,8 @@
     <!-- [Delete] -->
     <button *ngIf="canDelete()" (click)="delete()">Delete</button>
     
+    <div>
+        <br/>
+        <label>{{errorMessage}}</label>
+    </div>
 </div>
