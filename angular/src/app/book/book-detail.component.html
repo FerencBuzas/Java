@@ -17,12 +17,11 @@
   
     <!-- composer -->
     <div>
-       <!-- <label>composer: </label>{{book.composer.name}}  ({{book.composer.birthYear}}) -->
-       <label>composer: </label>
-        <!-- <combo-box [listData]="composers" [displayField]="'name'" [valueField]="'id'" 
-                   [(ngModel)]="selectedComposer"></combo-box> -->
-        <select>
-            <option *ngFor="let c of composers" [value]="c">{{c.name}}</option>
+        <!-- <label>composer: </label>{{book.composer.name}}  ({{book.composer.birthYear}}) -->
+        <label>composer: </label>
+        <label>{{book.composer.name}}</label>
+        <select [(ngModel)]="book.composer" >   <!-- (ngModelChange)="onChange($event)" -->
+            <option *ngFor="let c of composers" [ngValue]="c">{{c.name}}</option>
         </select>
     </div>
 
@@ -30,10 +29,11 @@
     <div>
        <!-- <label>published: </label>{{book.publisher.name}}, {{book.pubYear}} -->
        <label>publisher: </label>
-       <select>
-           <option *ngFor="let p of publishers" [value]="p">{{p.name}}</option>
-        </select>
-     </div>
+       <label>{{book.publisher.name}}</label>
+        <select [(ngModel)]="book.publisher" >
+           <option *ngFor="let p of publishers" [ngValue]="p">{{p.name}}</option>
+       </select>
+    </div>
 
     <!-- pubYear -->
     <div>

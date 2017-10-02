@@ -9,8 +9,10 @@ import { ComposerService } from '../composer/composer.service';
 import { Publisher } from '../publisher/publisher';
 import { PublisherService } from '../publisher/publisher.service';
 import { MusicLogger } from '../util/music-logger';
-import { ComboBoxComponent } from 'ng2-combobox';
 
+
+const EMPTY_COMPOSER = new Composer(0, "", 1840);
+const EMPTY_PUBLISHER = new Publisher(0, "");
 
 @Component({
   moduleId: module.id,
@@ -20,16 +22,11 @@ import { ComboBoxComponent } from 'ng2-combobox';
 })
 export class BookDetailComponent implements OnInit{
 
+
     book: Book;
     oriBook: Book;
     statusLine = '';
     composers: Composer[];
-//     = [
-//      new Composer(1, 'Bach', 1685 ),
-//      new Composer(2, 'Haydn', 1732 ),
-//      new Composer(3, 'Mozart', 1756),
-//      new Composer(4, 'Beethoven', 1770),
-//      new Composer(5, 'Schubert', 1797)];
     selectedComposer: Composer;
     publishers: Publisher[] = [];
     selectedPublisher: Publisher;
@@ -57,7 +54,7 @@ export class BookDetailComponent implements OnInit{
             });
       }
       else {
-          this.book = new Book();
+          this.book = new Book(0, "", EMPTY_COMPOSER, EMPTY_PUBLISHER, 1840);
           this.oriBook = Book.deepCopy(this.book);
       }
     });
