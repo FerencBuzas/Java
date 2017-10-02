@@ -11,6 +11,8 @@ import { Composer } from './composer';
 @Injectable()
 export class ComposerService {
 
+//    private cachedComposers: Composer[] = [];
+
     constructor(private http: Http,
                 private logger: MusicLogger) {
     }
@@ -24,6 +26,10 @@ export class ComposerService {
             .catch(this.handleErrorPromise);
     }
 
+//    getCachedComposers(): Composer[] {
+//        return this.cachedComposers;
+//    }
+
     private extractData(res: Response) {
         let arr: Composer[] = res.json() as Composer[];
 
@@ -32,10 +38,10 @@ export class ComposerService {
         for (let p of arr) {           // NOTE: 'p in arr' would return the indices
             result.push(new Composer(p.id, p.name, p.birthYear));
         }
+//        this.cachedComposers = result;
         return result;
     }
 
-    
     private handleErrorPromise(error: Response | any) {
         console.log(error.message || error);
         return Promise.reject(error.message || error);

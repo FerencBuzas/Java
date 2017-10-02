@@ -17,21 +17,41 @@
   
     <!-- composer -->
     <div>
-       <label>composer: </label>{{book.composer.name}}  ({{book.composer.birthYear}})
+       <!-- <label>composer: </label>{{book.composer.name}}  ({{book.composer.birthYear}}) -->
+       <label>composer: </label>
+        <!-- <combo-box [listData]="composers" [displayField]="'name'" [valueField]="'id'" 
+                   [(ngModel)]="selectedComposer"></combo-box> -->
+        <select>
+            <option *ngFor="let c of composers" [value]="c">{{c.name}}</option>
+        </select>
     </div>
 
-    <!-- book -->
+    <!-- publisher -->
     <div>
-       <label>published: </label>{{book.publisher.name}}, {{book.pubYear}}
-    </div>
+       <!-- <label>published: </label>{{book.publisher.name}}, {{book.pubYear}} -->
+       <label>publisher: </label>
+       <select>
+           <option *ngFor="let p of publishers" [value]="p">{{p.name}}</option>
+        </select>
+     </div>
 
-    <!-- [Back] -->
+    <!-- pubYear -->
+    <div>
+        <label>publication: </label>
+        <input [(ngModel)]="book.pubYear" placeholder="year" />
+     </div>
+   
+     <!-- [Back] -->
     <button (click)="goBack()">Back</button>
     
     <!-- [Save] -->
     <button *ngIf="isDirty()" (click)="save()">Save</button>
-    
+
     <!-- [Delete] -->
     <button *ngIf="canDelete()" (click)="delete()">Delete</button>
-      
+
+    <button (click)="devInfo()">Dev.Info</button>
+
+    <div><label>{{statusLine}}</label>      
+    </div>
 </div>

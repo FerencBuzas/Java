@@ -45,3 +45,10 @@ npm install karma-systemjs systemjs es6-module-loader systemjs-plugin-babel
     }).compileComponents();
     
   (It has also been solved in Angular-CLI).
+
+--------------------------------------------------
+To have a combobox component:
+  npm install ng2-combobox  (it is public, so free;
+  from https://www.npmjs.com/package/ng2-combobox
+  NOTE: today (2 Oct 2017) I did it with HTML Select, *ngFor.
+

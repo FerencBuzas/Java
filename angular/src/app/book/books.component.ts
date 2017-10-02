@@ -13,19 +13,13 @@ import { BookService } from './book.service';
 
 export class BooksComponent implements OnInit {
 
-  books = []
+  books = [];
   selectedBook: Book;
-
   constructor(private bookService: BookService,
-              private router: Router ) { 
-  }
-
-  getBooks(): void {   // a future is involved
-    this.bookService.getBooks().then(h => this.books = h);
-  }
+              private router: Router ) {}
 
   ngOnInit(): void {    // The constructor must be short and fast
-    this.getBooks();
+    this.bookService.getBooks().then(h => this.books = h);
   }
 
   onSelect(book: Book): void {
