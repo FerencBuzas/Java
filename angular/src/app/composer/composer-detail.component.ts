@@ -50,10 +50,7 @@ export class ComposerDetailComponent implements OnInit {
 
   save(): void {
     this.logger.info("CompDet.save()");
-    this.composerService.storeComposer(
-        this.composer.id,
-        this.composer.name,
-        this.composer.birthYear.valueOf());
+    this.composerService.storeComposer(this.composer);
     this.location.back();
   }
 

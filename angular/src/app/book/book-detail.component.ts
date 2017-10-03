@@ -60,15 +60,16 @@ export class BookDetailComponent implements OnInit{
     });
   }
 
+  onChange(event) {
+      console.log("onChange book=" + JSON.stringify(this.book));
+  }
+
   goBack(): void {
     this.location.back();
   }
 
   save(): void {
-    this.bookService.storeBook(this.book.id.valueOf(), this.book.title,
-        this.book.composer,
-        this.book.publisher,
-        this.book.pubYear.valueOf())
+    this.bookService.storeBook(this.book);
     this.location.back();
   }
 

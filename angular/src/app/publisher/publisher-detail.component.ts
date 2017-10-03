@@ -46,7 +46,7 @@ export class PublisherDetailComponent implements OnInit {
 
   save(): void {
     this.logger.info('PublisherDetailC..save()');
-    this.publisherService.storePublisher(this.publisher.id, this.publisher.name);
+    this.publisherService.storePublisher(this.publisher);
     this.location.back();
   }
 

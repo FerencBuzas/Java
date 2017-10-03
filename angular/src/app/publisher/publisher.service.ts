@@ -50,20 +50,18 @@ export class PublisherService {
     }
 
     deletePublisher(id: number): Promise<String> {
-        let url = MusicConfig.URL_BASE + '/publisher/delete?id=' + id;
+        let url = MusicConfig.URL_BASE + '/publisher' + id;
         // NO logger here
         return this.http.delete(url).toPromise()
                 .then(response => response.json().data as String)
                 .catch(this.handleErrorPromise);
     }
 
-    storePublisher(id: number, name: String): Promise<String> {
+    storePublisher(publisher: Publisher): Promise<String> {
 
-        let url = MusicConfig.URL_BASE + '/publisher/store?'
-            + 'id=' + id
-            + '&name=' + name;
-        console.log('## storePublisher() url=' + url + ' ##');  // NO logger here
-        return this.http.get(url).toPromise()
+        let url = MusicConfig.URL_BASE + '/publisher';
+        console.log('storePublisher() url=' + url);  // NO logger here
+        return this.http.post(url, publisher).toPromise()
                 .then(response => response.json().data as String)
                 .catch(this.handleErrorPromise);
     }

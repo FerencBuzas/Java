@@ -65,20 +65,11 @@ export class BookService {
                 .catch(this.handleErrorPromise);
     }
 
-    storeBook(id: number,
-            title: String,
-            composer: Composer,
-            publisher: Publisher,
-            pubYear: number): Promise<String> {
-
-        let url = MusicConfig.URL_BASE + '/book/store?'
-                   + 'id=' + id
-                   + '&title=' + title
-                   + '&composer=' + composer.name
-                   + '&publisher=' + publisher.name
-                   + '&pubYear=' + pubYear;
-        console.log('## url=' + url + ' ##');  // NO logger here
-        return this.http.get(url).toPromise()
+    storeBook(book: Book) {
+        let url = MusicConfig.URL_BASE + '/book';
+        // NO logger here
+        console.log('storeBook() url=' + url + ', ' + JSON.stringify(book));
+        return this.http.post(url, book).toPromise()
                 .then(response => response.json() as String)
                 .catch(this.handleErrorPromise);
     }

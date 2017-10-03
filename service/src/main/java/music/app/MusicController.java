@@ -13,7 +13,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 @RestController
@@ -45,8 +44,6 @@ public class MusicController {
         return String.format("<a href=\"%s/%s\">%s</a><br>", URL_BASE, lastWord, lastWord);
     }
 
-    // TODO: use RequestMethod everywhere
-
     // ======== Book ================================
     
     @RequestMapping(method=RequestMethod.GET, value="/music/book")
@@ -63,29 +60,13 @@ public class MusicController {
         return "{ \"status\": \"OK\" }";
     }
 
-    @RequestMapping(value="/music/book/store")
+    @RequestMapping(method=RequestMethod.POST, value="/music/book")
     public String storeBook(
-            @RequestParam(value="id", defaultValue="0") long id,
-            @RequestParam(value="title") String title,
-            @RequestParam(value="composer") String composerName,
-            @RequestParam(value="publisher") String publisherName,
-            @RequestParam(value="pubYear") int pubYear) {
+            @RequestBody Book input) {
         
-        LOGGER.info("storeBook title={}", title);
+        LOGGER.info("storeBook input={}", input);
         
-        List<Composer> composers = composerDao.getComposersByName(composerName);
-        int nCo = composers.size();  
-        if (nCo != 1) {
-            return "{ \"status\": \"Failure (number of composers: "+nCo+")\"";
-        }
-        
-        List<Publisher> publishers = publisherDao.getPublishersByName(publisherName);
-        int nPu = publishers.size();
-        if (nPu != 1) {
-            return "{ \"status\": \"Failure (number of publishers: "+nPu+")\"";
-        }
-        
-        bookDao.storeBook(new Book(id, title, composers.get(0), publishers.get(0), pubYear));
+        bookDao.storeBook(input);
         return "{ \"status\": \"OK\" }";
     }
 
@@ -103,22 +84,22 @@ public class MusicController {
         }
     }
 
-    @RequestMapping(value="/music/composer/store")
+    @RequestMapping(method=RequestMethod.POST, value="/music/composer")
     public String storeComposer(
-            @RequestParam(value="id", defaultValue="0") long id,
-            @RequestParam(value="name") String name,
-            @RequestParam(value="birthYear") int birthYear) {
+            @RequestBody Composer input) {
         
-        LOGGER.info("storeComposer id={} name={}", id, name);
-
-        composerDao.storeComposer(new Composer(id, name, birthYear));
+        LOGGER.info("storeComposer input={}", input);
+        
+        composerDao.storeComposer(input);
         return "{ \"status\": \"OK\" }";
     }
 
     @RequestMapping(method=RequestMethod.DELETE, value="/music/composer")
     public String removeComposer(
             @RequestParam(value="id") String id) {
+
         LOGGER.info("removeComposer id={}", id);
+        
         composerDao.deleteComposer(Long.parseLong(id));
         return "{ \"status\": \"OK\" }";
     }
@@ -134,14 +115,13 @@ public class MusicController {
         return result;
     }
     
-    @RequestMapping(value="/music/publisher/store")
+    @RequestMapping(method=RequestMethod.POST, value="/music/publisher")
     public String storePublisher(
-            @RequestParam(value="id", defaultValue="0") long id,
-            @RequestParam(value="name") String name) {
+            @RequestBody Publisher input) {
         
-        LOGGER.info("storePublisher name={}", name);
+        LOGGER.info("storePublisher input={}", input);
 
-        publisherDao.storePublisher(new Publisher(name));
+        publisherDao.storePublisher(input);
         return "{ \"status\": \"OK\" }";
     }
 

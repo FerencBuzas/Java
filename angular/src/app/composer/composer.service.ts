@@ -60,14 +60,11 @@ export class ComposerService {
             .catch(this.handleErrorPromise);
     }
 
-    storeComposer(id: number, name: String, birthYear: number): Promise<String> {
+    storeComposer(composer: Composer): Promise<String> {
 
-        let url = MusicConfig.URL_BASE + '/composer/store?'
-                + 'id=' + id
-                + '&name=' + name
-                + '&birthYear=' + birthYear;
+        let url = MusicConfig.URL_BASE + '/composer'
         console.log('## storeComposer() url=' + url + ' ##');  // NO logger here
-        return this.http.get(url).toPromise()
+        return this.http.post(url, composer).toPromise()
             .then(response => response.json() as String)
             .catch(this.handleErrorPromise);
     }
