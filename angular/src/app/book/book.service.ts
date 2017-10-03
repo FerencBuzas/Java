@@ -6,6 +6,7 @@ import 'rxjs/add/operator/toPromise';
 
 import { MusicConfig } from '../util/music-config';
 import { MusicLogger } from '../util/music-logger';
+import { MusicUtil } from '../util/music-util';
 import { Book } from './book';
 import { Composer } from '../composer/composer';
 import { Publisher } from '../publisher/publisher';
@@ -15,7 +16,8 @@ export class BookService {
 
     constructor(
             private http: Http,
-            private logger: MusicLogger) {
+            private logger: MusicLogger,
+            private musicUtil: MusicUtil) {
         this.logger.info("BookService constructor");
     }
 
@@ -28,7 +30,7 @@ export class BookService {
 
         return this.http.get(url).toPromise() // Observable<Response> --> Promise<Response>
             .then(this.extractData)            // --> Promise<Book[]>  (as map() with Obs.)
-            .catch(this.handleErrorPromise);
+            .catch(e => this.handleErrorPromise(this, e));
     }
 
     // A good answer to a similar question:
@@ -47,8 +49,8 @@ export class BookService {
         return result;
     }
 
-    private handleErrorPromise(error: Response | any) {
-        console.log(error.message || error);
+    private handleErrorPromise(that: BookService, error: Response | any) {
+        that.musicUtil.alert("BookSe.handleErrorPromise " + (error.message || error));
         return Promise.reject(error.message || error);
     }
 
@@ -62,7 +64,7 @@ export class BookService {
         // NO logger here
         return this.http.delete(url).toPromise()
                 .then(response => response.json() as String)
-                .catch(this.handleErrorPromise);
+                .catch(e => this.handleErrorPromise(this, e));
     }
 
     storeBook(book: Book) {
@@ -71,6 +73,6 @@ export class BookService {
         console.log('storeBook() url=' + url + ', ' + JSON.stringify(book));
         return this.http.post(url, book).toPromise()
                 .then(response => response.json() as String)
-                .catch(this.handleErrorPromise);
+                .catch(e => this.handleErrorPromise(this, e));
     }
 }

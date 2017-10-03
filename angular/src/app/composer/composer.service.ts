@@ -6,15 +6,15 @@ import 'rxjs/add/operator/toPromise';
 
 import { MusicConfig } from '../util/music-config';
 import { MusicLogger } from '../util/music-logger';
+import { MusicUtil } from '../util/music-util';
 import { Composer } from './composer';
 
 @Injectable()
 export class ComposerService {
 
-//    private cachedComposers: Composer[] = [];
-
     constructor(private http: Http,
-                private logger: MusicLogger) {
+                private logger: MusicLogger,
+                private musicUtil: MusicUtil) {
     }
 
     getComposers(): Promise<Composer[]> {
@@ -23,12 +23,8 @@ export class ComposerService {
 
         return this.http.get(url).toPromise() // Observable<Response> --> Promise<Response>
             .then(this.extractData)            // --> Promise<Composer[]>  (as map() with Obs.)
-            .catch(this.handleErrorPromise);
+            .catch(e => this.handleErrorPromise(this, e));
     }
-
-//    getCachedComposers(): Composer[] {
-//        return this.cachedComposers;
-//    }
 
     private extractData(res: Response) {
         let arr: Composer[] = res.json() as Composer[];
@@ -42,8 +38,8 @@ export class ComposerService {
         return result;
     }
 
-    private handleErrorPromise(error: Response | any) {
-        console.log(error.message || error);
+    private handleErrorPromise(that: ComposerService, error: Response | any) {
+        that.musicUtil.alert("CompSe.handleErrorPromise " + (error.message || error));
         return Promise.reject(error.message || error);
     }
 
@@ -57,7 +53,7 @@ export class ComposerService {
         // NO logger here
         return this.http.delete(url).toPromise()
             .then(response => response.json() as String)
-            .catch(this.handleErrorPromise);
+            .catch(e => this.handleErrorPromise(this, e));
     }
 
     storeComposer(composer: Composer): Promise<String> {
@@ -66,6 +62,6 @@ export class ComposerService {
         console.log('## storeComposer() url=' + url + ' ##');  // NO logger here
         return this.http.post(url, composer).toPromise()
             .then(response => response.json() as String)
-            .catch(this.handleErrorPromise);
+            .catch(e => this.handleErrorPromise(this, e));
     }
 }

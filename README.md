@@ -67,7 +67,6 @@ To demonstrate the cooperation of JPA, RESTful service, Angular.
   - Add component tests to the Angular client
   - Add an end-to-end test to the Angular client   
   - Add Continuous Integration
-  - Add new functionality to add/modify/delete elements
   - Add scrolling in tables
   - Add searching/filtering by composer, publisher
   - Deployment

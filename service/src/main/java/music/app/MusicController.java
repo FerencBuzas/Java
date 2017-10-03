@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
@@ -99,8 +100,13 @@ public class MusicController {
             @RequestParam(value="id") String id) {
 
         LOGGER.info("removeComposer id={}", id);
-        
-        composerDao.deleteComposer(Long.parseLong(id));
+
+        try {
+            composerDao.deleteComposer(Long.parseLong(id));
+        }
+        catch (Exception e) {
+            throw new FeriException(e);
+        }
         return "{ \"status\": \"OK\" }";
     }
 
@@ -133,5 +139,13 @@ public class MusicController {
         
         publisherDao.deletePublisher(id);
         return "{ \"status\": \"OK\" }";
+    }
+}
+
+@ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
+class FeriException extends RuntimeException {
+    
+    public FeriException(Exception e) {
+        super("FeriException: " + e);
     }
 }

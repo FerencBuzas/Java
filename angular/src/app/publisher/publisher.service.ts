@@ -3,11 +3,10 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs';
-//import 'rxjs/add/operator/map';
-//import 'rxjs/add/operator/toPromise';
 
 import { MusicConfig } from '../util/music-config';
 import { MusicLogger } from '../util/music-logger';
+import { MusicUtil } from '../util/music-util';
 import { Publisher } from './publisher';
 
 @Injectable()
@@ -15,7 +14,8 @@ export class PublisherService {
 
     constructor(
             private http: Http,
-            private logger: MusicLogger) {
+            private logger: MusicLogger,
+            private musicUtil: MusicUtil) {
         this.logger.info("PublisherService constructor");
     }
 
@@ -25,7 +25,7 @@ export class PublisherService {
 
         return this.http.get(url).toPromise()  // Observable<Resp..> --> Promise<Resp>
             .then(this.extractData)
-            .catch(this.handleErrorPromise);
+            .catch(e => this.handleErrorPromise(this, e));
     }
 
     private extractData(res: Response) {
@@ -39,8 +39,8 @@ export class PublisherService {
         return result;
     }
 
-    private handleErrorPromise(error: Response | any) {
-        console.log(error.message || error);
+    private handleErrorPromise(that: PublisherService, error: Response | any) {
+        that.musicUtil.alert("publisher/handleError: " + (error.message || error));
         return Promise.reject(error.message || error);
     }
 
@@ -50,11 +50,11 @@ export class PublisherService {
     }
 
     deletePublisher(id: number): Promise<String> {
-        let url = MusicConfig.URL_BASE + '/publisher' + id;
+        let url = MusicConfig.URL_BASE + '/publisher?' + id;
         // NO logger here
         return this.http.delete(url).toPromise()
                 .then(response => response.json().data as String)
-                .catch(this.handleErrorPromise);
+                .catch(e => this.handleErrorPromise(this, e));
     }
 
     storePublisher(publisher: Publisher): Promise<String> {
@@ -63,6 +63,6 @@ export class PublisherService {
         console.log('storePublisher() url=' + url);  // NO logger here
         return this.http.post(url, publisher).toPromise()
                 .then(response => response.json().data as String)
-                .catch(this.handleErrorPromise);
+                .catch(e => this.handleErrorPromise(this, e));
     }
 }
