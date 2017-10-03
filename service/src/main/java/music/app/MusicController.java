@@ -44,16 +44,17 @@ public class MusicController {
     private static String link(String lastWord) {
         return String.format("<a href=\"%s/%s\">%s</a><br>", URL_BASE, lastWord, lastWord);
     }
-    
+
+    // TODO: use RequestMethod everywhere
+
     // ======== Book ================================
     
-    @RequestMapping(method = RequestMethod.GET, value="/music/book")
+    @RequestMapping(method=RequestMethod.GET, value="/music/book")
     public Collection<Book> books() {
         return bookDao.getBooks();
     }
 
-    // TODO: use RequestMethod.DELETE (and in all similar places)
-    @RequestMapping(value="/music/book/delete")
+    @RequestMapping(method=RequestMethod.DELETE, value="/music/book")
     public String removeBook(
             @RequestParam(value="id") String id) {
         LOGGER.info("removeBook id={}", id);
@@ -90,7 +91,7 @@ public class MusicController {
 
     // ======== Composer ================================
 
-    @RequestMapping(value="/music/composer/list")
+    @RequestMapping(method=RequestMethod.GET, value="/music/composer")
     public Collection<Composer> composers(
             @RequestParam(value="name", defaultValue="") String name) {
 
@@ -114,7 +115,7 @@ public class MusicController {
         return "{ \"status\": \"OK\" }";
     }
 
-    @RequestMapping(value="/music/composer/delete")
+    @RequestMapping(method=RequestMethod.DELETE, value="/music/composer")
     public String removeComposer(
             @RequestParam(value="id") String id) {
         LOGGER.info("removeComposer id={}", id);
@@ -124,7 +125,7 @@ public class MusicController {
 
     // ======== Publisher ================================
 
-    @RequestMapping(value="/music/publisher")
+    @RequestMapping(method=RequestMethod.GET, value="/music/publisher")
     public Collection<Publisher> publishers(
             @RequestParam(value="name", defaultValue="") String name) {
         
@@ -144,7 +145,7 @@ public class MusicController {
         return "{ \"status\": \"OK\" }";
     }
 
-    @RequestMapping(value="/music/publisher/delete")
+    @RequestMapping(method=RequestMethod.DELETE, value="/music/publisher")
     public String removePublisher(
             @RequestParam(value="id") long id) {
         

@@ -58,9 +58,9 @@ export class BookService {
     }
 
     deleteBook(id: number): Promise<String> {
-        let url = MusicConfig.URL_BASE + '/book/delete?id=' + id;
+        let url = MusicConfig.URL_BASE + '/book?id=' + id;
         // NO logger here
-        return this.http.get(url).toPromise()
+        return this.http.delete(url).toPromise()
                 .then(response => response.json() as String)
                 .catch(this.handleErrorPromise);
     }

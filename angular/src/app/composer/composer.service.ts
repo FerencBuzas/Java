@@ -18,7 +18,7 @@ export class ComposerService {
     }
 
     getComposers(): Promise<Composer[]> {
-        let url = MusicConfig.URL_BASE + '/composer/list';
+        let url = MusicConfig.URL_BASE + '/composer';
         this.logger.info('getComposers() url=' + url);
 
         return this.http.get(url).toPromise() // Observable<Response> --> Promise<Response>
@@ -53,9 +53,9 @@ export class ComposerService {
     }
 
     deleteComposer(id: number): Promise<String> {
-        let url = MusicConfig.URL_BASE + '/composer/delete?id=' + id;
+        let url = MusicConfig.URL_BASE + '/composer?id=' + id;
         // NO logger here
-        return this.http.get(url).toPromise()
+        return this.http.delete(url).toPromise()
             .then(response => response.json() as String)
             .catch(this.handleErrorPromise);
     }

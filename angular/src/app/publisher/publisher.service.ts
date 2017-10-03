@@ -52,7 +52,7 @@ export class PublisherService {
     deletePublisher(id: number): Promise<String> {
         let url = MusicConfig.URL_BASE + '/publisher/delete?id=' + id;
         // NO logger here
-        return this.http.get(url).toPromise()
+        return this.http.delete(url).toPromise()
                 .then(response => response.json().data as String)
                 .catch(this.handleErrorPromise);
     }
