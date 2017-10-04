@@ -10,7 +10,6 @@ import { ComposerService } from './composer.service';
   templateUrl: 'composers.component.html',
   styleUrls: [ 'composers.component.css' ]
 })
-
 export class ComposersComponent implements OnInit {
 
   composers = [];
@@ -18,6 +17,7 @@ export class ComposersComponent implements OnInit {
 
   constructor(private composerService: ComposerService,
               private router: Router ) {
+    console.log("ComposersComponent constructor");
   }
 
   // When the service sends the composers, store them to member.

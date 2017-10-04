@@ -49,7 +49,7 @@ export class ComposerService {
     }
 
     deleteComposer(id: number): Promise<String> {
-        let url = MusicConfig.URL_BASE + '/composer?id=' + id;
+        let url = MusicConfig.URL_BASE + '/composer/' + id;
         // NO logger here
         return this.http.delete(url).toPromise()
             .then(response => response.json() as String)
@@ -58,8 +58,8 @@ export class ComposerService {
 
     storeComposer(composer: Composer): Promise<String> {
 
-        let url = MusicConfig.URL_BASE + '/composer'
-        console.log('## storeComposer() url=' + url + ' ##');  // NO logger here
+        let url = MusicConfig.URL_BASE + '/composer';
+        console.log('storeComposer() url=' + url);
         return this.http.post(url, composer).toPromise()
             .then(response => response.json() as String)
             .catch(e => this.handleErrorPromise(this, e));

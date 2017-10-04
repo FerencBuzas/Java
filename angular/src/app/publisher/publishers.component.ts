@@ -21,14 +21,11 @@ export class PublishersComponent implements OnInit {
   }
 
   getPublishers(): void {   // a future is involved
-    console.log("## PubComp.getPublishers()");
-    this.publisherService.getPublishers().then(
-      h => { this.publishers = h;
-             console.log("  PubComp.getPublishers: h=" + h);
-      });
+    console.log("PubComp.getPublishers()");
+    this.publisherService.getPublishers().then(h => this.publishers = h);
   }
 
-  ngOnInit(): void {    // The constructor must be short and fast
+  ngOnInit(): void {
     console.debug("ngOnInit()");
     this.getPublishers();
   }

@@ -21,7 +21,7 @@ export class PublisherService {
 
     getPublishers(): Promise<Publisher[]> {
         let url = MusicConfig.URL_BASE + '/publisher';
-        this.logger.info('PubServ.getPublishers() ## url=' + url);
+        this.logger.info('PubServ.getPublishers() url=' + url);
 
         return this.http.get(url).toPromise()  // Observable<Resp..> --> Promise<Resp>
             .then(this.extractData)
@@ -50,7 +50,7 @@ export class PublisherService {
     }
 
     deletePublisher(id: number): Promise<String> {
-        let url = MusicConfig.URL_BASE + '/publisher?' + id;
+        let url = MusicConfig.URL_BASE + '/publisher/' + id;
         // NO logger here
         return this.http.delete(url).toPromise()
                 .then(response => response.json().data as String)

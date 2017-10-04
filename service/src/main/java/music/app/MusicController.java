@@ -14,7 +14,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
-import java.util.concurrent.atomic.AtomicLong;
+
+/**
+ * From: https://spring.io/guides/tutorials/bookmarks/
+ * 
+ * @Author  Ferenc Buzas
+ */
 
 @RestController
 @CrossOrigin     // Adds Allow Cross Origin to header; TODO: restrict to address ...
@@ -23,38 +28,40 @@ public class MusicController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MusicController.class);
 
-    private static final String URL_BASE = "localhost:8080/music";
+    private static final String URL_BASE_FOR_LINKS = "localhost:8080/music";
 
-    @Autowired
     private BookDao bookDao;
-
-    @Autowired
     private ComposerDao composerDao;
-
-    @Autowired
     private PublisherDao publisherDao;
 
-    private final AtomicLong counter = new AtomicLong();
+    @Autowired
+    MusicController(BookDao bookDao, ComposerDao composerDao, PublisherDao publisherDao) {
 
+        this.bookDao = bookDao;
+        this.composerDao = composerDao;
+        this.publisherDao = publisherDao;
+    }
+    
     @RequestMapping("/music")
     public String music() {
+        // Create a HTML page with links to the 3 lists, to use just from a browser.
         return link("book") + link("composer") + link("publisher");
     }
 
     private static String link(String lastWord) {
-        return String.format("<a href=\"%s/%s\">%s</a><br>", URL_BASE, lastWord, lastWord);
+        return String.format("<a href=\"%s/%s\">%s</a><br>", URL_BASE_FOR_LINKS, lastWord, lastWord);
     }
 
     // ======== Book ================================
     
     @RequestMapping(method=RequestMethod.GET, value="/music/book")
-    public Collection<Book> books() {
+    public Collection<Book> getBookList() {
         return bookDao.getBooks();
     }
 
-    @RequestMapping(method=RequestMethod.DELETE, value="/music/book")
-    public String removeBook(
-            @RequestParam(value="id") String id) {
+    @RequestMapping(method=RequestMethod.DELETE, value="/music/book/{id}")
+    public String removeBook(@PathVariable String id) {
+
         LOGGER.info("removeBook id={}", id);
         
         bookDao.deleteBook(Long.parseLong(id));
@@ -74,15 +81,20 @@ public class MusicController {
     // ======== Composer ================================
 
     @RequestMapping(method=RequestMethod.GET, value="/music/composer")
-    public Collection<Composer> composers(
-            @RequestParam(value="name", defaultValue="") String name) {
+    public Collection<Composer> getComposerList() {
 
-        if (name.isEmpty()) {
-            return composerDao.getComposers();
-        }
-        else {
-            return composerDao.getComposersByName(name);
-        }
+        LOGGER.info("getComposerList()");
+        
+        return composerDao.getComposers();
+    }
+
+    @RequestMapping(method=RequestMethod.GET, value="/music/composer/{name}")
+    public Collection<Composer> getComposer(
+            @PathVariable String name) {
+
+        LOGGER.info("getComposer name={}", name);
+
+        return composerDao.getComposersByName(name);
     }
 
     @RequestMapping(method=RequestMethod.POST, value="/music/composer")
@@ -95,12 +107,11 @@ public class MusicController {
         return "{ \"status\": \"OK\" }";
     }
 
-    @RequestMapping(method=RequestMethod.DELETE, value="/music/composer")
-    public String removeComposer(
-            @RequestParam(value="id") String id) {
+    @RequestMapping(method=RequestMethod.DELETE, value="/music/composer/{id}")
+    public String removeComposer(@PathVariable String id) {
 
         LOGGER.info("removeComposer id={}", id);
-
+        
         try {
             composerDao.deleteComposer(Long.parseLong(id));
         }
@@ -113,12 +124,11 @@ public class MusicController {
     // ======== Publisher ================================
 
     @RequestMapping(method=RequestMethod.GET, value="/music/publisher")
-    public Collection<Publisher> publishers(
-            @RequestParam(value="name", defaultValue="") String name) {
+    public Collection<Publisher> getPublisherList() {
         
-        Collection<Publisher> result = publisherDao.getPublishers();
-        LOGGER.info("publishers() returning {} elements", result.size());
-        return result;
+        LOGGER.info("getPublisherList()");
+        
+        return publisherDao.getPublishers();
     }
     
     @RequestMapping(method=RequestMethod.POST, value="/music/publisher")
@@ -131,9 +141,8 @@ public class MusicController {
         return "{ \"status\": \"OK\" }";
     }
 
-    @RequestMapping(method=RequestMethod.DELETE, value="/music/publisher")
-    public String removePublisher(
-            @RequestParam(value="id") long id) {
+    @RequestMapping(method=RequestMethod.DELETE, value="/music/publisher/{id}")
+    public String removePublisher(@PathVariable long id) {
         
         LOGGER.info("removePublisher id={}", id);
         
