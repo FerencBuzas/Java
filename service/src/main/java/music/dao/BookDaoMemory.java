@@ -21,9 +21,7 @@ public class BookDaoMemory implements BookDao {
     private List<Book> books;
 
     @Autowired
-    BookDaoMemory(ComposerDaoMemory composerDao,
-            PublisherDaoMemory publisherDao,
-            BookDataCreator bookDataCreator) {
+    public BookDaoMemory(ComposerDaoMemory composerDao, PublisherDaoMemory publisherDao, BookDataCreator bookDataCreator) {
         this.composerDao = composerDao;
         this.publisherDao = publisherDao;
         this.bookDataCreator = bookDataCreator;
