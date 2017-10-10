@@ -12,7 +12,7 @@ import java.util.List;
  * Creates a list of Publisher objects; it can be used in memory, or persisted.
  */
 @Service
-class PublisherDataCreator {
+public class PublisherDataCreator {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PublisherDataCreator.class);
 

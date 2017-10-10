@@ -15,7 +15,7 @@ import java.util.List;
  * Creates a list of Book objects; it can be used in memory, or persisted.
  */
 @Service
-class BookDataCreator {
+public class BookDataCreator {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(BookDataCreator.class);
     

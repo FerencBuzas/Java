@@ -12,19 +12,30 @@ import java.util.List;
  * Creates a list of Composer objects; it can be used in memory, or persisted.
  */
 @Service
-class ComposerDataCreator {
+public class ComposerDataCreator {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ComposerDataCreator.class);
+    private final int n;
+
+    public ComposerDataCreator() {
+        this.n = 99;
+    }
+
+    public ComposerDataCreator(int n) {
+        this.n = n;
+    }
 
     List<Composer> createComposerList() {
 
         List<Composer> list = new ArrayList<>();
-
+        
         list.add(new Composer("Bach", 1685));
         list.add(new Composer("Haydn", 1732));
+        if (n <= 2) return list;
         list.add(new Composer("Mozart", 1756));
         list.add(new Composer("Beethoven", 1770));
         list.add(new Composer("Schubert", 1797));
+        if (n <= 5) return list;
         list.add(new Composer("Schumann", 1810));
 //        list.add(new Composer("Chopin", 1810));
         list.add(new Composer("Liszt", 1811));

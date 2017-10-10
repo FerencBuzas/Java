@@ -151,7 +151,7 @@ public class MusicController {
     }
 }
 
-@ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
+@ResponseStatus(HttpStatus. NOT_ACCEPTABLE)
 class FeriException extends RuntimeException {
     
     public FeriException(Exception e) {

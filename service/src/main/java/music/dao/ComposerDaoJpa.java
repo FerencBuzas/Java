@@ -4,7 +4,7 @@ import music.common.Composer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -14,8 +14,8 @@ import java.util.List;
 /**
  * Implementation of ComposerDao, when data are persisted.
  */
-@Repository
-@Primary
+@Repository("ComposerDaoJpa")
+@Profile("dev")
 public class ComposerDaoJpa implements ComposerDao {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ComposerDao.class);

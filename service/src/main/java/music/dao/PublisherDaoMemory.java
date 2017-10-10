@@ -2,6 +2,7 @@ package music.dao;
 
 import music.common.Publisher;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -11,12 +12,13 @@ import java.util.List;
  * Implementation of PublisherDao, when data are served just from memory.
  */
 @Repository
+@Profile("test")
 public class PublisherDaoMemory implements PublisherDao {
 
     private List<Publisher> publishers;
 
     @Autowired
-    PublisherDaoMemory(PublisherDataCreator publisherDataCreator) {
+    public PublisherDaoMemory(PublisherDataCreator publisherDataCreator) {
         publishers = publisherDataCreator.createPublisherList();
     }
 

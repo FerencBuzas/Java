@@ -2,6 +2,7 @@ package music.dao;
 
 import music.common.Composer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -11,12 +12,13 @@ import java.util.List;
  * Implementation of ComposerDao, when data are served just from memory.
  */
 @Repository
+@Profile("test")
 public class ComposerDaoMemory implements ComposerDao {
 
     private List<Composer> composers;
 
     @Autowired
-    ComposerDaoMemory(ComposerDataCreator composerDataCreator) {
+    public ComposerDaoMemory(ComposerDataCreator composerDataCreator) {
         composers = composerDataCreator.createComposerList();
     }
 

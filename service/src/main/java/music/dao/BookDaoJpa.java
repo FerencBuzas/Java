@@ -4,7 +4,7 @@ import music.common.Book;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -15,7 +15,7 @@ import java.util.List;
  * Implementation of BookDao, when data are persisted.
  */
 @Repository
-@Primary
+@Profile("dev")
 public class BookDaoJpa implements BookDao {
     
     private static final Logger LOGGER = LoggerFactory.getLogger(BookDaoJpa.class);
