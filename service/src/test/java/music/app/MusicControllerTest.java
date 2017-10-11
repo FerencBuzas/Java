@@ -3,7 +3,7 @@ package music.app;
 import music.common.Composer;
 import music.dao.ComposerDao;
 import music.dao.ComposerDaoMemory;
-import music.dao.ComposerDataCreator;
+import music.dao.DataCreator;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -69,7 +69,7 @@ public class MusicControllerTest {
     public void setup() throws Exception {
         this.mockMvc = webAppContextSetup(webApplicationContext).build();
 
-        composerDao = new ComposerDaoMemory(new ComposerDataCreator(2));
+        composerDao = new ComposerDaoMemory(new DataCreator(2));
     }
 
     @Test

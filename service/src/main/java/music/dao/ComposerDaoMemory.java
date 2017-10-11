@@ -18,8 +18,8 @@ public class ComposerDaoMemory implements ComposerDao {
     private List<Composer> composers;
 
     @Autowired
-    public ComposerDaoMemory(ComposerDataCreator composerDataCreator) {
-        composers = composerDataCreator.createComposerList();
+    public ComposerDaoMemory(DataCreator dataCreator) {
+        composers = dataCreator.createComposerList();
     }
 
     @Override

@@ -11,13 +11,13 @@ import static org.junit.Assert.assertTrue;
 
 public class PublisherDaoMemoryTest {
 
-    private PublisherDataCreator pdc;
+    private DataCreator pdc;
     private PublisherDaoMemory pdm;
 
     @Before
     public void setUp() {
 
-        pdc = new PublisherDataCreator();
+        pdc = new DataCreator();
         pdm = new PublisherDaoMemory(pdc);
     }
 

@@ -16,15 +16,16 @@ public class BookDaoMemory implements BookDao {
 
     private ComposerDaoMemory composerDao;
     private PublisherDaoMemory publisherDao;
-    private BookDataCreator bookDataCreator;
+    private DataCreator dataCreator;
 
     private List<Book> books;
 
     @Autowired
-    public BookDaoMemory(ComposerDaoMemory composerDao, PublisherDaoMemory publisherDao, BookDataCreator bookDataCreator) {
+    public BookDaoMemory(ComposerDaoMemory composerDao, PublisherDaoMemory publisherDao,
+                         DataCreator dataCreator) {
         this.composerDao = composerDao;
         this.publisherDao = publisherDao;
-        this.bookDataCreator = bookDataCreator;
+        this.dataCreator = dataCreator;
     }
 
     /*
@@ -33,7 +34,7 @@ public class BookDaoMemory implements BookDao {
      */
     private void createDataIfNotYet() {
         if (books == null) {
-            books = bookDataCreator.createBookList(composerDao.getComposers(),
+            books = dataCreator.createBookList(composerDao.getComposers(),
                     publisherDao.getPublishers());
         }
     }

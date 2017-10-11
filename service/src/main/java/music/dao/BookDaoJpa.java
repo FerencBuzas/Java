@@ -15,7 +15,7 @@ import java.util.List;
  * Implementation of BookDao, when data are persisted.
  */
 @Repository
-@Profile("dev")
+@Profile({"dev", "default"})
 public class BookDaoJpa implements BookDao {
     
     private static final Logger LOGGER = LoggerFactory.getLogger(BookDaoJpa.class);

@@ -18,8 +18,8 @@ public class PublisherDaoMemory implements PublisherDao {
     private List<Publisher> publishers;
 
     @Autowired
-    public PublisherDaoMemory(PublisherDataCreator publisherDataCreator) {
-        publishers = publisherDataCreator.createPublisherList();
+    public PublisherDaoMemory(DataCreator dataCreator) {
+        publishers = dataCreator.createPublisherList();
     }
 
     @Override

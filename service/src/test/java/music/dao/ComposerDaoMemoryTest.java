@@ -11,20 +11,20 @@ import static org.junit.Assert.assertTrue;
 
 public class ComposerDaoMemoryTest {
     
-    private ComposerDataCreator pdc;
-    private ComposerDaoMemory pdm;
+    private DataCreator dc;
+    private ComposerDaoMemory cdm;
 
     @Before
     public void setUp() {
 
-        pdc = new ComposerDataCreator();
-        pdm = new ComposerDaoMemory(pdc);
+        dc = new DataCreator();
+        cdm = new ComposerDaoMemory(dc);
     }
 
     @Test
     public void testGetComposersByName() throws Exception {
 
-        List<Composer> puLi = pdm.getComposersByName("Mozart");
+        List<Composer> puLi = cdm.getComposersByName("Mozart");
 
         assertEquals(1, puLi.size());
         assertTrue(puLi.get(0).getName().contains("Mozart"));

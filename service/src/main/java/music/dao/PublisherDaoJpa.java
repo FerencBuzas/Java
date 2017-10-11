@@ -15,7 +15,7 @@ import java.util.List;
  * Implementation of PublisherDao, when data are persisted.
  */
 @Repository
-@Profile("test")
+@Profile({"dev", "default"})
 public class PublisherDaoJpa implements PublisherDao {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PublisherDaoJpa.class);

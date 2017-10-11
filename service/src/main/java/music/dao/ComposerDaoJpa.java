@@ -14,8 +14,8 @@ import java.util.List;
 /**
  * Implementation of ComposerDao, when data are persisted.
  */
-@Repository("ComposerDaoJpa")
-@Profile("dev")
+@Repository
+@Profile({"dev", "default"})
 public class ComposerDaoJpa implements ComposerDao {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ComposerDao.class);
