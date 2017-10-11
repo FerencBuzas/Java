@@ -15,24 +15,24 @@ import java.util.List;
 @Profile("test")
 public class ComposerDaoMemory implements ComposerDao {
 
-    private List<Composer> composers;
+    private final DataCreator dataCreator;
 
     @Autowired
     public ComposerDaoMemory(DataCreator dataCreator) {
-        composers = dataCreator.createComposerList();
+        this.dataCreator = dataCreator;
     }
 
     @Override
     public List<Composer> getComposers() {
 
-        return composers;
+        return dataCreator.getComposers();
     }
 
     @Override
     public List<Composer> getComposersByName(String name) {
 
         List<Composer> result = new ArrayList<>();
-        for (Composer composer : composers) {
+        for (Composer composer : dataCreator.getComposers()) {
             if (composer.getName().startsWith(name)) {
                 result.add(composer);
             }
@@ -43,11 +43,11 @@ public class ComposerDaoMemory implements ComposerDao {
 
     @Override
     public void storeComposer(Composer composer) {
-        composers.add(composer);
+        dataCreator.getComposers().add(composer);
     }
 
     @Override
     public void deleteComposer(long id) {
-        composers.remove(id);
+        dataCreator.getComposers().remove(id);
     }
 }

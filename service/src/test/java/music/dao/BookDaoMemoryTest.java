@@ -15,10 +15,8 @@ public class BookDaoMemoryTest {
     @Before
     public void setUp() {
 
-        DataCreator dc = new DataCreator(2);
-        ComposerDaoMemory cdm = new ComposerDaoMemory(dc);
-        PublisherDaoMemory pdm = new PublisherDaoMemory(dc);
-        bdm = new BookDaoMemory(cdm, pdm, dc);
+        DataCreator dc = new DataCreator();
+        bdm = new BookDaoMemory(dc);
     }
 
     @Test

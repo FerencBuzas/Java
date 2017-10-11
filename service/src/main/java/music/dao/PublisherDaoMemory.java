@@ -15,24 +15,24 @@ import java.util.List;
 @Profile("test")
 public class PublisherDaoMemory implements PublisherDao {
 
-    private List<Publisher> publishers;
+    private final DataCreator dataCreator;
 
     @Autowired
     public PublisherDaoMemory(DataCreator dataCreator) {
-        publishers = dataCreator.createPublisherList();
+        this.dataCreator = dataCreator;
     }
 
     @Override
     public List<Publisher> getPublishers() {
 
-        return publishers;
+        return dataCreator.getPublishers();
     }
 
     @Override
     public List<Publisher> getPublishersByName(String name) {
 
         List<Publisher> result = new ArrayList<>();
-        for (Publisher publisher : publishers) {
+        for (Publisher publisher : dataCreator.getPublishers()) {
             if (publisher.getName().startsWith(name)) {
                 result.add(publisher);
             }
@@ -42,11 +42,11 @@ public class PublisherDaoMemory implements PublisherDao {
 
     @Override
     public void storePublisher(Publisher publisher) {
-        publishers.add(publisher);
+        dataCreator.getPublishers().add(publisher);
     }
 
     @Override
     public void deletePublisher(long id) {
-        publishers.remove(id);
+        dataCreator.getPublishers().remove(id);
     }
 }

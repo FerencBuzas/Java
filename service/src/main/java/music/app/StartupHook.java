@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
 /**
@@ -19,9 +20,19 @@ public class StartupHook implements CommandLineRunner {
 
     @Autowired
     private ConfigurableApplicationContext context;
+    
+    @Autowired
+    private Environment environment;
 
     public void run(String... args) {
         LOGGER.debug("StartupHook.run()");
-        context.getBean(DataCreator.class).createData();
+        
+        boolean test = false;
+        for (String s : environment.getActiveProfiles()) {
+            if (s.equals("test")) {
+                test = true;
+            }
+        }
+        context.getBean(DataCreator.class).createData(test ? 2 : 99);
     }
 }

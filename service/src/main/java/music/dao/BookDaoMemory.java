@@ -14,46 +14,26 @@ import java.util.List;
 @Profile("test")
 public class BookDaoMemory implements BookDao {
 
-    private ComposerDaoMemory composerDao;
-    private PublisherDaoMemory publisherDao;
     private DataCreator dataCreator;
 
-    private List<Book> books;
-
     @Autowired
-    public BookDaoMemory(ComposerDaoMemory composerDao, PublisherDaoMemory publisherDao,
-                         DataCreator dataCreator) {
-        this.composerDao = composerDao;
-        this.publisherDao = publisherDao;
+    public BookDaoMemory(DataCreator dataCreator) {
         this.dataCreator = dataCreator;
     }
 
-    /*
-     * This cannot be in the constructor, as bookDataCreator needs other two DAOs,
-     *   which are also injected; setting the order of creation would be difficult to me.
-     */
-    private void createDataIfNotYet() {
-        if (books == null) {
-            books = dataCreator.createBookList(composerDao.getComposers(),
-                    publisherDao.getPublishers());
-        }
-    }
 
     @Override
     public List<Book> getBooks() {
-
-        createDataIfNotYet();
-
-        return books;
+        return dataCreator.getBooks();
     }
 
     @Override
     public void storeBook(Book book) {
-        books.add(book);
+        dataCreator.getBooks().add(book);
     }
 
     @Override
     public void deleteBook(long id) {
-        books.remove(id);
+        dataCreator.getBooks().remove(id);
     }
 }

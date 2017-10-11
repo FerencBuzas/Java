@@ -6,31 +6,23 @@ import music.common.Publisher;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.List;
-
 import static org.junit.Assert.*;
 
 public class DataCreatorTest {
     
     private DataCreator creator;
-    private List<Book> bookList;
-    private List<Composer> composerList;
-    private List<Publisher> publisherList;
 
     @Before
     public void setUp() throws Exception {
         
         creator = new DataCreator();
-        composerList = creator.createComposerList();
-        publisherList = creator.createPublisherList();
-        bookList = creator.createBookList(composerList, publisherList);
     }
 
     @Test
     public void createBookList() throws Exception {
 
         // Check if "Mozart" is in the list.
-        for (Book p : bookList) {
+        for (Book p : creator.getBooks()) {
             if ("Sonate h-moll".equals(p.getTitle())) {
                 assertNotNull(p.getComposer());
                 assertEquals("Liszt", p.getComposer().getName());
@@ -46,7 +38,7 @@ public class DataCreatorTest {
     public void createComposerList() throws Exception {
 
         // Check if "Mozart" is in the list.
-        for (Composer p : composerList) {
+        for (Composer p : creator.getComposers()) {
             if ("Mozart".equals(p.getName())) {
                 return;
             }
@@ -57,7 +49,7 @@ public class DataCreatorTest {
     @Test
     public void findComposerByName() throws Exception {
 
-        Composer p = creator.findComposerByName(composerList, "Mozart");
+        Composer p = creator.findComposerByName("Mozart");
         assertNotNull(p);
         assertEquals("Mozart", p.getName());
     }
@@ -66,7 +58,7 @@ public class DataCreatorTest {
     public void createPublisherList() throws Exception {
 
         // Check if "Peters" is in the list.
-        for (Publisher p : publisherList) {
+        for (Publisher p : creator.getPublishers()) {
             if ("Peters".equals(p.getName())) {
                 return;
             }
@@ -77,7 +69,7 @@ public class DataCreatorTest {
     @Test
     public void findPublisherByName() throws Exception {
 
-        Publisher p = creator.findPublisherByName(publisherList, "Peters");
+        Publisher p = creator.findPublisherByName("Peters");
         assertNotNull(p);
         assertEquals("Peters", p.getName());
     }
