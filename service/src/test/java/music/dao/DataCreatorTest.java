@@ -13,13 +13,13 @@ public class DataCreatorTest {
     private DataCreator creator;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         
         creator = new DataCreator();
     }
 
     @Test
-    public void createBookList() throws Exception {
+    public void testCreateBookList() {
 
         // Check if "Mozart" is in the list.
         for (Book p : creator.getBooks()) {
@@ -35,7 +35,7 @@ public class DataCreatorTest {
     }
     
     @Test
-    public void createComposerList() throws Exception {
+    public void testCreateComposerList() {
 
         // Check if "Mozart" is in the list.
         for (Composer p : creator.getComposers()) {
@@ -47,7 +47,7 @@ public class DataCreatorTest {
     }
 
     @Test
-    public void findComposerByName() throws Exception {
+    public void testFindComposerByName() {
 
         Composer p = creator.findComposerByName("Mozart");
         assertNotNull(p);
@@ -55,7 +55,7 @@ public class DataCreatorTest {
     }
     
     @Test
-    public void createPublisherList() throws Exception {
+    public void testCreatePublisherList() {
 
         // Check if "Peters" is in the list.
         for (Publisher p : creator.getPublishers()) {
@@ -67,11 +67,10 @@ public class DataCreatorTest {
     }
 
     @Test
-    public void findPublisherByName() throws Exception {
+    public void testFindPublisherByName() {
 
         Publisher p = creator.findPublisherByName("Peters");
         assertNotNull(p);
         assertEquals("Peters", p.getName());
     }
-
 }

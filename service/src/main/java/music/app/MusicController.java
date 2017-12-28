@@ -13,12 +13,13 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.ws.rs.core.Response;
 import java.util.Collection;
 
 /**
  * From: https://spring.io/guides/tutorials/bookmarks/
  * 
- * @Author  Ferenc Buzas
+ * @author   Ferenc Buzas
  */
 
 @RestController
@@ -60,22 +61,22 @@ public class MusicController {
     }
 
     @RequestMapping(method=RequestMethod.DELETE, value="/music/book/{id}")
-    public String removeBook(@PathVariable String id) {
+    public Response removeBook(@PathVariable String id) {
 
         LOGGER.info("removeBook id={}", id);
         
         bookDao.deleteBook(Long.parseLong(id));
-        return "{ \"status\": \"OK\" }";
+        return Response.ok().build();
     }
 
     @RequestMapping(method=RequestMethod.POST, value="/music/book")
-    public String storeBook(
+    public Response storeBook(
             @RequestBody Book input) {
         
         LOGGER.info("storeBook input={}", input);
         
         bookDao.storeBook(input);
-        return "{ \"status\": \"OK\" }";
+        return Response.ok().build();
     }
 
     // ======== Composer ================================
@@ -98,27 +99,28 @@ public class MusicController {
     }
 
     @RequestMapping(method=RequestMethod.POST, value="/music/composer")
-    public String storeComposer(
+    public Response storeComposer(
             @RequestBody Composer input) {
         
         LOGGER.info("storeComposer input={}", input);
         
         composerDao.storeComposer(input);
-        return "{ \"status\": \"OK\" }";
+        Response.Status st = Response.Status.CREATED;
+        return Response.status(st).build();
     }
 
     @RequestMapping(method=RequestMethod.DELETE, value="/music/composer/{id}")
-    public String removeComposer(@PathVariable String id) {
-
+    public Response removeComposer(@PathVariable String id) {
+        
         LOGGER.info("removeComposer id={}", id);
         
         try {
             composerDao.deleteComposer(Long.parseLong(id));
+            return Response.accepted().build();
         }
         catch (Exception e) {
-            throw new FeriException(e);
+            return Response.notModified().build();
         }
-        return "{ \"status\": \"OK\" }";
     }
 
     // ======== Publisher ================================
@@ -132,29 +134,29 @@ public class MusicController {
     }
     
     @RequestMapping(method=RequestMethod.POST, value="/music/publisher")
-    public String storePublisher(
+    public Response storePublisher(
             @RequestBody Publisher input) {
         
         LOGGER.info("storePublisher input={}", input);
 
         publisherDao.storePublisher(input);
-        return "{ \"status\": \"OK\" }";
+        return Response.ok().build();
     }
 
     @RequestMapping(method=RequestMethod.DELETE, value="/music/publisher/{id}")
-    public String removePublisher(@PathVariable long id) {
+    public Response removePublisher(@PathVariable long id) {
         
         LOGGER.info("removePublisher id={}", id);
         
         publisherDao.deletePublisher(id);
-        return "{ \"status\": \"OK\" }";
+        return Response.ok().build();
     }
 }
 
-@ResponseStatus(HttpStatus. NOT_ACCEPTABLE)
+@ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
 class FeriException extends RuntimeException {
     
     public FeriException(Exception e) {
-        super("FeriException: " + e);
+        super("FeriException", e);
     }
 }

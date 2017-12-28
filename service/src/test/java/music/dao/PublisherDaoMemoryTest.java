@@ -18,11 +18,12 @@ public class PublisherDaoMemoryTest {
     public void setUp() {
 
         pdc = new DataCreator();
+        pdc.createData(2, false);
         pdm = new PublisherDaoMemory(pdc);
     }
 
     @Test
-    public void testGetPublishersByName() throws Exception {
+    public void testGetPublishersByName() {
 
         List<Publisher> puLi = pdm.getPublishersByName("Peters");
 

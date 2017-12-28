@@ -30,27 +30,33 @@ public class DataCreator {
     private List<Composer> composers;
     private List<Publisher> publishers;
     
-    public void createData(int nComposers) {
+    public void createData(int nComposers, boolean toStore) {
         LOGGER.info("DataCreator.createData() nComposers={}", nComposers);
 
         // Create lists in memory
         createComposerList(nComposers);
         createPublisherList();
+        createBookList();
 
         // Store the lists with JPA.
+        if (toStore) {
+            persistAll();
+        }
+    }
+    
+    private void persistAll() {
+        LOGGER.info("persistAll()");
+
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
 
-        for (Composer composer: composers) {
+        for (Composer composer : composers) {
             entityManager.persist(composer);
         }
-        for (Publisher publisher: publishers) {
+        for (Publisher publisher : publishers) {
             entityManager.persist(publisher);
         }
-
-        // Create and store dependent Books after Composers and Publishers are stored.
-        createBookList();
-        for (Book book: books) {
+        for (Book book : books) {
             entityManager.persist(book);
         }
 

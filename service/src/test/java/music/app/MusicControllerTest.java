@@ -7,6 +7,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.core.env.Environment;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
@@ -25,6 +26,7 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertNotNull;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
 
@@ -52,9 +54,13 @@ public class MusicControllerTest {
     private WebApplicationContext webApplicationContext;
 
     @Autowired
+    private Environment environment;
+
+    @Autowired
     void setConverters(HttpMessageConverter<?>[] converters) {
 
-        this.mappingJackson2HttpMessageConverter = Arrays.stream(converters)
+        this.mappingJackson2HttpMessageConverter = 
+            Arrays.stream(converters)
                 .filter(hmc -> hmc instanceof MappingJackson2HttpMessageConverter)
                 .findAny()
                 .orElse(null);
@@ -64,13 +70,14 @@ public class MusicControllerTest {
     }
 
     @Before
-    public void setup() throws Exception {
+    public void setup() {
         this.mockMvc = webAppContextSetup(webApplicationContext).build();
     }
 
     @Test
     public void testGetComposerList() throws Exception {
         mockMvc.perform(get("/music/composer"))
+                .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(contentType))
                 .andExpect(jsonPath("$", hasSize(2)))
@@ -89,6 +96,7 @@ public class MusicControllerTest {
         this.mockMvc.perform(post("/music/composer")
                 .contentType(contentType)
                 .content(composerJson))
+                .andDo(print())
                 .andExpect(status().isCreated());
     }
 
@@ -97,6 +105,7 @@ public class MusicControllerTest {
         mockMvc.perform(get("/music/composer")
                 .content(this.json(new Composer(0, "baby", 2017)))
                 .contentType(contentType))
+                .andDo(print())
                 .andExpect(status().isNotFound());
     }
 

@@ -18,15 +18,18 @@ public class ComposerDaoMemoryTest {
     public void setUp() {
 
         dc = new DataCreator();
+        dc.createData(2, false);
         cdm = new ComposerDaoMemory(dc);
     }
 
     @Test
-    public void testGetComposersByName() throws Exception {
+    public void testGetComposersByName() {
 
-        List<Composer> puLi = cdm.getComposersByName("Mozart");
-
-        assertEquals(1, puLi.size());
-        assertTrue(puLi.get(0).getName().contains("Mozart"));
+        List<Composer> coLi = cdm.getComposersByName("Bach");
+        assertEquals(1, coLi.size());
+        assertTrue(coLi.get(0).getName().contains("Bach"));
+        
+        List<Composer> coLi0 = cdm.getComposersByName("NoSuch");
+        assertEquals(0, coLi0.size());
     }
 }

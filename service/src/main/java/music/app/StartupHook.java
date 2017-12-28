@@ -25,14 +25,15 @@ public class StartupHook implements CommandLineRunner {
     private Environment environment;
 
     public void run(String... args) {
-        LOGGER.debug("StartupHook.run()");
+        LOGGER.info("StartupHook.run() ##");
         
         boolean test = false;
         for (String s : environment.getActiveProfiles()) {
             if (s.equals("test")) {
+                LOGGER.info("StartupHook: test=true");
                 test = true;
             }
         }
-        context.getBean(DataCreator.class).createData(test ? 2 : 99);
+        context.getBean(DataCreator.class).createData(test ? 2 : 99, !test);
     }
 }

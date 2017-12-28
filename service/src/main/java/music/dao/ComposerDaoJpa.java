@@ -46,6 +46,7 @@ public class ComposerDaoJpa implements ComposerDao {
 
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         daoUtil.funcInTrans(entityManager, () -> {
+            
             long id = composer.getId();
             if (id != 0) {
                 // Read the original object
@@ -54,6 +55,7 @@ public class ComposerDaoJpa implements ComposerDao {
                     LOGGER.info("  Could not find composer id=" + id);
                     return ("Could not find composer id=" + id);
                 }
+                
                 // Modify the original with the new one, rewrite it
                 oriComposer.modifyDataByOther(composer);
                 entityManager.persist(oriComposer);
@@ -71,10 +73,12 @@ public class ComposerDaoJpa implements ComposerDao {
 
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         daoUtil.funcInTrans(entityManager, () -> {
+            
             Composer composer = entityManager.find(Composer.class, id);
             if (composer != null) {
                 entityManager.remove(composer);
-            } else {
+            }
+            else {
                 LOGGER.info("  Could not find composer id=" + id);
             }
             return "";
