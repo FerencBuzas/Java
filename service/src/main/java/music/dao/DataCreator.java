@@ -47,21 +47,15 @@ public class DataCreator {
     private void persistAll() {
         LOGGER.info("persistAll()");
 
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        entityManager.getTransaction().begin();
+        EntityManager em = entityManagerFactory.createEntityManager();
+        em.getTransaction().begin();
 
-        for (Composer composer : composers) {
-            entityManager.persist(composer);
-        }
-        for (Publisher publisher : publishers) {
-            entityManager.persist(publisher);
-        }
-        for (Book book : books) {
-            entityManager.persist(book);
-        }
+        composers.forEach(em::persist);
+        publishers.forEach(em::persist);
+        books.forEach(em::persist);
 
-        entityManager.getTransaction().commit();
-        entityManager.close();
+        em.getTransaction().commit();
+        em.close();
     }
 
     private void createComposerList(int nComposers) {
@@ -100,21 +94,15 @@ public class DataCreator {
     }
 
     Publisher findPublisherByName(String name) {
-        for (Publisher publisher: publishers) {
-            if (publisher.getName().startsWith(name)) {
-                return publisher;
-            }
-        }
-        return null;
+        return publishers.stream()
+                .filter(p -> p.getName().startsWith(name))
+                .findFirst().orElse(null);
     }
 
     Composer findComposerByName(String name) {
-        for (Composer composer: composers) {
-            if (composer.getName().startsWith(name)) {
-                return composer;
-            }
-        }
-        return null;
+        return composers.stream()
+                .filter(c -> c.getName().startsWith(name))
+                .findFirst().orElse(null);
     }
 
     private void createBookList() {

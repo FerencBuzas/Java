@@ -13,20 +13,19 @@ public class DaoUtil {
      * This method reduces the amount of boilerplate.
      * TODO: check whether @Transactional can be used instead.
      * 
-     * @param entityManager  - to create the transaction 
-     * @param supplier       - code to be called in the transaction
-     * @param <R>            - type of the result
-     * @return               - the result of the code
+     * @param em        - to create the transaction 
+     * @param supplier  - code to be called in the transaction
+     * @param <R>       - type of the result
+     * @return          - the result of the code
      */
-    <R> R funcInTrans(EntityManager entityManager,
-                      Supplier<R> supplier) {
+    <R> R funcInTrans(EntityManager em, Supplier<R> supplier) {
 
-        entityManager.getTransaction().begin();
+        em.getTransaction().begin();
 
         R result = supplier.get();
 
-        entityManager.getTransaction().commit();
-        entityManager.close();
+        em.getTransaction().commit();
+        em.close();
 
         return result;
     }

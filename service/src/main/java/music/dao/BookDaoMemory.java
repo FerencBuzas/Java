@@ -34,6 +34,10 @@ public class BookDaoMemory implements BookDao {
 
     @Override
     public void deleteBook(long id) {
-        dataCreator.getBooks().remove(id);
+        
+        dataCreator.getBooks().stream()
+                .filter(b -> b.getId() == id)
+                .findFirst()
+                .ifPresent(b -> dataCreator.getBooks().remove(b));
     }
 }

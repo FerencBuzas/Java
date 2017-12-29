@@ -5,8 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Implementation of ComposerDao, when data are served just from memory.
@@ -31,14 +31,9 @@ public class ComposerDaoMemory implements ComposerDao {
     @Override
     public List<Composer> getComposersByName(String name) {
 
-        List<Composer> result = new ArrayList<>();
-        for (Composer composer : dataCreator.getComposers()) {
-            if (composer.getName().startsWith(name)) {
-                result.add(composer);
-            }
-        }
-
-        return result;
+        return dataCreator.getComposers().stream()
+                .filter(c -> c.getName().startsWith(name))
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -48,6 +43,9 @@ public class ComposerDaoMemory implements ComposerDao {
 
     @Override
     public void deleteComposer(long id) {
-        dataCreator.getComposers().remove(id);
+        dataCreator.getComposers().stream()
+                .filter(c -> c.getId() == id)
+                .findFirst()
+                .ifPresent(c -> dataCreator.getComposers().remove(c));
     }
 }

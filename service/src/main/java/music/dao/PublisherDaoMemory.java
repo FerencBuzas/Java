@@ -5,8 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Implementation of PublisherDao, when data are served just from memory.
@@ -31,13 +31,9 @@ public class PublisherDaoMemory implements PublisherDao {
     @Override
     public List<Publisher> getPublishersByName(String name) {
 
-        List<Publisher> result = new ArrayList<>();
-        for (Publisher publisher : dataCreator.getPublishers()) {
-            if (publisher.getName().startsWith(name)) {
-                result.add(publisher);
-            }
-        }
-        return result;
+        return dataCreator.getPublishers().stream()
+                .filter(p -> p.getName().startsWith(name))
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -47,6 +43,9 @@ public class PublisherDaoMemory implements PublisherDao {
 
     @Override
     public void deletePublisher(long id) {
-        dataCreator.getPublishers().remove(id);
+        dataCreator.getPublishers().stream()
+                .filter(c -> c.getId() == id)
+                .findFirst()
+                .ifPresent(p -> dataCreator.getPublishers().remove(p));
     }
 }

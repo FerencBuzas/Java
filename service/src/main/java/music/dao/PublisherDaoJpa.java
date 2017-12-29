@@ -45,21 +45,25 @@ public class PublisherDaoJpa implements PublisherDao {
     public void storePublisher(Publisher publisher) {
         LOGGER.info("storePublisher() {}", publisher);
 
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        daoUtil.funcInTrans(entityManager, () -> {
+        EntityManager em = entityManagerFactory.createEntityManager();
+        daoUtil.funcInTrans(em, () -> {
+            
             long id = publisher.getId();
             if (id != 0) {
+                
                 // Read the original object
-                Publisher oriPublisher = entityManager.find(Publisher.class, id);
+                Publisher oriPublisher = em.find(Publisher.class, id);
                 if (oriPublisher == null) {
                     LOGGER.info("  Could not find publisher id=" + id);
                     return ("Could not find publisher id=" + id);
                 }
+                
                 // Modify the original with the new one, rewrite it
                 oriPublisher.modifyDataByOther(publisher);
-                entityManager.persist(oriPublisher);
-            } else {
-                entityManager.persist(publisher);
+                em.persist(oriPublisher);
+            }
+            else {
+                em.persist(publisher);
             }
             return "";
         });
@@ -69,12 +73,14 @@ public class PublisherDaoJpa implements PublisherDao {
     public void deletePublisher(long id) {
         LOGGER.info("deletePublisher() id={}", id);
 
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        daoUtil.funcInTrans(entityManager, () -> {
-            Publisher publisher = entityManager.find(Publisher.class, id);
+        EntityManager em = entityManagerFactory.createEntityManager();
+        daoUtil.funcInTrans(em, () -> {
+            
+            Publisher publisher = em.find(Publisher.class, id);
             if (publisher != null) {
-                entityManager.remove(publisher);
-            } else {
+                em.remove(publisher);
+            }
+            else {
                 LOGGER.info("  Could not find publisher id=" + id);
             }
             return "";
@@ -82,8 +88,8 @@ public class PublisherDaoJpa implements PublisherDao {
     }
 
     private List<Publisher> fetchPublishers(String query) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        EntityManager em = entityManagerFactory.createEntityManager();
 
-        return daoUtil.funcInTrans(entityManager, () -> entityManager.createQuery(query, Publisher.class).getResultList());
+        return daoUtil.funcInTrans(em, () -> em.createQuery(query, Publisher.class).getResultList());
     }
 }

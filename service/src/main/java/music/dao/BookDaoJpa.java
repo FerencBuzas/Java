@@ -38,22 +38,24 @@ public class BookDaoJpa implements BookDao {
     public void storeBook(Book book) {
         LOGGER.debug("storeBook({})", book);
         
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        daoUtil.funcInTrans( entityManager, () -> {
+        EntityManager em = entityManagerFactory.createEntityManager();
+        daoUtil.funcInTrans( em, () -> {
+            
             long id = book.getId();
             if (id != 0) {
+            
                 // Read the original object
-                Book oriBook = entityManager.find(Book.class, id);
+                Book oriBook = em.find(Book.class, id);
                 if (oriBook == null) {
                     LOGGER.info("  Could not find book id=" + id);
                     return ("Could not find book id=" + id);
                 }
                 // Modify the original with the new one, rewrite it
                 oriBook.modifyDataByOther(book);
-                entityManager.persist(oriBook);
+                em.persist(oriBook);
             }
             else {  // a new object
-                entityManager.persist(book);
+                em.persist(book);
             }
             return "";
         });
@@ -63,11 +65,11 @@ public class BookDaoJpa implements BookDao {
     public void deleteBook(long id) {
         LOGGER.info("deleteBook() id={}", id);
         
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        daoUtil.funcInTrans(entityManager, () -> {
-            Book book = entityManager.find(Book.class, id);
+        EntityManager em = entityManagerFactory.createEntityManager();
+        daoUtil.funcInTrans(em, () -> {
+            Book book = em.find(Book.class, id);
             if (book != null) {
-                entityManager.remove(book);
+                em.remove(book);
             } else {
                 LOGGER.info("  Could not find book id=" + id);
             }
@@ -77,8 +79,8 @@ public class BookDaoJpa implements BookDao {
 
     private List<Book> fetchBooks(String query) {
             
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        return daoUtil.funcInTrans(entityManager, () ->
-            entityManager.createQuery(query, Book.class).getResultList());
+        EntityManager em = entityManagerFactory.createEntityManager();
+        return daoUtil.funcInTrans(em, () ->
+            em.createQuery(query, Book.class).getResultList());
     }
 }
