@@ -34,7 +34,6 @@ export class ComposerService {
         for (let p of arr) {           // NOTE: 'p in arr' would return the indices
             result.push(new Composer(p.id, p.name, p.birthYear));
         }
-//        this.cachedComposers = result;
         return result;
     }
 

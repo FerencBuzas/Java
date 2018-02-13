@@ -21,7 +21,7 @@ export class PublisherService {
 
     getPublishers(): Promise<Publisher[]> {
         let url = MusicConfig.URL_BASE + '/publisher';
-        this.logger.info('PubServ.getPublishers() url=' + url);
+        this.logger.info('getPublishers() url=' + url);
 
         return this.http.get(url).toPromise()  // Observable<Resp..> --> Promise<Resp>
             .then(this.extractData)

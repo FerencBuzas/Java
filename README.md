@@ -3,8 +3,7 @@
 A simple demo where JPA, RESTful service and Angular client work together.
 
 Author: Ferenc Buzas  
-Starting date: 13 Sep 2017  
-v1.1:          21 Sep 2017
+Written in Sep 2017  
 
 Server side: Spring REST service, with either JPA or hardcoded data.    
 Clients:     Angular / or just browse URLs / or a Java app. 
