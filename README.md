@@ -1,8 +1,9 @@
 # SheetMusicRegister v1.1
 
-A simple demo where JPA, RESTful service and Angular client work together.
+A simple demo where JPA, RESTful service and Angular 2 client work together.
 
 Author: Ferenc Buzas  
+Starting point: the [Tour of Heroes tutorial](https://angular.io/tutorial).
 Written in Sep 2017  
 
 Server side: Spring REST service, with either JPA or hardcoded data.    
