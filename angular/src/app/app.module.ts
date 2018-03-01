@@ -13,6 +13,7 @@ import { BookService }         from './book/book.service';
 import { ComposerDetailComponent } from './composer/composer-detail.component';
 import { ComposersComponent }     from './composer/composers.component';
 import { ComposerService }         from './composer/composer.service';
+import { HomeComponent }     from './home/home.component';
 import { PublisherDetailComponent } from './publisher/publisher-detail.component';
 import { PublishersComponent }     from './publisher/publishers.component';
 import { PublisherService }         from './publisher/publisher.service';
@@ -32,6 +33,7 @@ import { AppRoutingModule }     from './app-routing.module';
     BooksComponent,
     ComposerDetailComponent,
     ComposersComponent,
+    HomeComponent,
     PublisherDetailComponent,
     PublishersComponent
   ],
