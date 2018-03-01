@@ -20,11 +20,17 @@ public class PublisherDaoJpa implements PublisherDao {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PublisherDaoJpa.class);
 
-    @Autowired
-    private EntityManagerFactory entityManagerFactory;
+    private final EntityManagerFactory entityManagerFactory;
+    private final DaoUtil daoUtil;
 
     @Autowired
-    private DaoUtil daoUtil;
+    public PublisherDaoJpa(EntityManagerFactory entityManagerFactory,
+            DaoUtil daoUtil) {
+
+        this.entityManagerFactory = entityManagerFactory;
+        this.daoUtil = daoUtil;
+    }
+
 
     @Override
     public List<Publisher> getPublishers() {

@@ -31,9 +31,9 @@ public class MusicController {
 
     private static final String URL_BASE_FOR_LINKS = "localhost:8080/music";
 
-    private BookDao bookDao;
-    private ComposerDao composerDao;
-    private PublisherDao publisherDao;
+    private final BookDao bookDao;
+    private final ComposerDao composerDao;
+    private final PublisherDao publisherDao;
 
     @Autowired
     MusicController(BookDao bookDao, ComposerDao composerDao, PublisherDao publisherDao) {

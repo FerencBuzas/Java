@@ -23,6 +23,7 @@
         <module>java-client</module>
         <module>service</module>
         <module>common</module>
+        <module>selenium</module>
     </modules>
 
     <dependencies>

@@ -59,6 +59,10 @@ To demonstrate the cooperation of JPA, RESTful service, Angular.
     Contains a RESTful service, which retrieves Composers, Publishers, Books.  
     It uses JPA w/ Hibernate and H2, or it can return hardcoded values.
 
+#### selenium
+Download chromedriver from: http://chromedriver.storage.googleapis.com/index.html?path=2.28/
+  , the version 2.28 is OK, after it you get ignore-certificate... errors.
+
 # TODO
 
   - Create a correct way of selecting either service or mock data in angular/

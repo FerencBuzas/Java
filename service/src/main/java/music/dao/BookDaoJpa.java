@@ -20,12 +20,17 @@ public class BookDaoJpa implements BookDao {
     
     private static final Logger LOGGER = LoggerFactory.getLogger(BookDaoJpa.class);
     
-    @Autowired
-    private EntityManagerFactory entityManagerFactory;
+    private final EntityManagerFactory entityManagerFactory;
+    private final DaoUtil daoUtil;
     
     @Autowired
-    private DaoUtil daoUtil;
+    public BookDaoJpa(EntityManagerFactory entityManagerFactory,
+                      DaoUtil daoUtil) {
 
+        this.entityManagerFactory = entityManagerFactory;
+        this.daoUtil = daoUtil;
+    }
+    
     @Override
     public List<Book> getBooks() {
         LOGGER.debug("getBooks()");

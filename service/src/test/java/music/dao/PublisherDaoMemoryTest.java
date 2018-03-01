@@ -3,7 +3,9 @@ package music.dao;
 import music.common.Publisher;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.persistence.EntityManagerFactory;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -11,13 +13,16 @@ import static org.junit.Assert.assertTrue;
 
 public class PublisherDaoMemoryTest {
 
+    @Autowired
+    private EntityManagerFactory entityManagerFactory;
+    
     private DataCreator pdc;
     private PublisherDaoMemory pdm;
 
     @Before
     public void setUp() {
 
-        pdc = new DataCreator();
+        pdc = new DataCreator(entityManagerFactory);
         pdc.createData(2, false);
         pdm = new PublisherDaoMemory(pdc);
     }

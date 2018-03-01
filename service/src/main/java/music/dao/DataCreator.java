@@ -23,12 +23,16 @@ public class DataCreator {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DataCreator.class);
 
-    @Autowired
-    private EntityManagerFactory entityManagerFactory;
+    private final EntityManagerFactory entityManagerFactory;
 
     private List<Book> books;
     private List<Composer> composers;
     private List<Publisher> publishers;
+
+    @Autowired
+    DataCreator(EntityManagerFactory entityManagerFactory) {
+        this.entityManagerFactory = entityManagerFactory;
+    }
     
     public void createData(int nComposers, boolean toStore) {
         LOGGER.info("DataCreator.createData() nComposers={}", nComposers);

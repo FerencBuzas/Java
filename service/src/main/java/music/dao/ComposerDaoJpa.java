@@ -20,11 +20,16 @@ public class ComposerDaoJpa implements ComposerDao {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ComposerDao.class);
 
+    private final EntityManagerFactory entityManagerFactory;
+    private final DaoUtil daoUtil;
+    
     @Autowired
-    private EntityManagerFactory entityManagerFactory;
+    public ComposerDaoJpa(EntityManagerFactory entityManagerFactory,
+                          DaoUtil daoUtil) {
 
-    @Autowired
-    private DaoUtil daoUtil;
+        this.entityManagerFactory = entityManagerFactory;
+        this.daoUtil = daoUtil;
+    }
     
     @Override
     public List<Composer> getComposers() {

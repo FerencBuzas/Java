@@ -18,11 +18,15 @@ public class StartupHook implements CommandLineRunner {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CommandLineRunner.class);
 
-    @Autowired
-    private ConfigurableApplicationContext context;
+    private final ConfigurableApplicationContext context;
+    private final Environment environment;
     
     @Autowired
-    private Environment environment;
+    public StartupHook(ConfigurableApplicationContext context,
+                       Environment environment) {
+        this.context = context;
+        this.environment = environment;
+    }
 
     public void run(String... args) {
         LOGGER.info("StartupHook.run() ##");

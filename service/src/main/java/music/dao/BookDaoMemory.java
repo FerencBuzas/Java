@@ -14,7 +14,7 @@ import java.util.List;
 @Profile("test")
 public class BookDaoMemory implements BookDao {
 
-    private DataCreator dataCreator;
+    private final DataCreator dataCreator;
 
     @Autowired
     public BookDaoMemory(DataCreator dataCreator) {
