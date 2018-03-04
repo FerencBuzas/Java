@@ -2,7 +2,6 @@ package music.selenium;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 /**
  * Page Object for Home
@@ -10,23 +9,16 @@ import org.openqa.selenium.WebElement;
  */
 public class HomePage extends BasePage {
 
-    private By contentTitle = By.cssSelector("body > my-app > my-home > div > h2");
+    private static By contentTitle = By.cssSelector("body > my-app > my-home > div > h2");
 
     public HomePage(WebDriver driver, Header header) {
-        this.driver = driver;
-        this.header = header;
-        
+        super(driver, header, contentTitle, HomePage.class);
+
         if ( ! "Main page".equals(getContentTitle())) {
             throw new IllegalStateException("This is not the Main page");
         }
     }
-
-    @Override
-    public String getContentTitle() {
-        WebElement title = driver.findElement(contentTitle);
-        return title.getText();
-    }
-
+    
 //    public boolean verifySignInPageText() {
 //        WebElement element = driver.findElement(headerPageText);
 //        String pageText = element.getText();

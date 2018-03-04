@@ -3,17 +3,13 @@ package music.selenium;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * Page Object for the common header block.
  * Author: Ferenc Buzas
  */
-public class Header {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(Header.class);
-
+public class Header extends BasePage {
+    
     By menuTitle = By.xpath("/html/body/my-app/h1");
     By homeButton = By.xpath("/html/body/my-app/nav/a[1]");
     By booksButton = By.xpath("/html/body/my-app/nav/a[2]");
@@ -23,6 +19,7 @@ public class Header {
     private WebDriver driver;
     
     public Header(WebDriver driver) {
+        super(driver, null, null, Header.class);
         this.driver = driver;
     }
 
@@ -44,32 +41,22 @@ public class Header {
         }
     }
 
-    void clickButton(By by) {
-        LOGGER.debug("clickButton() " + by);
-        WebElement button = driver.findElement(by);
-        button.click();
-    }
-
     HomePage clickHomeButton() {
-        LOGGER.debug("clickHomeButton");
         clickButton(homeButton);
         return new HomePage(driver, this); 
     }
     
     BooksPage clickBooksButton() {
-        LOGGER.debug("clickBooksButton");
         clickButton(booksButton);
         return new BooksPage(driver, this);
     }
 
     ComposersPage clickComposersButton() {
-        LOGGER.debug("clickComposersButton");
         clickButton(composersButton);
         return new ComposersPage(driver, this);
     }
     
     PublishersPage clickPublishersButton() {
-        LOGGER.debug("clickPublishersButton");
         clickButton(publishersButton);
         return new PublishersPage(driver, this);
     }
