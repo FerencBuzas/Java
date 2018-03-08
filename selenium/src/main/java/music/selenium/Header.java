@@ -1,5 +1,6 @@
 package music.selenium;
 
+import music.util.SelUtil;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -16,11 +17,13 @@ public class Header extends BasePage {
     By composersButton = By.xpath("/html/body/my-app/nav/a[3]");
     By publishersButton = By.xpath("/html/body/my-app/nav/a[4]");
 
-    private WebDriver driver;
-    
-    public Header(WebDriver driver) {
-        super(driver, null, null, Header.class);
+    private final WebDriver driver;
+    protected final SelUtil selUtil;
+
+    public Header(WebDriver driver, SelUtil selUtil) {
+        super(driver, selUtil, null, null, Header.class);
         this.driver = driver;
+        this.selUtil = selUtil;
     }
 
     void verifyBlock() {
@@ -43,21 +46,21 @@ public class Header extends BasePage {
 
     HomePage clickHomeButton() {
         clickButton(homeButton);
-        return new HomePage(driver, this); 
+        return new HomePage(driver, selUtil, this); 
     }
     
     BooksPage clickBooksButton() {
         clickButton(booksButton);
-        return new BooksPage(driver, this);
+        return new BooksPage(driver, selUtil, this);
     }
 
     ComposersPage clickComposersButton() {
         clickButton(composersButton);
-        return new ComposersPage(driver, this);
+        return new ComposersPage(driver, selUtil, this);
     }
     
     PublishersPage clickPublishersButton() {
         clickButton(publishersButton);
-        return new PublishersPage(driver, this);
+        return new PublishersPage(driver, selUtil, this);
     }
 }

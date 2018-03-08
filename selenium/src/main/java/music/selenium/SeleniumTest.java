@@ -13,67 +13,78 @@ public class SeleniumTest {
     
     private static final Logger LOGGER = LoggerFactory.getLogger(SeleniumTest.class);
 
-    private static final String BASE_URL = "localhost:3000";
-    private static final int SLEEP_MS = 2500;
-
+    private Config config;
     private SelUtil selUtil;
-
-    public SeleniumTest(SelUtil selUtil) {
+    
+    public SeleniumTest(Config config, SelUtil selUtil) {
+        this.config = config;
         this.selUtil = selUtil;
     }
 
-    private void oneRound(WebDriver driver) {
+    private void oneRound(WebDriver driver, boolean detailed) {
         LOGGER.info("Running test with " + driver);
         if (Objects.isNull(driver)) {
             throw new IllegalStateException("Driver could not be created");
         }
         
-        Header header = new Header(driver);
-        driver.get(BASE_URL);
+        Header header = new Header(driver, selUtil);
+        driver.get(config.getBaseUrl());
         System.out.println("run()- Page title is " + driver.getTitle());
-        selUtil.sleep(SLEEP_MS);
+        selUtil.sleepShort();
 
         HomePage homePage = header.clickHomeButton();
-        selUtil.sleep(SLEEP_MS);
+        selUtil.sleepShort();
 
         BooksPage booksPage = header.clickBooksButton();
-        selUtil.sleep(SLEEP_MS);
+        selUtil.sleepShort();
+        if (detailed) {
+            new BooksTest(config, selUtil, booksPage).test();
+            selUtil.sleepLong();
+        }
 
         ComposersPage composersPage = header.clickComposersButton();
-        selUtil.sleep(SLEEP_MS);
+        selUtil.sleepShort();
 
         PublishersPage publishersPage = header.clickPublishersButton();
-        selUtil.sleep(SLEEP_MS);
+        selUtil.sleepShort();
 
         header.clickHomeButton();
-        selUtil.sleep(SLEEP_MS);
+        selUtil.sleepShort();
 
+        selUtil.sleepLong();
         driver.quit();
     }
 
-    private void run() {
+    private void run(boolean detailed) {
 
         // If the caller has set some driver property below, that test will be run.
-        String chromeProp = System.getProperty("webdriver.chrome.driver");
-        String firefoxProp = System.getProperty("webdriver.gecko.driver");
-        boolean chromeGiven = Objects.nonNull(chromeProp);
-        boolean firefoxGiven = Objects.nonNull(firefoxProp);
+        String chromeDriverPath = System.getProperty(config.getChromeDriverPropName());
+        String firefoxDriverPath = System.getProperty(config.getFirefoxDriverPropName());
+        boolean chromeGiven = Objects.nonNull(chromeDriverPath);
+        boolean firefoxGiven = Objects.nonNull(firefoxDriverPath);
+        
         if (chromeGiven || firefoxGiven) {
+            // The caller has set one or more drivers
             if (chromeGiven) {
-                oneRound(new ChromeDriver()); 
+                oneRound(new ChromeDriver(), detailed); 
             }
             if (firefoxGiven) {
-                oneRound(new FirefoxDriver());
+                oneRound(new FirefoxDriver(), detailed);
             }
         }
         else {
-            // Try to run a Selenium driver on the path.
-            oneRound(new ChromeDriver());
+            // Try to find a Selenium driver on the path.
+            oneRound(new ChromeDriver(), detailed);
         }
     }
     
     public static void main(String[] args) {
         LOGGER.info("main()");
-        new SeleniumTest(new SelUtil()).run();
+        
+        // My own dependency injection
+        Config config = new Config();
+        SelUtil selUtil = new SelUtil(config);
+        
+        new SeleniumTest(config, selUtil).run(true);
     }
 }
